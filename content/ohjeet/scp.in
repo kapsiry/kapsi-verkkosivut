@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>
+Jos käytät kotikoneellasi jotain UNIX-pohjaista järjestelmää (esim. Linux tai BSD), voit siirtää tiedostoja Kapsin palvelimelle scp-komennolla. <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTYn</a> oheisohjelmana on saatavilla myös pscp-ohjelma Windows-alustalle, joka voi olla kätevä esimerkiksi skripteissä. Jos kuitenkin haluat vain siirtää tiedostoja Kapsille, suosittelemme <a href="filezilla.html">Filezilla sftp-ohjelmaa</a>.
+</p>
+
+<p>SCP toimii pitkälti samalla tavalla kuin cp-komento omalla tietokoneella. Tiedostonimen paikalle voi kirjoittaa myös useita tiedostoja tai esimerkiksi <em>*.jpg</em>. Kohdekansio voi olla joko pelkkä polun loppu kotikansiosi alla (kuten public_html/gallery/) tai kokonainen polku (kuten /work/users/kayttaja/). Ohjelma kysyy salasanaasi ja näyttää palkin siirron edistymisestä:</p>
+
+<pre>
+user@kotikone:~$ scp <em>tiedosto</em> user@kapsi.fi:<em>kansio</em>
+Password:
+tiedosto                         100%    1024     1.0KB/s   00:00
+</pre>
+
+<p>Rekursiivinen kopiointi onnistuu valitsimella <em>-r</em>, kuten <em>cp</em>-komennonkin yhteydessä:</p>
+<pre>
+scp -r kansio1 user@kapsi.fi:kansio2
+</pre>
+
+<p>
+<b>Vinkki:</b> Voit käyttää scp:tä myös tiedostojen siirtämiseen suoraan Lakka- ja Hilla-palvelimien välillä:
+</p>
+
+<pre>
+user@hilla:~$ scp -r eggdrop user@kapsi.fi:~
+</pre>
+
+</div>

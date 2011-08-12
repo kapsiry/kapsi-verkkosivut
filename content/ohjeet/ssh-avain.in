@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>SSH-avaimen avulla <a href="ssh.html">ssh-yhteyttä</a> voi käyttää ilman, että salasanaa täytyy syöttää erikseen joka kerta, mikä on hyödyllistä erityisesti skripteissä. Lisäksi tunnuksen salasana voi tällöin olla hieman pidempi, kun sitä ei tarvitse muistaa. Myös avaimen voi suojata erillisellä salasanalla.</p>
+
+<p>SSH-avain koostuu omalle koneelle tallennetusta yksityisestä puoliskosta, ja ssh-palvelimella olevasta julkisesta avaimesta. Kirjauduttaessa ssh-ohjelma salaa yksityisellä avaimella viestin, ja palvelin tarkistaa, että viestin salaus täsmää tallennettuun julkiseen avaimeen.</p>
+
+<h2>Avaimen luominen omalle koneelle</h2>
+
+<p>RSA-avain luodaan <b>omalle koneelle</b> (tai siihen järjestelmään, josta yhteyttä otetaan) komennolla:</p>
+
+<pre>ssh-keygen -t rsa</pre>
+
+<p>Windowsissa avaimen voi luoda myös PuTTY:n lisäohjelman avulla: <a
+href="http://the.earth.li/~sgtatham/putty/latest/x86/puttygen.exe">puttygen.exe</a></p>
+
+<p>Seuraavaksi ssh-keygen kysyy tiedostojen tallennuspaikan:</p>
+
+<pre>Enter file in which to save the key (/home/user/.ssh/id_rsa): </pre>
+
+<p>Oletuspaikka on hyvä, ssh hakee avainta sieltä automaattisesti.</p>
+
+<p>Avaimelle on suositeltavaa määritellä erillinen salasana, jota ilman sitä ei
+voi käyttää. Salasanattoman avaimen voi kuitenkin luoda painamalla enteriä
+salasanaa kysyttäessä. Salasanattoman avaimen käytössä on oltava erityisen
+huolellinen, sillä jos salainen avaintiedosto joutuu vääriin käsiin, joku muu
+pystyy käyttämään luvatta tunnuksiasi.</p>
+
+<pre>Enter passphrase (empty for no passphrase):
+Enter same passphrase again:</pre>
+
+<h2>Julkisen osan kopioiminen palvelimelle</h2>
+
+<p>Helpoiten julkisen osan saa kopioitua <em>ssh-copy-id</em> -komennolla:</p>
+<pre>
+ssh-copy-id <em>käyttäjä</em>@kapsi.fi
+</pre>
+
+<p>Ellei koneellasi ole <em>ssh-copy-id</em> -ohjelmaa, voit kopioida avaimen itse.
+Tätä varten tarvitsemme ssh-keygenin tulosteesta julkisen avaimen <em>id_rsa.pub</em> sijainnin:</p>
+
+<pre>
+Your identification has been saved in /home/user/.ssh/id_rsa.
+Your public key has been saved in <b>/home/user/.ssh/id_rsa.pub</b>.
+The key fingerprint is:
+bf:47:6a:73:dc:7e:20:ad:69:06:4e:0b:a5:92:82:df user@localhost
+</pre>
+
+<p>Tiedostossa on yksi pitkä rivi, joka kopioidaan palvelimelle tiedostoon <em>~/.ssh/authorized_keys</em> . Tekstin on tultava yhdelle riville, ja sen jälkeen on oltava rivinvaihto.</p>
+
+<p>Jos päätteessäsi ei ole kopiointitoimintoa, tai haluat varmistaa
+että homma menee varmasti oikein, komenna:</p>
+
+<pre>cat ~/.ssh/id_rsa.pub | ssh <em>user</em>@kapsi.fi "mkdir ~/.ssh ; cat >> ~/.ssh/authorized_keys"</pre>
+
+<p>Komento kysyy salasanan ssh-kirjautumista varten, ja lisää avaimen authorized_keys -tiedoston loppuun.
+Tämän jälkeen ssh:n pitäisi päästää sisään ilman salasanaa tai avaimen salasanan kanssa.</p>
+
+<p>Avaimen käyttöön PuTTY:n kanssa löytyy ohje
+<a href="http://the.earth.li/~sgtatham/putty/0.55/htmldoc/Chapter8.html#C8">PuTTY:n manuaalista</a>
+</p>
+
+</div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<h2>Avaimen luominen</h2>
+<pre>
+$ mkdir ~/.gnupg
+$ chmod 700 ~/.gnupg
+$ gpg --gen-key
+
+Please select what kind of key you want:
+   (1) DSA and ElGamal (default)
+   (2) DSA (sign only)
+   (4) RSA (sign only)
+Your selection? 1
+
+DSA keypair will have 1024 bits.
+About to generate a new ELG-E keypair.
+      minimum keysize is  768 bits
+      default keysize is 1024 bits
+      highest suggested keysize is 2048 bits
+What keysize do you want? (1024) 2048 
+				
+Please specify how long the key should be valid.
+      0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0) 1y
+
+Key expires at Tue 01 Nov 2005 04:44:52 PM EET
+Is this correct (y/n)? y
+
+You need a User-ID to identify your key; the software constructs the user id
+from Real Name, Comment and Email Address in this form:
+    "Heinrich Heine (Der Dichter) &lt;heinrichh@duesseldorf.de&gt;"
+    
+Real name: Oma Nimi
+Email address: oma@nimi.info
+Comment: foobar
+
+You selected this USER-ID:
+    "Oma Nimi (foobar) &lt;oma@nimi.info&gt;"
+    
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+
+You need a Passphrase to protect your secret key.    
+
+Enter passphrase:
+
+
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action (type on the keyboard, move the mouse, utilize the
+disks) during the prime generation; this gives the random number
+generator a better chance to gain enough entropy.
+++++++++++.+++++++++++++++++++++++++++++++++++++++++++++..+++++++++++++++..+++++.++++++++++.+++++.++++++++++++++++++++...++++++++++..++++++++++&gt;+++++++++++++++
+
+...
+
+public and secret key created and signed.
+key marked as ultimately trusted.
+
+pub  1024D/D9BB2512 2005-10-31 Oma Nimi (foobar) &lt;oma@nimi.info&gt;
+     Key fingerprint = D9B1 6095 D55C 9870 F7A9  0342 8295 1FF7 D9BB 2512
+     sub  2048g/85D4AEC3 2005-10-31 [expires: 2005-11-01]
+</pre>
+
+<h2>Avaimen lähettäminen keyserverille</h2>
+<pre>
+$ gpg --keyserver pgp.mit.edu --send-keys
+</pre>
+
+<h2>Käyttö Thunderbird-sähköpostiohjelman kanssa</h2>
+
+<p>Asenna Enigmail -laajennus</p>
+
+</div>

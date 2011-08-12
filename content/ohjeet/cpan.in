@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p><a href="http://www.cpan.org/">CPAN</a> on kokoelma Perl-ohjelmointikielen
+kirjastoja, joita pystyy automaattisesti asentamaan cpan-ohjelman avulla.
+Kapsilla käyttäjä voi asentaa nämä kirjastot kotihakemistoonsa tämän ohjeen
+mukaisesti.</p>
+
+<h2>Perlin hakupolun asettaminen</h2>
+<p>Perlille täytyy aluksi kertoa, mistä se etsii itse asennettuja moduuleita.
+Sen voi tehdä lisäämällä <em>~/.bashrc</em>:hen yhden rivin, ja ajamalla vastaavan
+komennon itse:</p>
+<pre>
+user@host:~$ echo 'export PERL5LIB=~/CPAN/lib/perl5' >> ~/.bashrc
+user@host:~$ export PERL5LIB=~/CPAN/lib/perl5
+</pre>
+
+<p>Tämä asetus vaikuttaa vain uusiin käynnistettyihin ohjelmiin.</p>
+<!--Jos asennat CPAN-pakettia irssin skriptiä varten, saat asetuksen käyttöön
+irssissä ilman uudelleenkäynnistystä seuraavasti:</p>
+<pre>
+/set perl_use_lib
+[perl]
+perl_use_lib = /usr/lib/perl/5.10 <em># Tarkista nykyinen arvo</em>
+
+/set perl_use_lib /usr/lib/perl/5.10:~/CPAN/lib/perl5 <em># Ja lisää oma polku sen perään</em>
+</pre>-->
+
+<h2>CPAN:in käyttöönotto</h2>
+<p>Kun <code>PERL5LIB</code>-muuttuja on asetettu, voit käynnistää
+CPAN:in päätteen komennolla <code>cpan</code>:</p>
+<pre>
+user@host:~$ cpan
+...
+Would you like me to configure as much as possible automatically? [yes]
+...
+cpan[1]>
+</pre>
+
+<p>Ensimmäisellä käyttökerralla CPAN kysyy joitakin asetuksia. Oletusasetukset
+saa käyttöön painamalla enteriä näihin. Tämän jälkeen täytyy muuttaa vielä
+paria asetusta kotihakemistoon asentamista varten. Asetuskomennot
+alkavat <code>o</code>-kirjaimella, "<code>cpan[1]></code>" on näytöllä
+valmiiksi oleva osa:</p>
+<pre>
+cpan[1]> o conf makepl_arg INSTALL_BASE=~/CPAN
+cpan[2]> o conf prerequisites_policy follow
+cpan[3]> o conf commit
+commit: wrote '/home/users/user/.cpan/CPAN/MyConfig.pm'
+</pre>
+<p>Ensimmäisellä komennolla asetetaan hakemisto, johon Perl-moduulit asennetaan.
+Toinen komento vähentää hieman CPAN:in kysymien kysymysten määrää. Viimeinen
+komento tallentaa asetukset tiedostoon <code>~/.cpan</code>-hakemiston alle.</p>
+
+<h2>Pakettien asennus</h2>
+<p>Esimerkiksi Twitter-protokollan toteuttava
+<a href="http://search.cpan.org/~mmims/Net-Twitter-3.10001/lib/Net/Twitter.pod">
+Net::Twitter</a>-paketti asennetaan näin:</p>
+<pre>
+cpan[4]> install Net::Twitter
+...
+</pre>
+<p>Asennuksen aikana CPAN saattaa kysyä muutamaan kertaan riippuvuuksien
+asennuksesta. Näihin voi vastata enteriä painamalla. Jos jokin moduuli on
+<em>"Optional"</em>, ei sitä toki tarvitse asentaa.
+</p>
+
+<h2>Asennuksen testaaminen</h2>
+<p>Voit testata paketin toimivuutta suoraan komentoriviltä käynnistämällä
+perlin ja kirjoittamalla <code>use</code>-rivin. Puolipisteen ja rivinvaihdon
+jälkeen perl ilmoittaa, jos moduulia ei löydy.</p>
+<pre>
+user@host:~$ perl
+use Net::Twitter;
+use Testi;
+Can't locate Testi.pm 
+</pre>
+</div>

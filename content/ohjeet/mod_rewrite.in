@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Apachen <a href="http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html">mod_rewrite</a>-laajennoksella on mahdollista 
+toteuttaa erilaisia uudelleenohjauksia 
+www-sivuilla. Tässä ohjeessa on esimerkkejä yleisimpiin tapauksiin sopivista rewrite-säännöistä.</p>
+
+<p>Kaikki seuraavat asetukset tehdään .htaccess-tiedostoon, jonka hakemisto valitaan tilanteen mukaan. Kyseistä tiedostoa
+ei edes käsitellä, ellei osoite ilman uudelleenohjausta viittaisi kyseiseen hakemistoon, joten esimerkiksi alidomainit
+tulee määritellä www-hakemiston juuressa.</p>
+
+<p>Jotta mod_rewriteä voi käyttää, on .htaccess-tiedoston alkuun lisättävä seuraavat rivit. Jälkimmäiseltä riviltä muutetaan polku osoitteessa verkkotunnuksen jälkeiseksi osaksi (esim. jos .htaccess-tiedosto on osoitteessa <em>http://koti.kapsi.fi/käyttäjä/hakemisto/.htaccess</em>, on polku <em>/käyttäjä/hakemisto</em>). Juurihakemiston polku on / (pelkkä kauttaviiva).</p>
+<pre>
+RewriteEngine On
+RewriteBase /polku
+</pre>
+
+<p>RewriteRule-sääntöjen ensimmäinen osa on
+<a href="http://fi.wikipedia.org/wiki/S%C3%A4%C3%A4nn%C3%B6llinen_lauseke">regexp-lauseke</a>. Regexpissä piste tarkoittaa mitä tahansa merkkiä, joten on suositeltavaa lisätä pisteiden eteen kenoviiva estämään tämä. Muuten esimerkiksi teksti <em>index.php</em> täsmäisi myös nimeen <em>index-php</em>.
+</p>
+
+<h2 id="redirect">Uudelleenohjaus toiseen osoitteeseen</h2>
+
+<p>Yksittäisestä tiedostosta toiselle nimelle:</p>
+<pre>RewriteRule nimi1\.html$ nimi2.html [R]</pre>
+
+<p>Yksittäisestä tiedostosta ulkoiseen osoitteeseen:</p>
+<pre>RewriteRule tiedosto\.html$ http://domain.com/tiedosto.html [R]</pre>
+
+<p>Kaikki kansion tiedostot vastaavilla nimillä ulkoiseen osoitteeseen:</p>
+<pre>RewriteRule ^(.*)$ http://domain.com/$1 [R]</pre>
+
+<p>Jos uudelleenohjauksen ei halua näkyvän selaimen osoiterivillä, voi paikallisissa ohjauksissa jättää lopusta tekstin "[R]" pois.</p>
+
+
+<h2 id="url-siistinta">URL-osoitteiden siistiminen</h2>
+
+<p>Dynaamisia sivuja varten käytetään usein yhtä tiedostoa, esimerkiksi <em>index.php</em>, jolle sivun nimi välitetään
+parametrina. Seuraava sääntö muuttaa esimerkiksi osoitteen <em>etusivu.html</em> php-skriptiä varten muotoon <em>index.php?page=etusivu</em>:</p>
+<pre>
+RewriteRule ^(.*)\.html$ index.php?page=$1
+</pre>
+
+<p>Toinen tapa on ohjata alihakemistot suoraan php-ohjelman perään, jolloin polku on luettavissa muuttujasta 
+<em>$_SERVER['PATH_INFO']</em>. Jotta tämä tapa toimisi 
+<em>public_html</em>-hakemistossa, on tehtävä <a href="cgi-php.html">php.fcgi-asetus</a> (muutoin tuloksena on virhe <em>"No input 
+file specified."</em>).</p>
+<pre>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1    
+</pre>
+
+<h2 id="alidomain">Erilliset sivut alidomainille</h2>
+
+<p>Kapsin ylläpidolta voi pyytää ns. staattisen alidomainin, jolle saa siten muusta domainista erilliset sivut. Ylläpito luo alidomainin sivuja varten hakemiston <em>~/sites/alidomain.domain.com/www</em>, kuten itse domainillekin on luotu. Katso lisää <a href="domain.html">domain-ohjeesta</a>. Jos kuitenkin haluat hallita alidomainejasi itse, onnistuu se mod_rewrite:n avulla.</p>
+
+<p>Jotta alidomainin luominen itse olisi mahdollista, on osoitteen jo valmiiksi ohjattava domainin sivuille. Ohjautuvuus on helppo testata selaimella: Mikäli saat domain.com:n sivut, kaikki on kunnossa. Jos taas saat
+virheilmoituksen, täytyy ylläpidon lisätä nimipalveluihin tai www-palvelimeen sopiva ohjaus. Mikäli nimipalvelusi ovat Kapsilla, voit pyytää ylläpidolta ohjauksen *.domain.com -&gt; domain.com. Muiden palveluntarjoajien hallintatyökaluissa tämä on usein nimellä "wildcard".</p>
+
+<p>Seuraava sääntö näyttää domainia <em>alidomain.domain.com</em> varten sivut hakemistosta <em>alidomain</em> (joka täytyy luonnollisesti luoda itse):</p>
+
+<pre>
+RewriteCond %{HTTP_HOST} ^alidomain\.domain\.com
+RewriteCond %{REQUEST_URI} !^/php5.fcgi
+RewriteCond %{REQUEST_URI} !^/alidomain/
+RewriteRule ^(.*)$ /alidomain/$1 [L]
+</pre>
+
+
+<h2 id="alidomain-redirect">Alidomainin uudelleenohjaus</h2>
+
+<p>Pelkän uudelleenohjauksen alidomainia varten voi luoda seuraavasti:</p>
+
+<pre>
+RewriteCond %{HTTP_HOST} ^alidomain\.domain\.com
+RewriteRule ^(.*)$ http://www.ohjatutsivut.com/$1 [R]
+</pre>
+
+<h2 id="proxy">Välityspalvelin omalle http-palvelinohjelmalle</h2>
+<p>Ylläpidolta pyydetyssä <a href="../palvelut/portit.html">portissa</a>
+voi ajaa omaa http-palvelinohjelmaa.
+Tällöin se näkyy esimerkiksi osoitteessa <em>http://kirsikka.kapsi.fi:portti/</em>.
+Sivut saa näkymään myös oletusportissa 80 välittämällä pyynnöt mod_rewriten
+kautta proxy-toiminnolla:
+</p>
+
+<pre>
+RewriteRule ^(.*)$ http://kirsikka.kapsi.fi:<em>portti</em>/$1 [P]
+</pre>
+
+<p>Osoite <em>kirsikka.kapsi.fi</em> korvataan sillä osoitteella, jossa oma
+palvelin on käytössä. Jos portti on ylläpidolta pyydetty, palvelin on se mihin portti on avattu.
+Käytettäessä itse valittua porttia paikallisiin yhteyksiin, täytyy palvelinohjelma olla samalla koneella kuin oma www-sivusto.
+Kyseisen koneen saa helpoiten selville komennolla <em>ssh käyttäjätunnus@www.omadomain.com</em>.</p>
+
+</div>

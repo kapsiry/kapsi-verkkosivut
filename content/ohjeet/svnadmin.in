@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p><a href="http://subversion.tigris.org/">Subversion</a> eli SVN on versionhallintajärjestelmä, jota käytetään usein mm. lähdekoodin varastointiin. Subversionin käyttöönottoon liittyy varaston eli repositoryn luominen.</p>
+
+<p>Tässä ohjeessa neuvotaan, miten yhden käyttäjän repositoryn voi luoda itse kotihakemistoonsa, josta sitä käytetään ssh:n kautta. Tällöin myös erilaisten www-pohjaisten selausohjelmien asennus helpottuu.</p>
+
+<p>Monen käyttäjän projekteja varten Kapsin ylläpidolta on mahdollista saada <em>https://svn.kapsi.fi/</em>:n alta
+<a href="../palvelut/svn.html">erillisillä tunnuksilla toimiva repository</a>.</p>
+
+<h2>Repositoryn luominen</h2>
+<p>Ota luomista varten <a href="ssh.html">ssh-yhteys</a> Lakka-palvelimelle (tai Hillalle, jos haluat tallentaa tietosi sinne). Repository luodaan <em>svnadmin</em>-ohjelmalla:</p>
+<pre>
+svnadmin create <em>hakemistonimi</em>
+</pre>
+<p>Kätevintä lienee luoda repositoryille oma hakemisto kotihakemiston alle.</p>
+
+<h2>Repositoryn käyttö</h2>
+<p>Kapsin shell-palvelimella pystyt käyttämään repositorya paikallisesti <em>file://</em>-alkuisen polun kautta. On kuitenkin noudatettava varovaisuutta, jottei vahingossa checkouttaa repositorya samannimisen repositoryhakemiston päälle.</p>
+<pre>
+svn checkout file:///home/users/<em>tunnus</em>/<em>hakemistonimi</em>
+</pre>
+
+<p>Omalta koneeltasi voit käyttää repositorya <em>svn+ssh://</em>-polun kautta:</p>
+<pre>
+svn checkout svn+ssh://<em>tunnus</em>@kapsi.fi/home/users/<em>tunnus</em>/<em>hakemistonimi</em>
+</pre>
+
+<p>Subversion tallentaa osoitteen hakemistoon, johon olet checkoutin tehnyt. Siksi polku täytyy syöttää vain ensimmäisellä käyttökerralla. Salasanaakaan ei tarvitse syöttää, kun käyttää <a href="ssh-avain.html">SSH-avainta</a>.</p>
+
+</div>

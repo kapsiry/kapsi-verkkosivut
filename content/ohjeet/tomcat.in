@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Tomcat on alusta Java-pohjaisten sivujen ajamiseen. Kapsilla sitä ei ole keskitetysti asennettuna, mutta kohtuullisella vaivalla palvelimen käyttö onnistuu myös kotihakemistosta.</p>
+
+<p><strong>Huom:</strong> Erillisen Tomcat-palvelimen ajaminen vie paljon muistia, joten java-sivujen tarve kannattaa harkita tarkasti, ja käyttää muita sivustotekniikoita mikäli mahdollista.</p>
+
+<p>Tässä ohjeessa neuvotaan Tomcatin asentaminen proxy-tyyppisesti. Tällöin Apache www-palvelin asetetaan välittämään pyynnöt toisessa portissa ajettavalle Tomcat-palvelimelle.</p>
+
+<p>Tomcatia varten tarvitaan paikallisesti käytettävä portti, jonka voi valita vapaasti väliltä 30000–­­­40000. Ristiriitojen välttämiseksi kannattaa valita satunnainen porttinumero, eikä tasalukua.</p>
+
+<p>Ohje edellyttää jonkin verran shell-käytön osaamista ja ennenkaikkea viitseliäisyyttä, joten aivan aloittelijoille sitä ei voi suositella.</p>
+
+<h2>Ohjelmien asennus</h2>
+<p>Komennot suoritetaan www-palvelimella <a href="ssh.html">ssh-yhteyden</a> kautta joko Karviaisella (.kapsi.fi-osoitteet) tai Kirsikalla (omat verkkotunnukset).
+Oikeaan www-palvelimeen saat yhteyden kun yhdistät oman verkkosivusi osoitteella, kuten <em>www.domain.com</em>.</p>
+
+<ol class="largespace">
+<li>Luodaan hakemisto Tomcatille ja Javalle. Ohjeessa käytetään hakemistoa tomcat
+kotihakemiston juuressa:
+<pre>
+mkdir ~/tomcat
+cd ~/tomcat
+</pre>
+</li>
+
+<li>Java JRE:n lataaminen. <a href="http://java.sun.com/javase/downloads/index.jsp">Sunin sivuilta</a> ladataan <em>Java
+Runtime Environment (JRE) Linux self-extracting file</em>.
+Tiedoston nimen pitäisi olla suunnilleen <em>jre-6u2-linux-i586.bin</em>.
+</li>
+
+<li>Puretaan Java JRE tomcat-hakemiston alla. Purkuohjelma pyytää ensin
+hyväksymään lisenssin, ja purkautuu sitten hakemistoon <em>jre1.6.0_02</em>.
+<pre>sh jre-6u2-linux-i586.bin</pre>
+</li>
+
+<li>Tomcatin lataaminen. <a href="http://tomcat.apache.org/download-60.cgi">Tomcatin sivuilta</a> ladataan uusin <em>core</em>-binäärijakelu <em>.tar.gz</em>-muodossa.</li>
+
+<li>Puretaan Tomcatin paketti tomcat-hakemiston alla:
+<pre>tar xzf apache-tomcat-6.0.14.tar.gz</pre></li>
+
+<li><p>Aiemmin valitun porttinumeron asettaminen. Muokataan tiedostoa
+<em>~/tomcat/apache-tomcat-6.0.14/conf/server.xml</em> :</p>
+
+<p>
+Www-palvelun portti asetetaan tiedoston keskivaiheilla (huomioi, että
+tiedostossa on esimerkkejä kommentoituna, joiden muuttaminen ei hyödytä):
+</p>
+<pre>&lt;Connector port="34567" protocol="HTTP/1.1" ...</pre>
+
+<p>
+Lisäksi täytyy asettaa hallintapuolen käyttämä portti:
+</p>
+<pre>&lt;Server port="34568" shutdown="SHUTDOWN"&gt;</pre>
+
+<p>
+Lisäksi tiedostossa on erinäisiä muita kommentoimattomia porttiasetuksia.
+Niitä ei tarvita, joten ne kannattaa kommentoida jottei tule porttiristiriitoja muiden käyttäjien kanssa.
+</p>
+</li>
+
+<li>
+<p>Tomcatin käyttämän java-ympäristön muuttaminen. Tämän voi tehdä asettamalla
+JRE_HOME <em>.bashrc</em>:ssä, mutta skriptikäytön kannalta lienee parempi muokata
+Tomcatin tiedostoa <em>~/tomcat/apache-tomcat-6.0.14/bin/setclasspath.sh</em> .</p>
+<p>Tiedoston alkuun muutaman ensimmäisen rivin (komentotulkin nimi ja
+kommentteja)  jälkeen lisätään seuraava rivi. Polkuun vaihdetaan oma
+käyttäjätunnus, sekä JRE:n polku mikäli versio on muu kuin ohjeessa.
+</p>
+<pre>JRE_HOME=/home/users/<em>käyttäjätunnus</em>/tomcat/jre1.6.0_02</pre>
+</li>
+
+<li>
+<p>Tomcatin testikäynnistys:</p>
+<pre>sh ~/tomcat/apache-tomcat-6.0.14/bin/startup.sh</pre>
+
+<p>Tomcatin esimerkkisivuja voi testata www-palvelimelta paikallisesti tekstiselaimella. Osoitteeseen vaihdetaan itse valittu 
+portti:</p>
+<pre>w3m http://localhost:<em>portti</em>/</pre>
+</li>
+</ol>
+
+<h2>Apachen proxy-toiminto</h2>
+<p>Haluttuun www-hakemistoon (esimerkiksi <em>~/public_html/tomcat/</em>) luodaan <em>.htaccess</em>-tiedosto. Tiedoston sisältöön täytyy muuttaa itse valittu portti.</p>
+<pre>
+RewriteEngine On
+RewriteRule ^(.*)$ http://localhost:<em>portti</em>/$1 [P]
+</pre>
+<p>Nyt Tomcatin sivujen pitäisi näkyä ko. osoitteessa, (esimerkissä <em>http://kapsi.fi/~kayttaja/tomcat/</em>). Tosin jotkin 
+linkit ovat yhä rikki, koska Tomcat antaa väärän polun uudelleenohjauksiin, kuten osoitteella 
+<em>http://kapsi.fi/~kayttaja/tomcat/docs</em>. 
+Sen saa korjattua <em>server.xml</em>:ssä lisäämällä <em>Connector</em>-osioon <em>proxyName</em> ja 
+<em>proxyPort</em>-asetukset:</p>
+<pre>
+&lt;Connector port="34567" protocol="HTTP/1.1" ...
+     proxyName="koti.kapsi.fi/~kayttaja/tomcat" proxyPort="80"/&gt;
+</pre>
+<p>Asetuksen jälkeen Tomcat täytyy käynnistää uudelleen <em>shutdown.sh</em> ja <em>startup.sh</em> -skripteillä.</p>
+
+<h2>Ongelmatilanteet</h2>
+<p>Ongelmatilanteissa apua voi etsiä <em>logs</em>-hakemiston alla olevista lokitiedostoista. Näistä <em>catalina</em>-logit 
+kannattaa tarkistaa ensimmäisenä, sillä niistä näkyy käynnistyykö palvelin laisinkaan.</p>
+
+</div>
+

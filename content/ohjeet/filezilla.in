@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>
+<a href="http://filezilla-project.org/">FileZilla</a> on sftp-ohjelma Windows-, Linux- ja Mac OS X -alustoille. UNIX-pohjaisissa järjestelmissä, kuten Mac OS X ja Linux, voit myös käyttää komentoriviltä yleensä valmiiksi asennettua <a href="scp.html">scp-ohjelmaa</a>.
+</p>
+
+<h2>Asennus</h2>
+
+<p><a href="http://filezilla-project.org/download.php?type=client">FileZillan lataussivulta</a> kannattaa valita uusin omalle käyttöjärjestelmälle tarkoitettu versio.
+Asennus on varsin helppo, oletusasetukset toimivat joten pelkällä nextin klikkailulla selviää.</p>
+
+<h2>Sivuston lisääminen</h2>
+<div class="img_right">
+<img src="filezilla_sivustonhallinta.png" alt="Sivustonhallinta" />
+FileZillan sivustonhallintaikkuna
+</div>
+
+<p>Kun FileZilla on käynnistetty, avataan sivustonhallinta valikoista <em>Tiedosto → Sivustonhallinta</em> (englanniksi <em>File → Site manager</em>). Lisätään uusi palvelin painikkeella <em>Uusi sivusto</em> (<em>New Site</em>). Palvelimen nimeksi voi antaa esimerkiksi Kapsi.
+</p>
+
+<p>Asetukset täytetään seuraavasti:</p>
+
+<dl class="settings">
+<dt>Isäntä (Host)</dt><dd>kapsi.fi</dd>
+<dt>Palvelintyyppi (Server type)</dt><dd>SFTP - SSH File Transfer Protocol</dd>
+<dt>Portti (Port)</dt><dd>22</dd>
+<dt>Kirjautumistyyppi (Logontype)</dt><dd>Normaali (Normal)</dd>
+<dt>Käyttäjänimi (Username)</dt><dd>Shell-käyttäjätunnuksesi</dd>
+<dt>Salasana (Password)</dt><dd>Shell-salasanasi</dd>
+</dl>
+
+<p>Asetusten jälkeen valitaan <em>Yhdistä</em> (<em>Connect</em>).</p>
+
+<p><strong>Huomio:</strong> FileZillan ilmoitukset <em>"Failed: unable to initialize SFTP on server"</em>
+tai <em>"Connection closed by server with exitcode 1"</em>
+voivat tarkoittaa esimerkiksi vanhentunutta salasanaa. Tässä tapauksessa saat asiasta ilmoituksen,
+kun kirjaudut <a href="ssh.html">ssh-yhteyden</a> kautta Lakalle.</p>
+
+<h2>Tiedostojen siirtäminen</h2>
+
+<p>Kun tiedostoja halutaan kopioida palvelimelle, selataan
+vasemmanpuoleisesta valintaruudusta kansioon jossa kopioitavat
+tiedostot ovat, ja oikeanpuolimmaisesta sinne minne ne on tarkoitus
+kopioida. Sitten <em>ctrl</em>-näppäin pohjassa valitaan vasemmalta tiedostot
+jotka haluat kopioida ja hiiren oikean napin valikosta
+<em>Lataa palvelimelle</em> (<em>Upload</em>).</p>
+
+<p>Oman kotihakemistosi polku on <em>/home/users/käyttäjätunnus</em>. Kotisivut
+siirretään sen alle joko valmiiksi luotuun <em>sites/www.example.com/www</em> -hakemistoon,
+tai itse luotavaan <a href="public_html.html">public_html</a>-hakemistoon.</p>
+
+</div>

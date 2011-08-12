@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>Tilannevedokset ovat tekniikka, jonka avulla käyttäjä voi itse palauttaa vahingossa poistamansa tai 
+muuttamansa tiedostot. Kapsilla tämä on käytettävissä Lakka-palvelimen kotihakemistoissa.</p>
+
+<h2>Tiedostojen palautus</h2>
+<p>Jokaisessa hakemistossa on näkymätön <em>.snapshot</em>-alihakemisto. Kyseinen hakemisto ei näy 
+lainkaan hakemistolistauksessa edes <code>-a</code>-valitsinta käytettäessä, jotta se ei haittaisi 
+esimerkiksi hakemistojen kopiointia. Hakemistoon voi kuitenkin siirtyä cd-komennolla tai sftp-ohjelmassa 
+kirjoittamalla hakemiston nimen itse.</p>
+
+<p>
+<img src="filezilla-snapshots.png" alt="Tilannevedokset FileZillassa" title="Tilannevedokset FileZillassa" />
+</p>
+
+<p>Hakemistossa on alihakemistoina jokainen tilannevedos päivämäärän ja kellonajan mukaan nimettynä. 
+Näitä alihakemistoja voi selata tavallisesti, ja niissä näkyvät kaikki palautettavan hakemiston 
+tiedostot kyseisenä ajanhetkenä. Tietojen palautus tapahtuu yksinkertaisesti kopioimalla ne 
+<em>.snapshot</em>-hakemistosta takaisin kotihakemistoon.</p>
+
+<h2>Palautus Siilosta</h2>
+
+<p>Siilossa, eli varmuuskopioimattomassa levytilassa on myös käytettävissä tilannevedokset.
+Niihin pääsee käsiksi hakemistosta <em>/siilo/.zfs/snapshot</em>.</p>
+
+<h2>Tarkemmin tekniikasta</h2>
+
+<p>Tilannevedoksia käytettäessä järjestelmä pitää muistissa tiedostojen viimeaikaiset 
+muutokset. Näin voidaan palauttaa tiedostoista esimerkiksi kaksi päivää vanha versio, vaikka tiedot 
+olisi vahingossa poistettu. Koska vain muutokset tallennetaan, tilannevedoksia voidaan ottaa 
+useammin kuin varmuuskopioita. Fyysisiltä vaurioilta tilannevedokset eivät suojaa, ja siksi 
+tiedostoista otetaan myös varmuuskopiot eri palvelimelle.</p>
+
+<p>Kapsilla tilannevedokset ovat käytettävissä Lakan kotihakemistoissa. Tiheimmillään vedoksia otetaan 
+kolmen tunnin välein ja säilytetään kaksi päivää. Lisäksi säilytetään päivittäisiä vedoksia viikon 
+ajan ja viikottaisia vedoksia kuukauden.</p>
+
+<p>Myös varmuuskopioimattomassa siilo-levytilassa on käytössä sama tekniikka, mutta tietojen 
+säilytysaika on lyhyempi ja saattaa vaihdella käytettävissä olevan levytilan mukaan.</p>
+
+</div>

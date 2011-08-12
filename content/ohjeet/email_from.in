@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+<a href="domain.html">Omalle verkkotunnukselle</a> (domainille) voi pyytää ylläpidolta sähköpostiosoitteen. Jotta osoite näkyisi 
+oikein myös lähtevissä viesteissä, täytyy se asettaa sähköpostiohjelman asetuksiin tämän ohjeen mukaisesti.
+</p>
+
+<h2>Ohjelmakohtaiset ohjeet</h2>
+<h3>Webmail (<a href="https://mail.kapsi.fi">https://mail.kapsi.fi</a>)</h3>
+<p>Asetukset → Henkilötiedot → Sähköpostiosoite</p>
+
+<h3>Mozilla Thunderbird</h3>
+<p>Työkalut → Tilin asetukset → Sähköpostiosoite</p>
+
+<h3>Opera</h3>
+<p>Työkalut → Sähköposti- ja keskustelutunnukset → Muokkaa → Sähköpostiosoite</p>
+
+<h3>Outlook Express</h3>
+<p>Työkalut → Tilit → Sähköposti-välilehti → Ominaisuudet → Sähköpostiosoite</p>
+
+<h3>GMail</h3>
+<p>Asetukset → Tilit ja tuonti → Lähetä sähköpostia toisesta osoitteesta</p>
+
+<h3>Pine</h3>
+<p>Pinessä sähköpostiosoitteen asettaminen on hieman monimutkaisempaa kuin muissa ohjeissa. Sähköpostiosoitetta varten luodaan erillinen <em>role</em>, jota Pine asetetaan oletuksena käyttämään.</p>
+
+<p>Setup (<kbd>s</kbd>) → Rules (<kbd>r</kbd>) → <em>Type of rule setup:</em> Roles (<kbd>r</kbd>) → Add (<kbd>a</kbd>)</p>
+
+<p>Asetettavat kohdat:</p>
+<ul>
+<li><b>Current Folder Type:</b> Any</li>
+<li><b>Set From:</b> Etunimi Sukunimi &lt;osoite@domain.com&gt;</li>
+<li><b>Reply Use:</b> Without confirmation</li>
+<li><b>Forward Use:</b> Without confirmation</li>
+<li><b>Compose Use:</b> Without confirmation</li>
+</ul>
+
+<h2>Tunnetut ongelmat</h2>
+<p>Kapsin SMTP:tä käytettäessä osaan otsaketiedoista jää yhä @kapsi.fi-osoite, jonka jotkin ohjelmat (tiettävästi ainakin Outlook Express) näyttävät viestin lähettäjän yhteydessä: "osoite@domain.com puolesta kayttaja@kapsi.fi". Ongelman vaikutus on lähinnä kosmeettinen, eikä tiedossa ole korjausta. Otsaketietojen poistaminen palvelimesta ei ole järkevää, sillä ilman niitä viestin todellista lähettäjää ei olisi mahdollista jäljittää.</p>
+
+</div>

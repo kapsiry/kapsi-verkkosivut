@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+
+<p>
+Lakka- ja Hilla-palvelimien kotihakemistoista varmuuskopioidaan muuttuneet tiedot joka yö, ja
+sunnuntaisin kaikki tiedot. Varmuuskopiot säilytetään erillisellä
+palvelimella kahdelta edelliseltä sunnuntailta. Lakka-palvelimella vahingossa poistetut tiedot
+voi palauttaa myös itse <a href="snapshots.html">tilannevedoksista</a>.
+</p>
+
+<p>
+Omien kopioiden ottaminen on silti suositeltavaa, jos epäilee ettei huomaisi
+ongelmaa tarpeeksi nopeasti tai tiedot ovat erityisen tärkeitä.
+</p>
+
+<h2>Hakemiston varmuuskopioiminen</h2>
+
+<pre>
+tar -czvf kopio.tar.gz hakemisto
+</pre>
+
+<p>
+Tuloksena syntyy nykyiseen hakemistoon tiedosto kopio.tar.gz,
+joka sisältää kaikki komennossa määritellyn hakemiston tiedostot.
+Kotihakemiston ollessa kyseessä komento tekee varmuuskopion kaikista
+tiedostoistasi. Tämän jälkeen tärkeät tiedostot siirtyvät helposti
+talteen kotikoneelle esimerkiksi <a href="filezilla.html">filezillalla</a>.
+</p>
+
+<h2>Hakemiston palauttaminen</h2>
+
+<pre>
+tar -xzvf kopio.tar.gz
+</pre>
+
+<p>
+Komento purkaa tiedostot nykyiseen kansioon.
+</p>
+
+<p>
+<b>Vinkki:</b> Jos säilytät suuria varmuuskopiotiedostoja Lakka-palvelimella, voit käyttää /work levyä jota ei varmuuskopioida, ja jossa on enemmän levytilaa käyttäjälle kuin kotihakemistossa.
+</p>
+
+<h2>MySQL-kannan varmuuskopiointi</h2>
+
+Kotihakemiston varmuuskopioinnin lisäksi myös mysql-kanta on kopioitava erikseen.
+
+<pre>
+mysqldump -p --add-drop-table tietokanta | gzip &gt; varmuuskopio.sql.gz
+</pre>
+
+<p>Komento varmuuskopioi kaikki kannan <i>tietokanta</i> tiedot ja tallentaa ne pakattuun tiedostoon varmuuskopio.sql.gz. Kapsilla <i>tietokanta</i> on yleensä sama kuin käyttäjätunnuksesi. Komento kysyy MySQL-tietokannan salasanan, joka ei ole sama kuin shell-salasanasi (tietokannan salasanan olet saanut tietokannan pyytämisen yhdeydessä). Valitsin --add-drop-table lisää tiedostoon komennot, jotka poistavat palautettaessa mahdollisesti kantaan jääneet tiedot.
+</p>
+
+<p>
+Kun varmuuskopiointi on valmis, voit joko jättää tiedoston palvelimelle tai kopioida sen esimerkiksi
+<a href="filezilla.html">filezillalla</a> omalle koneellesi.
+</p>
+
+<h2>MySQL-kannan varmuuskopion palautus</h2>
+
+<pre>
+cat varmuuskopio.sql.gz | gunzip | mysql -psalasana tietokanta
+</pre>
+
+<p>
+Komennon parametrit ovat samat kuin varmuuskopioinnissa, järjestys on vain eri. Palautus korvaa kannassa jo olevat tiedot, eli jos palautat vanhaa kopiota, voi olla järkevää ottaa ensin kopio uudesta kannasta varmuuden vuoksi.
+</p>
+
+</div>

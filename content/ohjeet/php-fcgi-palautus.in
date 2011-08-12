@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Sites-hakemiston sivujen php on <a href="www-tekniikka.html#php">toteutettu</a> <em>php5.fcgi</em>-tiedoston kautta, joka luodaan automaattisesti www-hakemiston juureen. Tässä ohjeessa neuvotaan tiedoston luominen itse jos sen on vahingossa poistanut.</p>
+
+<p>Ota aluksi <a href="ssh.html">ssh-yhteys</a> Lakka-palvelimelle ja siirry sivustohakemistoosi:</p>
+<pre>
+cd sites/<em>domain.com</em>/www
+</pre>
+
+<p>Php5.fcgi luodaan seuraavasti. Ensimmäinen komento lisää tarvittavan sisällön tiedostoon, ja jälkimmäisellä asetetaan käyttöoikeudet.</p>
+<pre>
+echo '#!/usr/bin/php5-cgi' &gt; php5.fcgi
+chmod 700 php5.fcgi
+</pre>
+
+</div>

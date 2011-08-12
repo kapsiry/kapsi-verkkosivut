@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Tässä ohjeessa on kuvattu Kapsin www-palveluiden tekninen toteutus. Ohjeesta
+voi olla hyötyä asetusten teossa, tai mikäli haluaa toteuttaa samankaltaisia asioita
+omalla palvelimella.</p>
+
+<!-- Check-by: 2011-01-01 -->
+<h2 id="palvelimet">Kuormantasaus</h2>
+<p>Yhdistyksellä on tällä hetkellä kaksi <a href="../palvelut/palvelimet.html">www-palvelinta</a>: Karviainen ja Kirsikka.
+Verkkosivustot on jaettu näiden kesken siten, että <em>kapsi.fi</em>-osoitteen
+alaiset sivut palvellaan Karviaiselta ja muut sivustot pääsääntöisesti Kirsikalta.
+Jako on toteutettu määrittämällä eri sivustoille nimipalveluihin eri ip-osoitteet.
+Sivustojen jakoa voidaan muuttaa mm. huoltokatkojen vuoksi.</p>
+
+<p>Kummallakin www-palvelimella näkyvät verkon yli NFS:llä samat kotihakemistot
+kuin Lakalla. Palvelimille pääsee myös kirjautumaan ssh:lla. Se voi olla tarpeen
+fcgi-ohjelmien sammuttamiseksi <em>kill</em>-komennolla, sekä koska www-palvelinten
+ohjelmavalikoima on erilainen kuin Lakalla.</p>
+
+<h2 id="fcgi">FCGI-ohjelmat</h2>
+<p>FCGI on www-palvelimen rajapinta, jonka kautta se ajaa käyttäjän tekemiä ohjelmia.
+Se muistuttaa perinteistä <a href="cgi.html">CGI-ohjelmaa</a>, mutta toiminnan
+nopeuttamiseksi FCGI pitää ohjelmat käynnissä jonkin aikaa edellisen sivunlatauksen
+jälkeen. Näin ohjelman käynnistymiseen kuluva aika ei hidasta verkkosivujen toimintaa.</p>
+
+<p>Tämä voi kuitenkin aiheuttaa päivitysviivettä asetuksia tehtäessä, koska FCGI ei lataa
+kaikkia tiedostoja uudelleen ennen kuin ohjelma sammuu. Päivitysviiveen voi välttää
+sulkemalla fcgi-prosessin muutosten jälkeen. Käynnissä olevat ohjelmat näkee www-palvelimilla
+<em>top</em>-komennolla, jossa sulkeminen tapahtuu <em>k</em>-näppäimellä.</p>
+
+<h2 id="log">Verkkosivujen lokitiedostot</h2>
+<p>Kunkin palvelimen Apache kirjoittaa lokitiedostot hakemiston <em>/var/log/apache2</em> alle.
+Käyttäjille on <a href="http://acl.bestbits.at/about.html">ACL</a>:llä annettu lukuoikeus
+<em>error.log</em>-virhelokeihin, sekä <a href="www-logit.html">erillisestä pyynnöstä</a> myös
+<em>access.log</em>:iin.</p>
+
+<p>Lokien luku on helpointa Lakalta <em>~/sites/domain.com/log</em>-hakemiston kautta.
+Siellä on linkit polkuun, johon www-palvelinten lokihakemistot on liitetty Lakalla.</p>
+
+<p>Public_html-hakemistosta virhelogeja ei ole saatavilla, koska kaikkien käyttäjien public_html-logit menevät samaan tiedostoon. Logiotteita voi kuitenkin pyytää helpdeskin kautta.</p>
+
+<h2 id="php">PHP-toteutus</h2>
+<p>Kapsilla PHP-ohjelmat ajetaan aina käyttäjän omalla tunnuksella. Sen vuoksi
+www-ohjelmille ei tarvitse erikseen antaa oikeuksia tiedostoonkirjoitukseen.
+Muilla sivustoilla olevat ohjeet 777-käyttöoikeuksista pitää siis jättää huomiotta.
+</p>
+
+<p>Apachen <a href="http://httpd.apache.org/docs/2.2/suexec.html">SuEXEC</a> on tekniikka,
+jossa www-palvelin voi tiettyjen ehtojen täyttyessä käynnistää ohjelmia käyttäjän
+tunnuksella. Tietoturva on tässä erityisen olennaista, jotta tunnuksella ei ajeta
+muita kuin käyttäjän itse luomia ohjelmia. Sen vuoksi SuEXEC mm. estää ohjelman suorituksen,
+jos tiedostolle tai hakemistolle on annettu edellämainitut 777-käyttöoikeudet (eli kirjoitusoikeus kaikille).</p>
+
+<p>SuEXEC ei kuitenkaan toimi suoraan Apachen perinteisen <em>mod_php</em>-laajennoksen kanssa,
+joten PHP-toteutus on tehty FCGI:n kautta.</p>
+
+<h3>PHP sites-hakemistossa</h3>
+<p>Sites-hakemistossa on käytössä <a href="php-fcgi-palautus.html">php5.fcgi-wrapperi</a>, joka ajaa tiedostot <em>/usr/bin/php5-cgi</em>-tulkilla. Wrapperi luodaan www-hakemiston juureen automaattisesti, ellei samannimistä tiedostoa ole valmiiksi olemassa.</p>
+<p>PHP-tiedostojen pyynnöt on ohjattu tälle wrapperille Apachen palvelimenlaajuiseen
+asetustiedostoon tehdyn <a href="cgi-php.html">Action</a>-asetuksen avulla.</p>
+
+<p>Wrapperilla saavutetaan pieni nopeusetu public_html:n toteutukseen verrattuna, koska fcgi voi käyttää samaa tulkkia eri tiedostoille. Public_html:n kanssa wrapperin asettaminen ylläpidon toimesta ei helposti onnistu Apachen konfiguraation vuoksi.</p>
+
+<p>Wrapperille ohjataan tyypin <code>application/x-httpd-fastphp</code> sivut. Jos php:n haluaa toimimaan jollakin toisella päätteellä sites-hakemistossa, lisätään <em>.htaccess</em>-tiedostoon rivi <code>AddType application/x-httpd-fastphp <em>pääte</em></code>.</p>
+
+<h3>PHP public_html-hakemistossa</h3>
+<p>Apachen asetuksissa <em>public_html</em>-hakemiston <em>.php</em>-pääte on kytketty <em>fcgid-script</em>-tyyppiin, jolloin tiedostot ajetaan kuten fcgi-skriptit.</p>
+
+<p>Normaalisti php-tiedoston ensimmäiselle riville tarvittaisiin tällöin käytettävän php-tulkin
+polku. Tämä on kuitenkin kierretty asettamalla <a href="http://en.wikipedia.org/wiki/Binfmt_misc">binfmt</a>:llä kaikki <em>.php</em>-päätteiset tiedostot
+ajettavaksi <em>/usr/bin/php5-cgi</em>-tulkilla. PHP-tiedostot voi siten www-palvelimilla ajaa suoraan komennolla <em>./index.php</em>.</p>
+
+<p>Koska tiedostot ajetaan fcgi-ohjelmina yksittäin, täytyy niille asettaa suoritusoikeus. Asetus 700 on hyvä valinta, koska se mm. estää php-koodin paljastumisen konfiguraatiovirheiden yhteydessä.</p>
+
+<p>Public_html:ssä PHP:n saa toimimaan eri päätteellä vain erillisen <a href="cgi-php.html">wrapperin</a> kautta, koska binfmt on kytketty käyttöön vain päätteelle <em>.php</em></p>
+
+</div>
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Kapsin ylläpitoon ja muihin toimiryhmiin saa yhteyden <a href="../tukipalvelut.html">sähköpostilla</a>. Oikeaan osoitteeseen lähetetty viesti nopeuttaa käsittelyä, mutta vääräänkin osoitteeseen menneet siirretään oikealle ryhmälle. Tässä ohjeessa on hieman selvitystä siitä, mitä asioita kukin toimiryhmä hoitaa.</p>
+
+<h2>Tarpeelliset tiedot</h2>
+<p>Tukipyynnön yhteydessä on hyvä mainita oma nimensä (ellei se näy sähköpostin lähettäjänä) ja käyttäjätunnuksensa. WWW-sivuihin liittyvistä virheistä kannattaa mainita lisäksi virheen aiheuttaneen sivun osoite sekä päivämäärä ja kelloaika, jolloin virhe on tapahtunut.</p>
+<p>Esimerkiksi salasanaa ei ole tarpeellista mainita.</p>
+
+<h2>Toimiryhmän valinta</h2>
+<h3>Ylläpito</h3>
+<p>Ylläpito huolehtii Kapsin palvelinlaitteiston ja ohjelmistojen toiminnasta, toteuttaa jäsenpalvelut sekä vastaa
+jäsenten ylläpitopyyntöihin. Esimerkkejä ylläpidolle kuuluvista asioista:</p>
+<ul>
+<li>MySQL-tietokantojen luominen, sähköpostiosoitteiden hallinta yms. yleiset ylläpitotoimenpiteet</li>
+<li>Ohjelmien asentaminen (lähinnä Debianin stable-jakelusta, muut voi asentaa itse kotikansioonsa)</li>
+<li>Varmuuskopioiden palautus Hilla-palvelimella. Lakalla voit palauttaa tiedostot itse <a 
+href="snapshots.html">tilannevedoksista</a>.</li>
+<li>Lisätilapyynnöt</li>
+<li>Unohtuneiden salasanojen vaihtaminen</li>
+</ul>
+
+<h3>Helpdesk</h3>
+<p>Helpdesk vastaa jäsenten kysymyksiin palveluiden ja niihin liittyvien ohjelmien käytöstä. Helpdeskillä
+ei ole ylläpidon oikeuksia. Esimerkkejä helpdeskin hoitamista asioista:</p>
+<ul>
+<li>Ongelmat PHP:n, tiedostonsiirron, yms. tai ohjeiden kanssa</li>
+<li>Otteet Apachen virhelogista sekä virheen mahdollisten syiden etsintä</li>
+<li>Informointi jäsenpalveluista ja niiden käyttöönotosta</li>
+</ul>
+
+<h3>Hallitus</h3>
+<p>Hallitus on yhdistyksen päättävä elin, joka valitaan vuosikokouksessa. Hallitus mm. käsittelee jäsenhakemukset
+ja päättää laitehankinnoista. Esimerkkejä hallitukselle kuuluvista asioista:</p>
+<ul>
+<li>Jäsenrekisterin ylläpito, esimerkiksi muuttuneet osoite-, email- tai nimitiedot</li>
+<li>Uudet jäsenet, erityisesti "poikkeustapaukset", kuten kannatusjäsenet ja yhteisöt</li>
+<li>Eroilmoitukset</li>
+</ul>
+
+<h3>Laskutus</h3>
+<p>Laskutuksen hoitaa hallituksesta valittu rahastonhoitaja, mutta selkeyden säilyttämiseksi sillä on erillinen
+osoite. Laskutukseen kuuluvia asioita:</p>
+<ul>
+<li>Laskun eräpäivän lykkäys</li>
+<li>Kysymykset maksun perillemenosta</li>
+</ul>
+<p>
+Yleensä tosin maksun perillemenoa ei tarvitse erityisemmin tarkistaa. Puuttuvasta jäsenmaksusta mainitaan kyllä
+ennen palveluiden katkaisemista (tämän vuoksi on tärkeää pitää ajantasainen osoite jäsenrekisterissä).
+</p>
+
+
+</div>

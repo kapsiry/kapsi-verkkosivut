@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Gemit ovat Ruby-ohjelmointikielen laajentamiseen tarkoitettuja palikoita ja
+samalla kirjastokokoelma.
+</p>
+<p>
+Käytännössä omalle gem-ympäristölle on tarvetta, jos haluaa kehittää
+verkkopalveluita uusimman Rails-kehitysympäristön päälle. Kannattaa siis säätää
+gem-ympäristöä Karviaisella. Tämä ohje kertoo, kuinka saat gemit toimimaan
+omalla käyttäjätunnuksellasi. Lakka-palvelin on tällä hetkellä sen verran
+vanhaa versiota, että uusin RubyGems ei välttämättä toimi.
+</p>
+
+<h2>Valmistelu</h2>
+<p>
+Luo kotihakemistoosi local-hakemisto, jonka alla alamme pitämään gemejä:
+</p>
+<pre>
+mkdir -p $HOME/local
+</pre>
+<p>
+Muokkaa kotihakemistosi .bashrc-tiedostoa ja lisää sen loppuun seuraavat rivit:
+</p>
+<pre>
+export RUBYLIB="$HOME/local/lib:$RUBYLIB"
+export GEM_HOME=$HOME/local
+export PATH=$HOME/local/bin:$PATH
+</pre>
+<p>Tämän jälkeen anna komento, jotta saat uudet asetukset käyttöön:</p>
+<pre>
+source $HOME/.bashrc
+</pre>
+
+<h2>Asennus</h2>
+<p>
+Hae RubyGems osoitteesta <a href="http://rubyforge.org/frs/?group_id=126">http://rubyforge.org/frs/?group_id=126</a> (tarkista, onko alla olevassa uusin versio)
+</p>
+<pre>
+wget http://rubyforge.org/frs/download.php/38646/rubygems-1.2.0.tgz
+</pre>
+<p>Pura se johonkin päin kotihakemistoasi. Onnistuu esimerkiksi komennolla</p>
+<pre>
+tar xvvzf rubygems-1.2.0.tgz
+</pre>
+<p>
+Siirry purettuun hakemistoon ja anna komento
+</p>
+<pre>
+cd rubygems-1.2.0
+ruby setup.rb config --prefix=$HOME/local
+</pre>
+<p>
+Tämän jälkeen et enää tarvitse juuri purettua rubygems-x.x.x -hakemistoa ja
+tar-palloa, vaan voit poistaa ne.
+</p>
+
+<h2>Viimeistely</h2>
+<p>Tässä vaiheessa RubyGems on jo asennettu, mutta ei vielä toimi pelkästään
+kirjoittamalla gem, vaan vaatii gem1.8-komennon. Tämän korjaamme tekemällä
+symbolisen linkin gem1.8:sta gem:iin.</p>
+<pre>
+ln -s $HOME/local/bin/gem1.8 $HOME/local/bin/gem
+</pre>
+<p>Tässä vaiheessa voit kokeilla RubyGemsin päivittämistä komennolla</p>
+<pre>
+gem update --system
+</pre>
+<p>
+Jos ko. komento ei toimi (antaa virheilmoituksen), on jotain vialla.
+</p>
+
+<h2>Käyttö Ruby on Railsin kanssa</h2>
+<p>Sivutilasta ajettavat FCGI-ohjelmat eivät huomioi <em>.bashrc</em>:hen tehtyjä asetuksia.
+Siksi ne täytyy erikseen asettaa <em>environment.rb</em>:ssä:</p>
+<pre>
+$LOAD_PATH.unshift '/home/users/<em>käyttäjä</em>/local/lib'
+ENV['GEM_PATH'] = '/home/users/<em>käyttäjä</em>/local'
+</pre>
+
+<h2>Huomiot</h2>
+<p>
+Opettele käyttämään gemejä. On hyvin tärkeää seurata käyttämiensä kirjastojen
+turvallisuustilannetta. Koska kirjastot on nyt asennettu omaan kotihakemistoosi,
+on niistä huolenpito myöskin omalla vastuullasi! Ylläpito pitää kyllä huolen
+järjestelmään yhteisesti asennetuista kirjastoista, mutta ei voi seurata
+kaikkien omia (edes ohjeistettuja) virityksiä. Tutustu siis RubyGemsin
+dokumentaatioon ja käyttöohjeisiin:
+<a href="http://www.rubygems.org/read/book/1">http://www.rubygems.org/read/book/1</a>.
+</p>
+
+</div>

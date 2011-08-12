@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Screen on ohjelma, jonka avulla <a href="shell-manual.html">shellissä</a> ajettavan ohjelman voi jättää käyntiin, vaikka yhteys katkaistaan. Lisäksi samaan screeniin saa yhtäaikaisesti auki useita ikkunoita, joissa voi pitää auki eri ohjelmia.</p>
+
+<h2>Ikkunoiden hallinta</h2>
+
+<p>Screen käynnistetään käskyllä <em>screen</em> , jonka jälkeen näyttö tyhjenee ja normaali kehote tulee uudelleen näytön ylälaitaan näkyviin. Ensimmäisellä kerralla screen näyttää lisäksi inforuudun, josta näkyy mm. ohjelman versio. Screenissä voi käynnistää ohjelmia täysin normaalisti, esimerkiksi yhdistää IRC-palvelimelle irssillä.</p>
+
+<p>Screenin toimintoja käytetään näppäinyhdistelmän ctrl-a kautta. Yleisimmät komennot ovat:</p>
+
+<ul>
+<li><b>Screenin irrotus:</b> <kbd>ctrl-a d</kbd></li>
+<li><b>Uuden ikkunan luominen:</b> <kbd>ctrl-a c</kbd></li>
+<li><b>Ikkunoiden listaaminen:</b> <kbd>ctrl-a w</kbd></li>
+<li><b>Vaihtaminen tiettyyn ikkunaan:</b> <kbd>ctrl-a <em>ikkunan numero</em></kbd></li>
+<li><b>Vaihtaminen kahden edellisen ikkunan välillä:</b> <kbd>ctrl-a ctrl-a</kbd></li>
+<li><b>Screenin oma ohjetoiminto:</b> <kbd>ctrl-a ?</kbd></li>
+</ul>
+
+<h2>Screenin irrottaminen ja liittäminen</h2>
+
+<p>Screenin erinomaisuus piilee mahdollisuudessa sulkea ssh-yhteys sulkematta kuitenkaan ohjelmia. Screenin voi irrottaa näppäinyhdistelmällä <kbd>ctrl-a d</kbd>. Seuraavalla kerralla kirjauduttaessa screenin saa liitettyä takaisin käskyllä <em>screen -Dr</em> .</p>
+
+<h2>Aloittelijan ongelmatilanteet</h2>
+<p>Joskus tulee vahingossa avattua useampi screeni yhtä aikaa, jolloin <em>screen -Dr</em> ei liitäkään screeniä takaisin, vaan ilmoittaa auki olevat screenit:</p>
+
+<pre>
+user@lakka:~$ screen -Dr
+There are several suitable screens on:
+        29905.pts-2079.lakka    (03/01/2010 11:56:05 AM)        (Detached)
+        27021.pts-214.lakka     (11/22/2009 11:04:47 PM)        (Detached)
+Type "screen [-d] -r [pid.]tty.host" to resume one of them.
+</pre>
+
+<p>Liitettävän screenin voi valita käskyllä <em>screen -Dr pid</em>, esimerkiksi äskeisen listauksen ylemmän vaihtoehdon käskyllä <em>screen -Dr 29905.pts-2079.lakka</em>. Ylimääräiset screenit voi sen jälkeen sulkea yksinkertaisesti sulkemalla kaikki niiden ikkunat.</p>
+
+<p>Ellei useammasta screenistä aiheutunutta ongelmatilannetta saa muuten selvitettyä, voi kaikki ylimääräiset screenit lopettaa <em>kill</em>-käskyllä:</p>
+
+<pre>
+user@lakka:~$ screen -Dr
+There are several suitable screens on:
+        29905.pts-2079.lakka    (03/01/2010 11:56:05 AM)        (Detached)
+        27021.pts-214.lakka     (11/22/2009 11:04:47 PM)        (Detached)
+Type "screen [-d] -r [pid.]tty.host" to resume one of them.
+user@lakka:~$ kill 29905
+user@lakka:~$ screen -Dr
+</pre>
+
+<p>Jos ongelmia ilmenee tämänkin jälkeen, ota yhteyttä <a href="http://www.kapsi.fi/tukipalvelut.html">helpdeskiin</a>.</p>
+
+</div>

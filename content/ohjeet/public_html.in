@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Kaikilla käyttäjillä on oletuksena käytössä sivutila osoitteella <em>http://koti.kapsi.fi/kayttajatunnus/</em>, jossa näkyvät sivut <em>public_html</em>-hakemistosta kotihakemiston alta. Ellei tätä hakemistoa ole valmiiksi olemassa, se täytyy luoda tämän ohjeen mukaisesti.</p>
+
+<p>Lisäksi voi erikseen pyytää sivuja joko osoitteelle <em>käyttäjä.kapsi.fi</em> tai <a href="domain.html">omalle verkkotunnukselle</a>. Ylläpito luo niitä varten valmiiksi <em>sites</em>-hakemiston.</p>
+
+<p>Helpoiten hakemiston saa luotua <a href="ssh.html">ssh-yhteyden</a> kautta. Ota yhteys Lakka-palvelimeen ja aja seuraavat komennot. Ne luovat kansion ja asettavat sopivat käyttöoikeudet. Tämän jälkeen Internet-selaimella pitäisi ko. osoitteessa näkyä tiedostolistaus tyhjästä kansiosta.</p>
+
+<pre>
+mkdir ~/public_html
+chmod 701 ~
+chmod 755 ~/public_html
+</pre>
+
+</div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Irssi-proxy on irssin lisäosa, jonka avulla sitä voi käyttää bouncerin tapaan. Erityisen kätevä se on esimerkiksi GPRS:ää käytettäessä, jolloin yhteyden pätkiminen ei näy irciin eikä yhteyden viive haittaa samalla tavalla kuin ssh-yhteydessä. Tässä ohjeessa oletetaan, että irssin käyttö on muilta osin jo tuttua.</p>
+
+<p>Kapsilla proxy-moduuli on käännetty valmiiksi, joten käyttöönotto on melko helppoa. Jokaista proxyn käyttämää IRC-verkkoa varten tarvitaan kuitenkin oma portti, joka on pyydettävä ylläpidolta.</p>
+
+<h2>Proxyn käynnistäminen</h2>
+
+<p>Proxy-moduulin lataaminen ja salasanan asettaminen tapahtuu seuraavasti. Salasanaa tarvitaan myöhemmin yhdistettäessä proxyyn. Lisäksi asetetaan osoite, jolle portit on avattu. Lakalla se on <em>lakka.kapsi.fi</em> ja Hillalla <em>hilla.kapsi.fi</em> .</p>
+<pre>
+/load proxy
+/set irssiproxy_password <em>salasana</em>
+/set irssiproxy_bind lakka.kapsi.fi
+</pre>
+
+<p>Käytettävät irc-verkot ja niitä varten käytettävät portit asetetaan muuttujaan <em>irssiproxy_ports</em>. IRC-verkkojen nimet näet komennolla <em>/server</em>, jonka listauksessa ne ovat sulkeissa. Seuraavassa esimerkissä ylläpidolta on saatu portit 45000 ja 45001, joihin kytketään verkot IRCnet ja QuakeNet:</p>
+<pre>
+/set irssiproxy_ports IRCnet=45000 QuakeNet=45001
+</pre>
+
+<p>Testauksen jälkeen asetukset tallennetaan komennolla <em>/save</em></p>
+
+<h2>Proxyyn yhdistäminen</h2>
+<p>Proxya voi käyttää millä tahansa tavallisella irc-clientillä. Palvelimeksi määritetään aiemmin määritelty osoite ja portti, aikaisemmassa esimerkissä <em>lakka.kapsi.fi:45000</em>. Proxyn salasana asetetaan palvelimen salasanaksi. Proxyyn yhdistämisestä tulee irssin status-ikkunaan viesti:</p>
+<pre>
+-!- Irssi: Proxy: Client connected from ::ffff:xxx.xxx.xxx.xxx
+</pre>
+
+<p>Yhdistämisen jälkeen kaikki irssissä auki olleet kyseisen verkon kanavat aukeavat myös toiseen clientiin, jossa niitä voi käyttää aivan normaalisti. Viestit jäävät talteen myös irssiin, josta ne voi myöhemminkin lukea.</p>
+
+<h2>Ongelmat</h2>
+<p>Jos verkon nimi on määritetty asetukseen <em>irssiproxy_ports</em> väärin, tulee proxyyn yhdistettäessä virheilmoitus "Not connected to server". Yhteys IRC-palvelimeen täytyy katkaista ja yhdistää uudelleen, jotta asetettu verkon nimi tulee voimaan.</p>
+
+<p>Muihin ongelmiin voi kysyä apua helpdeskiltä.</p>
+
+</div>

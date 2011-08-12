@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Verkkosivujen virhe <em>500 Internal Server Error</em> tarkoittaa ongelmaa
+joko <em>.htaccess</em>-asetuksissa tai CGI- tai PHP-ohjelman suorituksessa.
+Tämä ohje neuvoo virhetilanteen selvittämisessä.</p>
+
+<h2>Virheet .htaccess-asetuksissa</h2>
+<p>Piilotiedosto <em>.htaccess</em> sisältää www-palvelinohjelman toimintaan
+vaikuttavia asetuksia. Syntaksivirheet tai asetukset, joille ei ole tukea,
+aiheuttavat virheilmoituksen. Tästä on kyse, jos virheilmoitus ilmenee muulloinkin
+kuin CGI- tai PHP-sivuja käytettäessä.</p>
+
+<p>
+Useimmiten <em>.htaccess</em>-asetukset ovat käyttäjän itse tekemiä.
+Joidenkin ohjelmien asennuspaketeissa tulee kuitenkin valmiina asetustiedosto,
+jonka kaikki asetukset eivät välttämättä toimi Kapsilla.
+Tiedoston saa näkyviin komennolla <em>ls -a</em>,
+ja sitä voi lukea tavallisella tekstieditorilla.</p>
+
+<p>Virheen syy ilmenee <a href="www-logit.html">error.log</a>-tiedostosta.
+<em>Public_html</em>-hakemistoa käytettäessä lokitiedostoa ei ole saatavilla,
+jolloin voi kokeilla kommentoida asetuksia tai pyytää apua <a href="../tukipalvelut.html">helpdeskiltä</a>.</p>
+
+<p>Erityisen yleinen syy on <em>FollowSymLinks</em>-asetus. Se on korvattu turvallisemmalla <em>FollowSymLinksIfOwnerMatch</em>-asetuksella, joka on oletuksena käytössä. Kyseisen asetuksen voi siis poistaa <em>.htaccess</em>-tiedostosta.</p>
+
+<h2>CGI- ja PHP-ohjelmien virheet</h2>
+<p>CGI- ja PHP-ohjelmien virhetilanteissa <em>error.log</em>:in virheilmoitus on usein pelkkä
+<em>Premature end of script headers</em>. Se tarkoittaa ettei ohjelma tuottanut kunnollista
+vastausta sivuhakuun. Virhe voi johtua esimerkiksi ohjelman kaatumisesta, tai siitä että <em>SuEXEC</em> estää ohjelman suorituksen <a href="kayttooikeudet.html">käyttöoikeuksien</a> vuoksi.</p>
+
+<h3>Käyttöoikeudet</h3>
+<p>SuEXEC on www-palvelimen ominaisuus, joka suorittaa sovellukset käyttäjän omalla käyttäjätunnuksella.
+Tietoturvan vuoksi SuEXECissä on varsin tiukat
+<a href="http://httpd.apache.org/docs/2.0/suexec.html#model">rajoitukset käyttöoikeuksille</a>, eikä ohjelmaa suoriteta jos rajoitukset eivät täyty.</p>
+
+<p>Helpdesk voi tarvittaessa selvittää ongelman erillisestä lokitiedostosta. Aluksi kannattaa kuitenkin tarkistaa kaksi asiaa:</p>
+<ol>
+<li>Millään tiedostolla tai hakemistolla ei saa olla käyttöoikeutta 777, jonka SuEXEC estää.</li>
+<li>Public_html-hakemistossa PHP-tiedostoilla täytyy olla suoritusoikeus.</li>
+</ol>
+
+<h3 id="wrap">Muiden virheiden selvittäminen wrap.cgi:llä</h3>
+<p>Muut <em>Premature end of script headers</em> -virheet voi selvittää luomalla samaan hakemistoon <em>wrap.cgi</em>-tiedoston. Tällä ohjataan ohjelman tuottamat virheilmoitukset selaimelle.</p>
+<pre>
+#!/bin/bash
+echo -e "Content-type: text/plain\r\n\r\n"
+<em>./ohjelma.cgi</em> 2>&amp;1
+</pre>
+<p>Viimeiselle riville asetetaan ajettavan ohjelman nimi. PHP-ohjelmia varten
+tiedoston tulee olla tällainen, jossa PHP-tiedoston nimi on kolmannella rivillä:</p>
+<pre>
+#!/bin/bash
+echo -e "Content-type: text/plain\r\n\r\n"
+export SCRIPT_FILENAME=<em>index.php</em>
+/usr/bin/php5-cgi 2>&amp;1
+</pre>
+<p>
+<em>Wrap.cgi</em>:lle annetaan suoritusoikeus ja se avataan selaimessa. Ohjelman
+tuloste tulee näkyviin, eli joko kunnollinen vastaus tai jokin virheilmoitus esimerkiksi
+puuttuvasta kirjastosta. Menetelmä ei kuitenkaan sovi FCGI-ohjelmille.</p>
+
+
+</div>
+
+

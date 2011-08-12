@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<div class="img_right">
+<img src="domain.png" alt="Verkkotunnuksen käyttöönoton eteneminen." />
+</div>
+
+<p>Tämä ohje neuvoo oman verkkotunnuksen (domain, esimerkissä <em>www.example.com</em>) käyttöönoton. 
+Verkkotunnus on rekisteröitävä ulkopuoliselta palveluntarjoajalta, mutta 
+Kapsilta saa sille tarvittavat nimipalvelut, www-sivutilan ja 
+sähköpostin. Kapsin palvelut ovat jäsenille maksuttomia, verkkotunnuksen hinta riippuu rekisteröijästä.</p>
+
+<p>Verkkotunnuksen käyttöönotossa on kaksi osaa. Vaiheet voi käytännössä tehdä kummassa tahansa järjestyksessä:</p>
+<ol class="largespace">
+<li>Pyydä verkkotunnukselle haluamasi palvelut
+<a href="../tukipalvelut.html">ylläpidolta</a>.</li>
+
+<li>Rekisteröi verkkotunnus ja syötä sen asetuksiin Kapsin nimipalvelimien osoitteet (<em>ns1.kapsi.fi</em> ja 
+<em>ns2.kapsi.fi</em>). Suosittuja rekisteröijiä ovat mm. <a href="https://domain.ficora.fi/">Ficora</a> (<em>.fi</em>-osoitteet), 
+<a href="https://www.verkkotunnukset.fi/">verkkotunnukset.fi</a>, <a href="http://joker.com">joker.com</a> sekä <a 
+href="http://godaddy.com/">godaddy.com</a>.
+</li>
+</ol>
+
+<h2 id="pyynto">Ylläpitopyynnön sisältö</h2>
+<p>Kaikkiin verkkotunnuspyyntöihin tarvitaan nämä tiedot:</p>
+<ul>
+<li>Verkkotunnuksen osoite</li>
+<li>Oma käyttäjätunnuksesi</li>
+<li>Nimipalveluiden tarve</li>
+</ul>
+
+<p>Helpointa on käyttää Kapsin nimipalveluita. Jos kuitenkin haluat käyttää verkkotunnuksen rekisteröijän nimipalveluita, on 
+asiasta ilmoitettava ylläpidolle. Moninkertaiset nimipalvelut voivat aiheuttaa ongelmia sähköpostin kulkemisessa.</p>
+
+
+<h2 id="palvelut">Palvelut</h2>
+
+<p>Tarvitsemasi palvelut voit valita alla olevasta listasta. Kerro ylläpidolle lähettämässäsi sähköpostissa haluamasi 
+palvelut sekä niihin liittyvät tiedot, kuten sähköpostiosoitteet.</p>
+
+<ul class="largespace">
+<li><strong>Kotisivut</strong>
+<p>Voit valita, haluatko selaimen osoiterivillä näkyväksi osoitteeksi 
+<em>http://www.example.com/</em> vai <em>http://example.com/</em>. Toinen osoite ohjaa ensisijaiseen, eli
+ero on vain kosmeettinen.</p></li>
+
+<li><strong>Erilliset kotisivut alidomainille</strong>
+<p>Ilmoita sähköpostissasi 
+haluamiesi alidomainien nimet, esimerkiksi <em>http://pekka.example.com/</em>.
+Halutessasi voit myös <a href="mod_rewrite.html#alidomain">hallita alidomaineita itse</a>.
+</p></li>
+
+<li><strong>Verkkosivujen uudelleenohjaukset</strong>
+<p>Ilmoita mistä www-osoitteesta ohjataan ja minne.</p></li>
+
+<li><strong>Sähköpostiosoite itsellesi</strong>
+<p>Viestit tulevat omaan <em>tunnus@kapsi.fi</em>-laatikkoosi. Ilmoita haluamasi 
+osoite, kuten <em>etunimi.sukunimi@example.com</em>. Lähtevien viestien osoite
+<a href="email_from.html">asetetaan sähköpostiohjelmassa</a>.
+Voit myös valita useita osoitteita, jotka voit halutessasi lajitella erillisiin sähköpostikansioihin
+<a href="procmail.html">procmaililla</a>. Niin sanottua wildcard-osoitetta <em>*@example.com</em> ei suositella, koska 
+sellaisiin tulee todella suuret määrät roskapostia.</p>
+</li>
+
+<li><strong>Erilliset sähköpostilaatikot</strong>
+<p>Lähipiiriin kuuluville voi saada erillisen sähköpostilaatikon Kapsilta. 
+Tarkemmat ehdot ovat <a href="http://www.kapsi.fi/palvelut/email.html">sähköpostin palvelukuvauksessa</a>.
+Ilmoita haluamasi osoite sekä osoitetta käyttävän henkilön nimi.</p></li>
+<li><strong>Sähköpostin uudelleenohjaukset</strong>
+<p>Ilmoita mistä sähköpostiosoitteesta ohjataan ja minne.</p></li>
+
+<li><strong>IRC-osoite</strong>
+<p>Saat oman verkkotunnuksen näkymään IRC:ssä tunnuksesi perään. Osoite voi olla esimerkiksi
+<em>irc.domain.com</em>, mutta ei kuitenkaan sama kuin kotisivujen osoite. Katso lisätietoa <a href="irc-hostname.html">tästä 
+ohjeesta</a>.</p></li>
+</ul>
+
+<h2 id="dns">Kapsin nimipalveluiden käyttöönotto</h2>
+<p>Käyttäjän täytyy muuttaa nimipalvelimet domaininsa
+hallinnasta.  Se miten ne vaihdetaan riippuu palvelusta, avainsana on
+"nameserver" tai "dns". Kapsilla on kaksi nimipalvelinta
+jäsenten käytössä. Jos hallinnassa on paikat useammalle
+nimipalvelimelle, jätetään ylimääräiset tyhjiksi. Kapsin
+nimipalvelimien osoitteet ovat:</p>
+
+<dl class="settings">
+<dt>Primary nameserver, ensisijainen nimipalvelin</dt>
+<dd>ns1.kapsi.fi</dd>
+
+<dt>Secondary nameserver, toissijainen nimipalvelin</dt>
+<dd>ns2.kapsi.fi</dd>
+</dl>
+
+<p>
+Useimmat palvelut toimivat nimipalvelimien nimillä, mutta jotkin vaativat syöttämään IP-osoitteet.
+IP-osoitteet saat tarvittaessa selville komennolla <em>"host ns1.kapsi.fi"</em> <a href="ssh.html">ssh-yhteyden</a> kautta.
+</p>
+
+<h2 id="omadns">Nimipalveluiden hallitseminen itse</h2>
+<p>Jos verkkotunnuksen rekisteröijällä on oma hallintapalvelu nimipalveluita varten,
+voit käyttää myös sitä. Ilmoita tällöin ylläpidolle pyynnön yhteydessä hoitavasi
+nimipalvelut itse, jolloin he lisäävät vain tarvittavat asetukset www-tilaa ja sähköpostia
+varten.</p>
+
+<p>Halutessasi saat myös Kapsin nimipalveluille vapaavalintaisia tietueita (MX, AAAA).
+Useimmissa tilanteissa nimipalveluiden hallitseminen itse ei siis ole tarpeen.</p>
+
+<p>Jotta palvelut toimisivat, täytyy sinun itse asettaa domainin nimipalveluihin seuraavat asetukset.
+WWW-palvelimen IP-osoitteen mahdollisista muutoksista tiedotetaan.</p>
+<dl class="settings">
+<dt>WWW-palvelin</dt>
+<dd>A 217.30.184.170</dd>
+
+<dt>Ensisijainen sähköpostipalvelin</dt>
+<dd>MX 5 mail.kapsi.fi.</dd>
+
+<dt>Toissijainen sähköpostipalvelin</dt>
+<dd>MX 10 mx2.kapsi.fi.</dd>
+</dl>
+
+</div>

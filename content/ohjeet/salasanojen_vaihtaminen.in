@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Uusien tunnusten shell-salasanat on vaihdettava ennen palveluiden käyttämistä siltä varalta, että viesti joskus joutuisi muiden nähtäväksi. Muut palvelut kuin SSH eivät hyväksy ensimmäistä tai ylläpidon vaihtamaa salasanaa ennen sen vaihtamista. Lisäksi salasanan säännöllinen vaihtaminen on tietoturvan kannalta suositeltavaa.</p>
+
+<p>Helpoin tapa vaihtaa salasana on käyttää <a href="https://pakki.kapsi.fi/salasana/">tätä lomaketta</a>.</p>
+
+<p><strong>Vinkki:</strong> Hyviä salasanoja saa luotua <a href="ssh.html">SSH-yhteyden</a> kautta Lakka-palvelimella <em>makepasswd</em>- ja <em>pwgen</em>-ohjelmalla.</p>
+
+<p>Kapsin palveluihin liittyy kolme erillistä salasanaa:</p>
+<ul class="largespace">
+<li><strong>Shell-palveluiden salasana</strong>, joka päivittyy automaattisesti Lakalta muille shell-palvelimille (Hilla) ja WWW-palvelimille (Kirsikka, Karviainen). Shell-salasana käy lisäksi sähköpostiin ja webmailiin.</li>
+<li><strong>MySQL-salasanan</strong> saat erikseen pyytäessäsi tietokannan käyttöösi. Se käy lisäksi <a href="https://pakki.kapsi.fi/phpmyadmin/">PHPMyAdmin</a>-palveluun.</li>
+<li><strong>PostgreSQL-salasanan</strong> saat erikseen pyytäessäsi PostgreSQL-tietokannan käyttöösi. PostgreSQL toimii Lakalta ja Hillalta myös ilman salasanaa, mutta verkkosivuja varten tarvitset salasanan sen käyttämiseen.</li>
+</ul>
+
+Lisäksi jos käytössäsi on postituslistoja, niiden hallinnointiin käytettävä salasana on myös erillinen edellisistä.
+
+<h2>Shell-salasanan vaihtaminen</h2>
+
+<p>Avaa ensiksi <a href="ssh.html">SSH-yhteys</a> Lakka-palvelimelle. Ensimmäisellä kirjautumisella shell-salasanan vaihto on pakotettu. Myöhemmin salasana vaihdetaan käskyllä <em>passwd</em>. Ohjelma kysyy aluksi nykyistä salasanaasi, ja sen jälkeen kahdesti uutta salasanaa kirjoitusvirheiden varalta. Salasana ei näy kirjoitettaessa.
+</p>
+
+<pre>
+kayttaja@lakka:~$ passwd
+
+Voit vaihtaa salasanasi myös osoitteessa https://pakki.kapsi.fi/salasana/
+Syötä ensin nykyinen salasanasi, sitten uusi salasanasi kahdesti.
+
+Enter login(LDAP) password: 
+New UNIX password: 
+Retype new UNIX password: 
+LDAP password information changed for kayttaja
+passwd: password updated successfully
+kayttaja@lakka:~$
+</pre>
+
+<p>Salasana on nyt vaihdettu onnistuneesti.</p>
+
+
+<h2>MySQL-salasanan vaihtaminen</h2>
+
+<p>Yhdistä <a href="ssh.html">SSH:lla</a> Lakka-palvelimelle ja kirjaudu normaalisti 
+shell-tunnuksillasi. Avaa sen jälkeen MySQL-konsoli komennolla:</p>
+
+<pre>mysql -u <em>kayttajatunnus</em> -p</pre>
+
+<p>Vaihda <em>kayttajatunnus</em>-kohdan tilalle oma MySQL-käyttäjätunnuksesi. Ohjelma kysyy aluksi 
+nykyistä MySQL-salasanaasi kirjautumista varten.</p>
+
+<p>Kirjauduttuasi MySQL:ään voit vaihtaa salasanan <em>set password</em>-komennolla 
+(<em>mysql&gt;</em> on näytöllä valmiiksi oleva kehote, jota ei siis tarvitse kirjoittaa itse). 
+Ohjelma ilmoittaa vaihdon onnistumisesta.</p>
+
+<pre>
+mysql&gt; set password=PASSWORD('uusi_salasana');
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt;
+</pre>
+
+<p>Kirjaudu ulos MySQL:stä komennolla <i>quit</i>.</p>
+
+</div>

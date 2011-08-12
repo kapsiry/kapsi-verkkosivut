@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Kaikki www-sivustot on tarkoitus siirtää Lakalta uudelle palvelimelle vuoden 2007 alkupuolella, luultavasti helmikuun aikana. Muuttuvien asioiden määrä on pyritty minimoimaan, mutta on silti suositeltavaa tarkistaa sivuston toiminta uudella palvelimella jo etukäteen.</p>
+<p>Tällä hetkellä suurin osa <em>sites</em>-hakemiston sivuista on siirretty. Voit tarkistaa kummalla palvelimella sivustosi on <a href="http://helpdesk-testing.kapsi.fi/host/">tämän lomakkeen</a> avulla.</p>
+
+<p><a href="siirtyminen.html">Tarvittavista muutoksista</a> on erillinen ohje.</p>
+<p>Uusi palvelin käyttää Lakan kotihakemistoja NFS:n kautta, joten itse tiedostoja ei tarvitse siirtää. Myös vhostille pääsee kirjautumaan ssh:lla Lakan käyttäjätunnuksilla, mutta se ei yleensä ole tarpeen.</p>
+
+<h2>Uudet osoitteet</h2>
+<p>Uuden WWW-palvelimen osoite on vhost.kapsi.fi ja IP 217.30.184.170. Sivuja voi testata itse ilman, että niiden toiminta muilla selaajilla muuttuu.</p>
+<p>Omalla verkkotunnuksella testaus tapahtuu lisäämällä omalle koneelleen hosts-tiedostoon ohjaus kyseistä osoitetta varten. Windows-järjestelmissä muutettava tiedosto on <em>C:\WINDOWS\system32\drivers\etc\hosts</em> ja Linux-järjestelmissä <em>/etc/hosts</em>. Seuraavista listauksesta valitaan sopiva rivi, joka lisätään hosts-tiedostoon:</p>
+<pre>
+217.30.184.170 domain.com www.domain.com # Omaa verkkotunnusta varten, muuta domain
+217.30.184.170 kayttaja.kapsi.fi # Omaa vhostia varten, muuta "kayttaja"
+</pre>
+
+<p>Public_html-hakemistosta näytettävät sivut näkyvät uudelta palvelimelta osoitteella <em>http://vhost.kapsi.fi/~käyttäjä/</em>. Niiden testaaminen voi olla hieman monimutkaisempaa, mikäli sivustolla on absoluuttisia linkkejä, jotka ohjaavat kapsi.fi-osoitteeseen.</p>
+
+<p>Sivuhakujen ohjautumisen uudelle palvelimelle voi varmistaa php-ohjelmalla:</p>
+<ol>
+<li>Luodaan phpinfo.php, johon lisätään rivi <code>&lt;?php phpinfo(); ?&gt;</code></li>
+<li>Asetetaan käyttöoikeudet 700, jotta sivu toimisi uudella palvelimella</li>
+<li>Avataan sivu selaimessa. Sivun alussa näkyy tiedot järjestelmästä, esimerkiksi
+<em>System: Linux <strong>vhost</strong> 2.6.18-kapsi-deb-1 #2</em>. Vhost tarkoittaa uutta palvelinta ja Lakka vanhaa. Selaimen uudelleenkäynnistys voi olla tarpeen, jotta muuttunut osoite päivittyisi.</li>
+</ol>
+
+<p>Sivuston saa näkymään vanhalta palvelimelta, kun lisätyn rivin poistaa hosts-tiedostosta. Omalla verkkotunnuksella olevat
+sivut voidaan siirtää jo nyt pysyvästi uudelle palvelimelle, ota tätä varten yhteys ylläpitoon.</p>
+
+</div>

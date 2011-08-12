@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>Roskapostin suodatus perustuu tiettyjen viestin ominaisuuksien tunnistamiseen, kuten itse tekstin sanaston ja otsaketietojen palvelinlistan tutkimiseen. Lakalla tarkoitukseen on käytössä <em>spamassassin</em>-ohjelmisto. Tässä ohjeessa käytetään spamassassinia saapuvan postin tutkimiseen, ja lajitellaan roskaposti erilliseen kansioon <a href="procmail.html">procmaililla</a>.</p>
+
+<p><em>SquirrelMail</em>-ohjelmassa, jota Kapsin webmail käyttää, on joitakin omia suodatustoimintojaan. Tässä ohjeessa neuvottu
+spamassassin suodattaa kuitenkin paremmin. Ohjeessa tehdyt asetukset vaikuttavat koko tunnukseesi, riippumatta siitä millä tavalla 
+luet postisi.</p>
+
+<h2>Käyttöönotto</h2>
+
+<p>Luo kotikansion alle tekstitiedosto nimellä .procmailrc seuraavalla sisällöllä. Tällöin spamassassinin roskapostiksi tunnistamat viestit menevät sähköpostikansioon spam.
+</p>
+
+<pre>
+MAILDIR=$HOME/mail/
+
+:0:
+* ^X-Spam-Status: Yes
+spam
+</pre>
+
+<p>Tiedosto kannattaa luoda <a href="ssh.html">ssh-yhteyden</a> kautta suoraan palvelimella. Helpoiten oletusasetukset saa käyttöön ajamalla ssh-yhteyden kautta seuraavan komennon:</p>
+<pre>
+echo -e 'MAILDIR=$HOME/mail/\n\n:0:\n* ^X-Spam-Status: Yes\nspam\n' > ~/.procmailrc
+</pre>
+
+<p><b>Huomio:</b> Tarkista aina procmail-säätöjen jälkeen, että posti
+kulkee!  Pienikin virhe voi tehdä peruuttamatonta tuhoa uudelle
+postille.</p>
+
+<h2>Roskapostikansion asettaminen näkyviin sähköpostiohjelmassa</h2>
+<p>
+Joissakin sähköpostiohjelmissa roskapostikansio täytyy erikseen valita näkyviin.
+Kapsin webmailissa tämä tapahtuu valitsemalla yläreunasta <em>Kansiot</em>. Avautuvan
+sivun alaosasta voi valita spam-kansion näkyviin. Huomioi, ettei spam-kansiota ole
+olemassa ennen ensimmäisen spam-viestin saapumista.
+</p>
+
+<h2>Toiminnan tarkastelu</h2>
+
+<p>
+Suodatinta kokeiltaessa on huomioitava sen tarkkuus. Esimerkiksi itse forward-toiminnolla lähettämäsi spammi
+ei välttämättä jää suodattimeen, sillä spamassassin huomaa sen tulleen paikallisesti samalta palvelimelta.
+</p>
+<p>
+Näet tarkemmat tiedot suodatuksesta ottamalla sähköpostiohjelmassasi näkyviin kaikki otsaketiedot (full headers).
+Spamassassinin lisäämät rivit voivat näyttää esimerkiksi seuraavalta:
+</p>
+<pre>
+X-Spam-Checker-Version: SpamAssassin 3.0.3 (2005-04-27) on lakka.kapsi.fi
+X-Spam-Level: **
+X-Spam-Status: No, score=2.6 required=5.0 tests=ALL_TRUSTED,AWL,
+    RAZOR2_CF_RANGE_51_100,RAZOR2_CHECK,URIBL_OB_SURBL,URIBL_SBL,
+    URIBL_SC_SURBL,URIBL_WS_SURBL autolearn=no version=3.0.3
+</pre>
+<p>
+Tiedoista selviää mm. spamassassinin versio, viestin saamat &quot;spammipisteet&quot;, käytetyt testit sekä
+se, käytettiinkö viestiä spamassassinin itseopetukseen.</p>
+
+<h2>Suodattimen lisäasetukset</h2>
+<p>Oletuksena suodatus tehdään palvelimenlaajuisen suodatusmerkinnän 
+perusteella. Jos haluat käyttää omaa opetustietokantaa tai muita omia 
+asetuksia, lisää .procmailrc:hen ennen suodatussääntöä seuraavat 
+rivit:</p>
+<pre>
+:0fw
+| spamc
+</pre>
+
+<p>Suodattimen tarkkuutta voi parantaa mm.
+<a href="http://fi.wikipedia.org/wiki/Bayesilainen_roskapostisuodatus">bayesilaisen</a> suodattimen avulla.
+Bayesilainen suodatin pyrkii tunnistamaan ominaiset piirteet sille opetetuista asiaviesteistä ja roskapostista. Itseopetuksessa riittävän selviä tapauksia käytetään automaattisesti bayesilaisen suodattimen opettamiseen.
+</p>
+<p>
+Lisää tietoa bayesilaisen suodattimen opettamisesta saat esimerkiksi <a href="http://keitin.net/jarpatus/bayes_ohjeet.html">täältä</a>.
+</p>
+<p>Tehokkuussyistä ohjeessa käytetään <em>spamc</em>-ohjelmaa, joka ottaa yhteyttä palvelimella pyörivään keskitettyyn 
+suodattimeen. Asetuksia muokattaessa saattaa olla tarpeen vaihtaa tilalle omana prosessinaan pyörivä spamassassin, jolloin ko. rivi 
+muuttuu muotoon <em>| nice spamassassin</em>. Keskitetty suodatin ei nimittäin välttämättä aja kaikkia itse tehtyjä suodatussääntöjä.</p>
+
+<h2>Ongelmatilanteet</h2>
+<p>Ongelmatilanteissa, kuten jos suodatin ei tunnu tunnistavan roskapostia lainkaan, voi ottaa yhteyttä helpdeskiin.</p>
+<p>Viestiin kannattaa liittää seuraavien komentojen tulosteet, joista selviää lisätietoa ongelmien selvittämiseksi. Komennot ajetaan <a href="ssh.html">ssh-yhteyden</a> kautta.</p>
+<ol class="largespace">
+<li>Tiedostojen ja hakemistojen olemassaolo:
+<pre>
+ls -l ~/.procmailrc ~/mail
+</pre>
+</li>
+
+<li>Procmailrc:n sisältö:
+<pre>
+cat ~/.procmailrc
+</pre>
+</li>
+
+<li>Procmailrc:n rivinvaihtotyyppi yms. ominaisuudet:
+<pre>
+file ~/.procmailrc
+</pre>
+</li>
+</ol>
+
+</div>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Roskapostia alkaa herkästi tulemaan, kun sähköpostiosoitteesi leviää Internetissä. Herkimmin osoite päätyy roskapostittajien listoille kotisivuiltasi, keskustelupalstoilta tai rekisteröityessäsi erinäisiin palveluihin. Etenkin viimeisessä tapauksessa on kuitenkin olemassa helppo ratkaisu: käyttää eri osoitetta joka kerta.
+</p>
+
+<p> Kapsin sähköpostipalvelut on konfiguroitu niin, että mikä tahansa osoitteeseen 
+<strong>kayttaja@<i>mitatahansa</i>.mail.kapsi.fi</strong> lähetettävä posti tulee perille osoitteeseen kayttaja@kapsi.fi . Tällöin 
+voit palveluun rekisteröityessäsi antaa esimerkiksi osoitteen matti.meikalainen@untrusteddotcom.mail.kapsi.fi . </p> <p> Mikäli 
+palvelu antaa osoitteesi muille, voit helposti suodattaa siihen tulevan postin pois <a href="procmail.html">procmaililla</a>. 
+Esimerkiksi seuraavankaltainen .procmailrc suodattaa pois kaiken @mitatahansa.mail.kapsi.fi päätteiseen osoitteeseen tulevan 
+postin: </p>
+
+<pre>
+MAILDIR=$HOME/mail/
+
+:0:
+* ^To.*@mitatahansa\.mail\.kapsi\.fi
+/dev/null
+
+</pre>
+
+<p>
+Voit käyttää osoitetta samalla tavalla kotisivuillasi. Suositeltavaa on kuitenkin nimetä lisäosa esimerkiksi kayttaja@nospam.mail.kapsi.fi, jolloin ihminen osaa poistaa sen lisätessään osoitteesi osoiteluetteloonsa. Myös vastatessasi viesteihin osoitteenasi näkyy pelkkä kayttaja@kapsi.fi, joten "väärä" osoite korjaantuu itsekseen.
+</p>
+
+<p>
+Vaihtoehtoinen muoto on lisätä käyttäjätunnuksen perään plusmerkin jälkeen vapaavalintainen teksti.
+Omilla domaineilla voi siis käyttää osoitetta <strong>nimi+<em>mitatahansa</em>@example.com</strong>.
+</p>
+
+</div>

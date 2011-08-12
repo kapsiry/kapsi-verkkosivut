@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Unix-järjestelmissä tiedostojen käyttöoikeuksia kuvataan usein numerosarjalla, esimerkiksi 0755.
+Kolme viimeistä numeroa kertovat järjestyksessä tiedoston omistajan, samaan ryhmään kuuluvien ja
+muiden käyttäjien oikeudet. Ensimmäinen numero liittyy erilaisiin lisäominaisuuksiin, eikä sitä
+yleensä tarvita.
+</p>
+
+<p>
+Kukin numero muodostuu suoritusoikeudesta (arvo 1), kirjoitusoikeudesta (arvo 2) ja
+lukuoikeudesta (arvo 4). Oikeuksien painotusarvot lasketaan yhteen, esimerkiksi
+luku- ja suoritusoikeus on numero 5.
+</p>
+
+<h2>Käyttöoikeuksien hallinta</h2>
+<p>
+Tiedoston käyttöoikeudet voi tarkistaa <a href="ssh.html">ssh-yhteyden</a> kautta:
+</p>
+<pre>
+kayttaja@lakka:~$ ls -l
+-rwxr-xr-x 1 kayttaja users 3572 2006-12-09 16:10 index.cgi
+</pre>
+<p>
+Listauksessa käyttöoikeudet näkyvät hieman selkeämmin kirjainsarjana, tässä jälleen
+käyttöoikeus 755, eli omistajalla kaikki oikeudet ja muille luku- ja suoritusoikeus.
+</p>
+
+<p>
+Käyttöoikeudet voi asettaa joko <a href="filezilla.html">sftp-ohjelmalla</a> tai chmod-komennolla:
+</p>
+<pre>
+kayttaja@lakka:~$ chmod 700 index.cgi
+kayttaja@lakka:~$ ls -l
+-rwx------ 1 kayttaja users 3572 2006-12-09 16:10 index.cgi
+</pre>
+
+<h2>Käyttöoikeuksien merkitys</h2>
+<p>
+Tiedostojen luku- ja kirjoitusoikeudet on helppo ymmärtää. Suoritusoikeus tarkoittaa tiedoston olevan
+ajettava ohjelma tai skripti. Hakemistoilla suoritusoikeus mahdollistaa tiedostojen lukemisen kansiosta
+niiden nimellä ja lukuoikeus kansion sisällön listaamisen. Kirjoitusoikeus mahdollistaa uusien tiedostojen
+luomisen hakemistoon.
+</p>
+
+<p>
+Kapsilla on käytössä palvelimen asetus, joka estää käyttäjiä lukemasta toistensa tiedostoja käyttöoikeuksista
+rippumatta. Sen sijaan www-palvelimeen vaikuttaa käyttöoikeuksien viimeinen ryhmä, muut käyttäjät.
+</p>
+
+<p>
+PHP-ohjelmat ajetaan oletuksena CGI-ohjelman tapaan, joten niille täytyy asettaa suoritusoikeus. Käyttöoikeuden
+muuttaminen on kuitenkin tarpeen vain tiedostoille, jotka haetaan suoraan www-selaimen kautta. Monissa ohjelmissa
+on yksittäinen index.php, jonka kautta muut tiedostot ladataan.
+</p>
+
+<p>Sopivia oikeuksia www-sivuja varten:</p>
+<ul>
+<li>700 - CGI-skripti tai selaimesta avattava PHP-skripti</li>
+<li>644 - Tavallinen tiedosto</li>
+<li>755 - Hakemisto, jonka sisällön www-palvelin näyttää tiedostolistauksena</li>
+<li>711 - Hakemisto, jonka sisältöä www-palvelin ei listaa, mutta josta tiedostot voi avata jos niiden nimen tietää</li>
+<li>700 - Hakemisto, jonka sisältämät tiedostot eivätkä alihakemistot näy www-selaimen kautta</li>
+</ul>
+
+<p>Käyttöoikeutta 777 ei yleensä ole syytä käyttää. Sitä ehdotetaan usein safemoden vuoksi ohjelmien ohjeissa,
+mutta Kapsilla safemode ei ole käytössä. Lisäksi php ei toimi, mikäli skriptillä tai hakemistolla on oikeudet 777,
+sillä suexec ei tietoturvasyistä suorita tällaisia ohjelmia.</p>
+
+</div>

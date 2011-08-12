@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Versionhallinta tarkoittaa järjestelmää, joka ylläpitää listaa tiedostojen muutoksista. Versionhallinnasta saa siten haettua myös tiedoston vanhemmat versiot, sekä listattua muutokset. Tässä ohjeessa käsitelty SVN on yksi esimerkki versionhallintaohjelmistosta.</p>
+
+<h2>Tiedostojen hakeminen</h2>
+
+<p>Tiedostot saa haettua helposti komennolla checkout näin:</p>
+
+<pre>
+$ mkdir ~/svn
+$ cd ~/svn
+$ svn checkout http://svn.kapsi.fi/helloworld/
+A  helloworld/configure
+A  helloworld/AUTHORS
+ ...
+A  helloworld/NEWS
+A  helloworld/install-sh
+Checked out revision 39.
+</pre>
+
+<p>SVN:ssä tiedostojen jokainen muutos säilyy periaatteessa ikuisesti. 
+Vanhemman version voi aina hakea lisäargumenteilla komennolle <em>svn
+checkout</em>.</p>
+
+<h2>Muutokset</h2>
+
+<p>Tiedostojen hakemisen jälkeen tiedostoja voi muuttaa sellaisenaan. Kun
+haluat päivittää muutokset tiedostoon svn-serverille, auttaa seuraava komento.
+Komento pyytää myös lokimerkinnän, mitä muutos koskee.</p>
+
+<p>Voit komentaa <em>svn commit</em>:</p>
+
+<pre>
+$ cd helloworld
+$ svn commit src/cchello.c
+Sending        src/cchello.c
+Transmitting file data .
+Committed revision 40.
+</pre>
+
+<p>Päivityksen ajaminen ennen muutoksien tekemistä (seuraava kappale) voi olla
+normaalisti hyvä idea.</p>
+
+<h2>Tiedoston nimen muuttaminen tai siirtely</h2>
+
+<p>SVN tukee tiedostojen nimen muuttamista ja paikan siirtelyä samaan tyyliin
+kuin UNIX-komento <i>mv</i>. Tämä on yksi huomattavista eroista esimerkiksi
+CVS:ään.</p>
+
+<pre>
+$ svn move src/test.sh src/test2.sh
+A         src/test2.sh
+D         src/test.sh
+</pre>
+
+<p>Huolimatta A- ja D-merkinnöistä, <i>svn move</i> on eri asia kuin <i>svn
+remove</i> ja <i>svn add</i>. Se säilyttää tiedoston historiamerkinnät toisin
+kuin manuaalinen poistaminen ja lisäys.</p>
+
+<h2>Tietojen päivittäminen</h2>
+
+<p>Jotta tiedot eivät vanhennu muiden kehittäjien muutoksista, ne on hyvä
+päivittää säännöllisesti.</p>
+
+<pre>
+$ svn update
+U  src/cchello.c
+Updated to revision 40.
+</pre>
+
+<h2>Työkopion muutokset</h2>
+
+<p>SVN:ssä on komento <i>svn status</i>, jolla voi mihinkään koskematta
+tarkistaa, mitä tiedostoja olet muuttanut. Se ei päivitä toisten kehittäjien
+muutoksia kuten CVS:ssä joutui tekemään.</p>
+
+<pre>
+$ svn status
+?      Makefile.in
+?      autom4te.cache
+?      configure.scan
+?      aclocal.m4
+?      src/Makefile.in
+M      src/cchello.c
+</pre>
+
+<p><i>M</i> tarkoittaa, että tiedostoa on muutettu. <i>?</i> tarkoittaa tuntematonta tiedostoa (se ei ole SVN-palvelimella). Näille merkinnöille näkee tarkemmat määritykset komennolla <i>svn help status</i>.</p>
+
+<p>Jos et ole varma, mitä muutoksia olet tehnyt tiedostoon <i>src/cchello.c</i>, voit katsoa ne komennolla <i>svn diff</i>.</p>
+
+<pre>
+$ svn diff src/cchello.c 
+Index: src/cchello.c
+===================================================================
+--- src/cchello.c       (revision 40)
++++ src/cchello.c       (working copy)
+@@ -4,7 +4,7 @@
+  */
+ 
+ #ifdef HAVE_CONFIG_H
+-#include &lt;config.h&lt;            // for autotools _WITH_*
++# include &lt;config.h&lt;   // for autotools _WITH_*
+ #endif
+ 
+ #include &lt;stdio.h&lt;             // for printf
+</pre>
+
+<h2>Uuden tiedoston lisääminen</h2>
+
+<p>Lisää uusi tiedosto ja aja:</p>
+
+<pre>
+$ svn add tiedosto.txt
+A         tiedosto.txt
+$ svn commit tiedosto.txt
+</pre>
+
+<h2>Lisätietoja</h2>
+
+<p>Lisää ohjeita löytyy komennolla <i>svn help</i> tai Internetistä. 
+Esimerkiksi kirjassa <a href="http://svnbook.red-bean.com/">Version Control
+with Subversion</a> on monipuolisempia esimerkkejä.</p>
+</div>

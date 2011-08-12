@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>
+Tämä on erityisesti Kapsin palveluille mukautettu ohje <a href="http://gallery.menalto.com/">Gallery</a>-ohjelman
+asennukseen. Gallerya varten tarvitset <a href="../palvelut/tietokannat.html">MySQL-tietokannan</a>, jonka saat pyytämällä ylläpidolta. Jotta Gallery toimisi, on PHP:n safemode kytkettävä pois käytöstä <a href="cgi-php.html">ohjeen</a> mukaisesti.
+</p>
+
+<h2>Tunnetut ongelmat</h2>
+<p>
+Jos Gallerya käytetään ilman safemodea, kirjoittaa se kirjautumiseen tarvittavat sessiotiedostot www-data -käyttäjänä. Näitä tiedostoja ei voi enää lukea, kun php.cgi on otettu käyttöön. Ongelman tunnistaa virheilmoituksesta:
+</p>
+<p><b>Warning: session_start(): open(/tmp/sess_xxxx, O_RDWR) failed: Permission denied (13)</b></p>
+
+<p>Ongelma korjaantuu poistamalla selaimen evästeet (cookiet), jolloin sessio luodaan uudelleen.</p>
+
+<h2>Yksityiskohtaiset asennusohjeet</h2>
+<p>
+Ohjeen loppuosassa käydään läpi Gallery 2:n asennus kohta kohdalta. Toimenpiteen pitäisi olla pitkälti samanlainen myös vanhemmalle Gallery 1 -versiolle.
+</p>
+
+<h3>Asennuspaketin lataaminen ja purkaminen</h3>
+
+<p>
+Helpoiten asennus käy <a href="ssh.html">ssh-yhteyden</a> kautta. Ota yhteys Lakka-palvelimelle, ja siirry cd-komennolla hakemistoon, johon Galleryn haluat asentaa. Purkamisvaiheessa luodaan uusi alihakemisto Gallerya varten.
+</p>
+<pre>
+user@lakka:~$ cd public_html
+user@lakka:public_html$
+</pre>
+
+<p>
+Galleryn sivuilta ladataan halutun version <em>.tar.gz</em>-päätteinen asennustiedosto. Oletuksena tarjotaan <em>.zip</em>-pakattua versiota, mutta myös <em>.tar.gz</em>-paketti löytyy <a href="http://codex.gallery2.org/index.php/Gallery2:Download">Galleryn latausohjeesta</a>.
+</p>
+
+<p>
+Voit ladata tiedoston omalle koneellesi ja siirtää sen <a href="filezilla.html">sftp</a>:llä palvelimelle, tai ladata sen suoraan palvelimelle <em>wget</em>-ohjelmalla. Url-osoitteen wget-komentoon saat lataussivun linkistä "If you are experiencing problems with the download please use this direct link". Muut linkit eivät johda itse tiedostoon, vaan html-sivuun jolta lataus alkaa.
+</p>
+<pre>
+user@lakka:public_html$ wget http://.../gallery-xxxx-typical.tar.gz
+</pre>
+
+<p>
+Tiedosto puretaan <em>tar</em>-komennolla. Purkamisen yhteydessä luodaan uusi hakemisto, jonka voi siirtää haluamalleen nimelle käskyllä <em>mv</em>.
+</p>
+<pre>
+user@lakka:public_html$ tar -xzvf gallery-xxxx-typical.tar.gz
+...
+gallery2/main.php
+gallery2/init.inc # Tar listaa puretut tiedostot
+
+user@lakka:public_html$ mv gallery2 gallery # Muutetaan hakemiston nimi
+user@lakka:public_html$ cd gallery # Siirrytään lopuksi juuri luotuun hakemistoon
+user@lakka:gallery$
+</pre>
+
+<h3>Galleryn asennusohjelma</h3>
+<p>
+Purkamisen jälkeen tehdään <a href="cgi-php.html">php.cgi</a>-asetus ohjeen mukaisesti gallery-hakemistoon. Safemode on kytkettävä pois päältä <b>ennen</b> Galleryn asennuksen aloittamista. Kun safemode-asetus on tehty, voi Galleryn oman asennusohjelman aloittaa avaamalla kyseisen osoitteen (kuten <em>http://koti.kapsi.fi/kayttaja/gallery/</em>) www-selaimeen.
+</p>
+
+<p>
+Heti ensimmäisessä vaiheessa Gallery tahtoo varmistuksen siitä, että asennusta yrittävällä on varmasti oikeus siihen. Henkilöllisyys varmennetaan luomalla uusi tiedosto, jossa on Galleryn ilmoittama merkkijono. Shellissä se käy esimerkiksi seuraavasti (itse merkkijono on tietenkin erilainen):
+</p>
+<pre>
+user@lakka:gallery$ echo 5268a61f3a5deb19f6034be644ff4270 > login.txt
+</pre>
+
+<p>
+System Check -tarkistusten pitäisi mennä suoraan läpi, jonka jälkeen asennustyypiksi valitaan yhden sivuston asennus, eli "Standard installation".
+</p>
+
+<p>
+Neljännessä vaiheessa asetetaan hakemisto, johon Gallery tallentaa tiedostonsa. Turvallisuuden kannalta on parempi, jos hakemisto ei ole www-selaimen kautta näkyvissä. Hyvä valinta on siten esimerkiksi <em>/home/users/kayttaja/g2data</em> . Asennusohjelmassa on kehotus asettaa hakemistolle oikeudet 0777, mutta tätä ei pidä Kapsin tapauksessa tehdä.
+</p>
+
+<p>
+Tietokannan asetuksiin syötetään ylläpidolta saamasi tiedot. Asennusohjelman lomakkeen kentät täytetään seuraavasti:
+</p>
+
+<dl class="settings">
+<dt>Database type</dt><dd>MySQL (v3.23.34a and newer)</dd>
+<dt>DB Hostname</dt><dd>db1.kapsi.fi (tietokantapalvelimen osoite)</dd>
+<dt>DB Username, DB Password</dt><dd>MySQL-käyttäjätunnuksesi</dd>
+<dt>DB Name</dt><dd>Tietokannan nimi, normaalisti sama kuin käyttäjätunnuksesi</dd>
+<dt>Table Prefix, Column Prefix</dt>
+<dd>Näitä asetuksia käytetään erottamaan useat Gallery-asennukset toisistaan. Ne voi jättää oletusarvoihinsa, jos tämä on ainoa Gallerysi, muussa tapauksessa muuta <em>Table Prefix</em>.</dd>
+</dl>
+
+<p>
+Asennuksen loppuosassa ei ole mitään Kapsin kannalta erityistä, vaan lähinnä sivustokohtaisia asetuksia. Asennuksen jälkeen kannattaa vielä varmistaa, ettei Gallery ole muuttanut safemode-asetuksen <em>.htaccess</em>-tiedostoa.
+</p>
+
+</div>

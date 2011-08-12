@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Procmail on monipuolinen työkalu sähköpostin lajitteluun ja suodatukseen. Tässä ohjeessa esitellään muutamia sen käyttötavoista.</p>
+
+<p>Procmailin toiminta asetetaan kotihakemiston juuressa piilotiedostossa <em>.procmailrc</em> . Tiedoston alkuun asetetaan sähköpostien tallennushakemiston polku, joka Kapsilla on <em>mail</em> kotihakemiston alla:</p>
+
+<pre>
+MAILDIR=$HOME/mail/
+</pre>
+
+<p>Ylläolevan rivin jälkeen listataan suodatusohjeet, joihin voi ottaa mallia seuraavista esimerkeistä. Ohjeet käsitellään järjestyksessä, joten ensimmäinen täsmäävä sääntö määrää viestin lajittelun.</p>
+
+<p>Asetustiedoston muokkaaminen kannattaa tehdä <a href="ssh.html">ssh-yhteyden</a> kautta esimerkiksi <a 
+href="shell-manual.html#nano">nanolla</a>. SFTP:n kautta muokattaessa FileZilla pitää asettaa ASCII-moodiin, jotta rivinvaihdot 
+välittyvät oikein.</p>
+
+<p><b>Huomio:</b> Tarkista aina procmail-asetusten muuttamisen jälkeen, että posti kulkee! Pienikin virhe voi tehdä peruuttamatonta tuhoa uudelle postille.</p>
+
+<h2>Viestien lajittelu vastaanottajan mukaan</h2>
+
+<p><a href="../jasentoiminta/postituslistat.html">Jäsenten postituslistan</a> viestit lähetetään osoitteeseen <em>jasenet@kapsi.fi</em>. Lajitellaan ne omaan hakemistoonsa <em>kapsi-jasenet</em> procmaililla:</p>
+<pre>
+:0:
+* ^To.*jasenet@kapsi\.fi
+kapsi-jasenet
+</pre>
+
+<p>Lajittelusääntö on <a href="http://fi.wikipedia.org/wiki/S%C3%A4%C3%A4nn%C3%B6llinen_lauseke">regexp-lauseke</a>, joten pisteiden eteen lisätään kenoviiva. Ilman kenoviivaa pisteet tarkoittavat regexpissä mitä tahansa merkkiä.</p>
+
+<!-- <h2>Viestien automaattinen siirtäminen saapuneet-kansioon</h2>
+<p>Saapuvat sähköpostit tallentuvat aluksi tiedostoon <em>/var/spool/mail/kayttaja</em>. Useimmat sähköpostiohjelmat siirtävät ne sieltä automaattisesti saapuneet-kansioon, mutta esimerkiksi <em>mutt</em> ei toimi näin. Jos uusien viestien haluaa näkyvän heti saapuneet-kansiossa, voi ne siirtää sinne procmailin <em>DEFAULT</em>-asetuksella:</p>
+<pre>
+DEFAULT=$HOME/mbox
+</pre> -->
+
+<h2>Lisää tietoa</h2>
+<p>Procmailista on runsaasti lisää tietoa ja ohjeita verkossa. Ohjeita on esimerkiksi englanninkielisellä sivulla <a href="http://lipas.uwasa.fi/~ts/info/proctips.html">Timo's procmail tips and recipes</a>.</p>
+
+</div>

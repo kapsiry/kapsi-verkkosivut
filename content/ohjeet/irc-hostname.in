@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Hostnamella tarkoitetaan palvelimen osoitetta, joka irkissä näkyy esimerkiksi whois-tiedoissa ja kanavalle liityttäessä. Oletuksena tämä on Lakalla <em>kapsi.fi</em> ja Hillalla <em>hilla.kapsi.fi</em>. Muut mahdolliset hostnamet ja käytettävissä olevat palvelimet näet <a href="../palvelut/irc.html">IRC-palvelun asetussivulta</a>.</p>
+
+<p>Kapsilla on lisäksi mahdollista käyttää omaa domainia irkissä <a href="http://fi.wikipedia.org/wiki/IPv6">IPv6</a>:n avulla. 
+Osoitteen saat käyttöösi pyytämällä ylläpidolta. Mainitse pyynnössäsi myös, haluatko osoitteen käyttöön Lakalle vai 
+Hillalle. IPv6:lla on mahdollista yhdistää vain sitä tukeviin palvelimiin. Esimerkiksi 
+QuakeNetissä IPv6:tta ei ole mahdollista käyttää, koska kyseisessä verkossa ei ole yhtään IPv6-palvelinta.
+</p>
+
+<p><b>Huomio:</b> IPv6-hostilla on se varjopuoli, etteivät mahdolliset samaan nimeen kytketyt verkkosivut toimi IPv6:tta tukevilla koneilla. Ongelma muodostuu silloin, kun IPv6:tta tukeva kone yrittää ensisijaisesti yhdistää sen kautta, mutta www-palvelin onkin käytössä vain IPv4-osoitteella. Tällä hetkellä IPv6 on vielä suhteellisen harvalla käytössä, ja ongelmaan luultavasti kehitetään myöhemmin jonkinlainen proxy-ratkaisu. Suositeltavaa on käyttää irc-yhteyksiä varten jotain muuta kuin verkkosivujen osoitetta, esimerkiksi <em>irc.domain.com</em>.</p>
+
+<h2>Hostnamen asettaminen</h2>
+<p>Irssissä osoitteen asettaminen tapahtuu seuraavasti. Muissa ohjelmissa asetuksen nimi on yleensä "hostname", ja jotta IPv6-hostia voi käyttää myös ohjelman on tuettava sitä.</p>
+
+<p>Yhdistämisen yhteydessä hostin voi asettaa valitsimella -host. Valitsin -4 varmistaa, että käyttöön otetaan tavallinen IPv4-osoite eikä mahdollista IPv6-hostia.</p>
+<pre>
+/server -4 -host lakka.kapsi.fi irc.tdc.fi
+</pre>
+
+<p>IPv6:n saa vastaavasti käyttöön vaihtamalla -4:n tilalle valitsimen -6:</p>
+<pre>
+/server -6 -host domain.com irc.tdc.fi
+</pre>
+
+<p>Jotta irssi käyttää automaattisesti oikeaa vhostia käynnistettäessä, lisätään palvelin pysyvästi irssin asetuksiin:</p>
+<pre>
+/server add -6 -host domain.com -auto irc.tdc.fi
+/save
+</pre>
+
+</div>

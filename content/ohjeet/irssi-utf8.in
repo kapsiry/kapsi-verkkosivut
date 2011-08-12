@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Unicode on uusi merkistöstandardi, joka sisältää lähes kaikkien kielien merkit.
+Lisäksi mukana on matemaattisia merkkejä sekä erilaisia symboleja. IRC:ssä
+unicodesta käytetään yleensä koodausta UTF-8, erityisesti kansainvälisillä kanavilla.
+UTF-8 on myös käytössä joissakin Linux-jakeluversioissa, kuten esimerkiksi Ubuntussa.
+</p>
+
+<p>
+Tämä ohje neuvoo Irssin konfiguroinnin siten, että irkkiin päin puhutaan oletuksena
+ISO 8859-15 -merkistöä ja päätteelle UTF-8:aa.
+</p>
+
+<ol class="largespace">
+<li><p>Asetetaan päätteen merkistö UTF-8:ksi. PuTTY:ssä tämä löytyy asetusvalikosta
+<em>Window → Translation → Character set → UTF-8</em>.</p>
+<p>Jos joskus tulee tarvetta käyttää
+screeniä päätteeltä, jossa UTF-8-tukea ei ole, voi komentaa screenin avauksen jälkeen
+<em>ctrl-a :utf8 on off</em>.</p></li>
+
+<li><p>Käynnistetään screen ja irssi:</p>
+<pre>
+screen irssi
+</pre>
+</li>
+
+<li>
+<p>
+Irssin merkistöksi päätteeseen päin asetetaan UTF-8:
+</p>
+<pre>
+/set term_charset UTF-8
+</pre>
+</li>
+
+<li>
+<p>
+Turvallisin vaihtoehto on asettaa IRC-keskustelun merkistöksi ISO 8859-15, sillä UTF-8 ei ole vielä
+tuettu kaikilla ohjelmilla:
+</p>
+<pre>
+/set recode_out_default_charset ISO8859-15
+</pre>
+</li>
+
+<li>
+<p>Tallennetaan Irssin asetukset:</p>
+<pre>
+/save
+</pre>
+</li>
+</ol>
+
+<h2>Kanavanimet joissa on ääkkösiä</h2>
+<p>Mikäli kanavan nimessä on ISO 8859-15 -merkistön ääkkösiä, ei join-komento suoraan toimi.
+Sen sijaan kanavalle pääsee seuraavasti:</p>
+<pre>
+/eval /join #\344\344kk\366nen
+</pre>
+<p>Kanavan nimestä siis korvataan ä \344:llä ja ö \366:lla.</p>
+
+<h2>UTF-8:n poistaminen käytöstä</h2>
+<p>Osa käyttäjistä haluaa palata kokonaan ISO 8859-15 -merkistöön, jos esimerkiksi terminaaliohjelma ei tue UTF-8:aa.
+Tämäkin onnistuu seuraavalla käskyllä shellissä:</p>
+<pre>
+echo export LC_ALL="en_US.ISO8859-15" >> ~/.bash_profile
+</pre>
+<p>Käsky lisää merkistön asettamisen kirjautumistiedoston loppuun.</p>
+<p>Käskyn ajamisen jälkeen täytyy kirjautua uudelleen sekä joissain tapauksissa
+sammuttaa ja käynnistää myös irssi ja screen uudestaan.</p>
+
+</div>

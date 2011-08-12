@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+
+<p>
+CGI on www-palvelimen laajennos, jonka kautta sivut voidaan luoda suorittamalla erillinen skripti tai muu ohjelma. Kapsin palvelimilla CGI-ohjelmat toimivat päätteellä .cgi. Lisäksi käytettävissä on FCGI .fcgi-päätteellä nopeuttamaan sitä tukevien ohjelmien toimintaa.
+</p>
+
+<p>Yksinkertainen CGI:nä ajettavaksi tarkoitettu PHP-ohjelma:</p>
+
+<pre>
+#!/usr/bin/php5-cgi
+&lt;?php
+echo "Hello World!";
+?&gt;
+</pre>
+
+<p>
+Tavallisen CGI-ohjelman käyttäminen ei vaadi kuin käyttöoikeuksien 700 asettamisen skriptille:
+</p>
+
+<pre>
+chmod 700 skripti.cgi
+</pre>
+
+<p>
+Ensimmäisellä rivillä määritellään käytettävä tulkki. Yleisimpien kielien tulkit Kapsin palvelimella:
+</p>
+<ul>
+<li>PHP, versio 5 - /usr/bin/php5-cgi</li>
+<li>Python - /usr/bin/python2.5</li>
+<li>Perl - /usr/bin/perl</li>
+</ul>
+
+
+<h2>500 Internal Server Error</h2>
+<p>
+Virhe &quot;500 Internal Server Error&quot; voi johtua useista syistä. Virheestä on lisää tietoa palvelimen
+logeissa, joista voi pyytää otteen helpdeskiltä tai ylläpidolta. Ensiksi kannattaa kuitenkin tarkistaa
+seuraavat seikat:
+</p>
+
+<ul>
+<li><a href="kayttooikeudet.html">Käyttöoikeudet</a> - sekä skripti itse että puussa ylemmät hakemistot</li>
+<li>Tiedostopääte .cgi, ellei .htaccess-tiedostossa ole määritetty muuta</li>
+<li>CGI-ohjelma ei voi olla symbolisesti linkitetty</li>
+<li>Rivinvaihtojen on oltava UNIX-muotoa, lisää tietoa alempana</li>
+</ul>
+
+<p>
+Tekstitiedostot täytyy siirtää käyttäen tiedonsiirto-ohjelman tekstimuoto-toimintoa (ascii) tai varmistaa
+flip-komennolla että niiden sisältämät rivinvaihdot ovat UNIX-muotoisia:
+</p>
+
+<pre>
+flip -u tiedosto.cgi
+</pre>
+
+<h2>Avun pyytäminen helpdeskiltä</h2>
+
+<p>
+CGI-ohjelman tuottaessa virheen &quot;500 Internal Server Error&quot;, on ongelmasta
+lisää tietoa palvelimen logissa. Elleivät ylempänä olevat vinkit auta, helpdesk voi
+tarkastaa virheen syyn logeista. Myös muiden virheiden yhteydessä voi pyytää apua.
+</p>
+
+<p>
+Lähetä kysymyksesi helpdeskille <a href="https://tuki.kapsi.fi">sähköpostilla</a>.
+Jotta ongelma selviäisi nopeasti, mainitse ainakin seuraavat asiat:
+</p>
+<ul>
+    <li>Sivun osoite</li>
+    <li>Kellonaika ja päivämäärä virheen &quot;500 Internal Server Error&quot; yhteydessä</li>
+</ul>
+
+</div>

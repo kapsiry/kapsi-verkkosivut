@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>
+SSH-yhteyden avulla voit suorittaa komentoja suoraan Kapsin palvelimella. Lisää tietoa shellin käytöstä löydät <a href="shell-manual.html">shell-oppaasta</a>.
+</p>
+<p>
+<b>Huomio:</b> Shell-komennot on useimmissa ohjeissa merkitty esimerkiksi "user@lakka:~$ ls", jossa alkuosa on valmiina oleva komentokehote, ja vain dollarimerkin jälkeinen osa kirjoitetaan itse.
+</p>
+<p>
+SSH-yhteysasetukset Kapsin palvelimille ovat:
+</p>
+
+<dl class="settings">
+<dt>Host</dt><dd>hilla.kapsi.fi (Hilla-palvelin) tai kapsi.fi (Lakka- eli Box-palvelin)</dd>
+<dt>Protocol</dt><dd>SSH2</dd>
+<dt>Port</dt><dd>22</dd>
+</dl>
+
+<h2>Windows-järjestelmät: PuTTY</h2>
+<p>
+PuTTY-ohjelman saat <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">täältä</a>.
+PuTTYn asetusruutuun syötetään yllä annetut asetukset. Asetukset voi myös tallentaa, jolloin seuraavilla kerroilla yhdistäminen onnistuu tallennettuja asetuksia tuplaklikkaamalla.
+</p>
+
+<p>
+Lopuksi valitaan asetusruudun alareunasta Open. Ensimmäisellä kerralla putty kysyy varmistuksen palvelimen salauksen aitoudesta. Tähän vastataan Kyllä tai Yes. Tämän jälkeen syötetään jäseneksi liittymisen yhteydessä sähköpostissa saatu shell-tunnus ja -salasana. Huomioi ettei salasana näy kirjoitettaessa. Salasanan vaihtamisesta on myös <a href="salasanojen_vaihtaminen.html">ohje</a>.
+</p>
+
+<p>
+Jotta <strong>ääkköset</strong> toimisivat PuTTY:ssa oikein, täytyy merkistöksi asettaa UTF-8.
+Se tehdään valitsemalla asetusvalikosta Window → Translation → Character set → UTF-8.
+</p>
+
+<h2>Mac OS X</h2>
+<p>
+Komentokehote löytyy valikoista Ohjelmat → Lisäohjelmat → Pääte tai englanniksi Applications → Utilities → Terminal. Yhteydenmuodostus tapahtuu vastaavasti kuin Linuxissa (alla), eli komennolla <em>ssh user@kapsi.fi</em>.
+</p>
+
+<h2>Linux- ja muut UNIX-pohjaiset järjestelmät: OpenSSH</h2>
+<p>
+Useimmissa Linux-jakelupaketeissa tulee jo valmiiksi mukana ssh-ohjelma. Jos saat ohjetta käyttäessäsi virheen, esimerkiksi "bash: ssh: command not found", sinun täytyy asentaa ssh. Jos ssh:n asennuksessa on ongelmia, voit kysyä apua helpdeskiltä (kerro käyttämäsi jakelupaketti viestin yhteydessä).
+</p>
+
+<p>
+Kirjautumista varten avaa komentokehote. Esimerkiksi KDE-työpöytäympäristössä se on valikossa Järjestelmä-kohdan alla, "Terminaaliohjelma". Käskyn muoto on ssh user@host. (Esimerkissä "mew ~ $" on oman koneen komentokehote, ja siis vain ssh-käsky kirjoitetaan itse)
+</p>
+
+<pre>
+mew ~ $ ssh user@kapsi.fi
+Password:
+</pre>
+
+<p>
+Korvaa komennosta user käyttäjätunnuksellasi ja syötä salasanasi. Huomioi ettei salasana näy kirjoitettaessa. SSH kysyy ensimmäisellä kerralla varmistusta palvelimen aitoudesta:
+</p>
+
+<pre>
+The authenticity of host 'kapsi.fi (217.30.184.161)' can't be established.
+RSA key fingerprint is 85:41:7d:f3:43:8a:e6:e1:0f:93:64:f5:d8:05:73:b9.
+Are you sure you want to continue connecting (yes/no)?
+</pre>
+
+<p>
+Tähän vastataan yes.
+</p>
+
+<h2>Kirjautumisen jälkeen</h2>
+
+<pre>
+Linux lakka 2.4.31-ow1-lakka #1 SMP i686 GNU/Linux
+============================
+
+[lakka.kapsi.fi]
+
+10.10.2005
+
+  Kapsille on avattu foorumi osoitteessa http://forum.kapsi.fi/. Kaikki
+  ovat tervetulleita!
+
+--
+No mail.
+
+Last login: Thu Oct 27 15:25:32 2005 from 123.234.123.234
+user@lakka:~$
+</pre>
+
+<p>
+Kirjauduttuasi sinun tulisi nähdä edellä esitetyn kaltainen ruutu. Ylimpänä näkyvät tiedotukset. Sen jälkeen näet onko sinulle postia. Hakiessasi postit IMAP-protokollalla voit nähdä ilmoituksen "You have mail" joka viittaa vanhoihin viesteihin. Jos postilaatikossa on uusia viestejä, näet ilmoituksen "You have new mail". Viimeisellä rivillä on komentokehote, johon komennot kirjoitetaan. Monissa ohjeissa annetaan ajettavia shell-komentoja, ja yleisempää tietoa shellin käytöstä löydät
+<a href="shell-manual.html">shell-oppaasta</a>.
+</p>
+
+</div>

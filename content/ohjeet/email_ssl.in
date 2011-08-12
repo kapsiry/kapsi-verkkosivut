@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Kapsin sähköpostipalveluihin yhdistettäessä on käytettävä SSL-salausta. Normaalissa sähköpostiyhteydessä kaikki tieto, mukaanlukien salasana, siirretään salaamattomana Internetin yli, mikä on selkeä tietoturvariski. Tämä ohje koskee vain erillistä sähköpostiohjelmaa käyttäviä, webmailiin asetuksia ei tarvitse tehdä.</p>
+
+<h2>Ohjelmakohtaiset ohjeet</h2>
+<h3>Mozilla Thunderbird</h3>
+<p>Työkalut → Tilin asetukset → Palvelimen asetukset → Käytä suojattua yhteyttä (SSL)</p>
+<p>Portin pitäisi muuttua automaattisesti oikeaksi.</p>
+
+<h3>Opera</h3>
+<p>Työkalut → Sähköposti- ja keskustelutunnukset → Muokkaa → Palvelimet-välilehti → Salattu yhteys (TLS)</p>
+<p>Operassa portin numero täytyy asettaa käsin. Löydät sen <a href="../palvelut/email.html">muiden sähköpostiasetusten</a> yhteydestä.</p>
+
+<h3>Outlook Express</h3>
+<p>Työkalut → Tilit → Sähköposti-välilehti → Ominaisuudet → Lisäasetukset → Tuleva posti (POP3/IMAP) → Tämä palvelin edellyttää SSL-suojausta</p>
+<p>Portin pitäisi muuttua automaattisesti oikeaksi.</p>
+
+</div>

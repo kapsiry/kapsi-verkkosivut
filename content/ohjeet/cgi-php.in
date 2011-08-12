@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Tämä ohje käsittelee PHP:n ajamista CGI-ohjelmana. Aiemmin ohje oli olennainen PHP:n ajamisessa ilman safemodea, mutta nykyään vastaava asetus on jo valmiiksi käytössä. Ohjetta voi kuitenkin käyttää tarvittaessa <a href="phpini.html">asetusten</a> muuttamiseen.</p>
+
+<p>
+Asetus vaikuttaa rekursiivisesti kaikkiin hakemiston ja sen alihakemistojen tiedostoihin. Yleensä se on paras
+tehdä ohjelman juurikansioon.
+</p>
+
+<h2>Luodaan php.fcgi</h2>
+
+<p>
+Luodaan haluttuun hakemistoon tiedosto <em>php.fcgi</em> . Tiedoston lopussa on oltava vähintään yksi rivinvaihto, jonka monet editorit luovat automaattisestikin.
+</p>
+
+<pre>#!/usr/bin/php5-cgi
+
+</pre>
+
+<p>Skriptille annetaan käyttöoikeus 700:</p>
+
+<pre>chmod 700 php.fcgi</pre>
+
+<h2>Luodaan .htaccess</h2>
+
+<p>
+Luodaan <em>.htaccess</em> -tiedosto samaan hakemistoon. Jos tiedosto on jo olemassa,
+seuraavat rivit lisätään alkuun.
+</p>
+
+<pre>
+RemoveHandler .php
+AddType application/cgi-php php
+Action application/cgi-php <em>/~käyttäjä/polku/php.fcgi</em>
+</pre>
+
+<p>
+Polku <em>/~käyttäjä/polku/php.fcgi</em> muutetaan <em>php.fcgi</em>
+tiedoston oikeaksi osoitteeksi. Polun alku on URL-osoitteessa verkkotunnuksen jälkeinen osa. Esimerkiksi:
+</p>
+
+<pre>
+http://kapsi.fi/~käyttäjä/polku/php.fcgi -&gt; /~käyttäjä/polku/php.fcgi
+http://tunnus.kapsi.fi/polku/php.fcgi -&gt; /polku/php.fcgi
+</pre>
+
+<h2>Mahdolliset ongelmatilanteet</h2>
+
+<p>
+Windows-käyttäjien on siirrettävä tiedostot ascii-tilassa tai luotava ne palvelimella <a href="ssh.html">ssh-yhteyden</a> kautta, jotta rivinvaihdoista tulee oikeanlaiset. Useimpien SFTP-ohjelmien automaattitunnistus ei osaa käsitellä .htaccess-tiedostoa, koska sillä ei ole päätettä.
+</p>
+
+<p>
+Ongelmat tämän ohjeen käytössä johtuvat usein <a href="kayttooikeudet.html">vääristä käyttöoikeuksista</a>.
+Muut yleiset virheet ja ohjeita lisäavun pyytämiseen on annettu <a href="cgi.html">perinteisen cgi-ohjelman ohjeessa</a>.
+</p>
+
+</div>

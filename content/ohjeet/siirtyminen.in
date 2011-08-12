@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Karviainen (aiemmin Vhost) on yhdistyksen erillinen WWW-palvelin. Tarkempaa tietoa Karviaisen tekniikasta on <a href="www-tekniikka.html">erillisellä sivulla</a>.</p>
+
+<p>Tässä ohjeessa on listattu muutokset, jotka sivustojen toiminnassa on siirrettäessä niitä Lakalta Karviaiselle.</p>
+
+<h2>Muuttuvat asiat</h2>
+<p>Eniten muutoksia on PHP- ja CGI-ohjelmien toiminnassa. Yksinkertaiset, pelkkiä staattisia HTML-, CSS- ja muita tiedostoja sisältävät sivut toimivat myös uudella palvelimella ilman erityisiä muutoksia.</p>
+<p>Ainoa ei-dynaamisia sivustoja mahdollisesti koskeva muutos on siirtyminen www-palvelinohjelmiston Apachen versioon 2. Se voi aiheuttaa muutoksia <em>.htaccess</em>-tiedoston käskyjen syntaksiin ja toimintaan. Ellei ko. tiedostoa käytä, ei tästä tarvitse välittää.</p>
+
+<h2>PHP-ohjelmat</h2>
+<p>Uudella palvelimella vanha moduuli-php poistuu kokonaan käytöstä, ja samalla myös safemode. Ennen monimutkaisempien PHP-ohjelmien kanssa on tarvittu <em>php.cgi</em>-asetusta, jotta safemode ei haittaisi ohjelmien toimintaa. Vastaava asetus on nyt oletuksena käytössä.</p>
+<p>Vanhat <em>php.cgi</em>-asetukset toimivat myös uudella palvelimella, mutta ne on suositeltavaa poistaa ongelmien välttämiseksi, koska vastaava asetus on jo olemassa. Vanhan asetuksen saa pois poistamalla <em>.htaccess</em>-tiedostoon lisätyt rivit, sekä <em>php.cgi</em>-tiedoston.</p>
+<p>Muut tarvittavat muutokset riippuvat sivustojen sijainnista, eli siitä, ovatko ne <em>sites</em>-hakemistossa (kuten esimerkiksi omat domainit) vai <em>public_html</em>-hakemistossa (kuten osoitteella <em>http://koti.kapsi.fi/kayttaja/</em> näkyvät sivut).</p>
+
+<h3>Sites-hakemisto</h3>
+<p>Sites-hakemiston PHP on toteutettu luomalla www-hakemiston juureen <em>php5.fcgi</em>-tiedosto, ja lisäämällä vanhaan <em>php.cgi</em>-ohjeeseen kuuluneet <em>.htaccess</em>-asetukset palvelimen globaaliin konfiguraatioon.</p>
+<p>Sites-hakemistossa tarvitaan seuraavat muutokset:</p>
+<ul class="largespace">
+<li>Omia alidomaineita mod_rewriten avulla luoneiden on lisättävä asetuksiin sääntö, joka estää php5.fcgi:n uudelleenohjauksen. Tähän voi ottaa mallia <a href="mod_rewrite.html">ohjeesta</a>.</li>
+<li>Ainakin Mambon on todettu vaativan, että ohjelman asetuksista muutetaan polku <em>/home/users/kayttaja/sites/domain.com/www/...</em> muotoon <em>/var/www/userhome/kayttaja/sites/domain.com/www/</em>. Monet ohjelmat osaavat ehdottaa polkumuutosta itsekin asetusruudussa käytäessä.</li>
+</ul>
+
+<h3>Public_html-hakemisto</h3>
+<p>Public_html-hakemiston PHP on toteutettu binfmt:llä, jolloin jokainen php-tiedosto ajetaan omana fcgi-ohjelmanaan. Tämän vuoksi php-ohjelmien käyttöoikeudet täytyy muuttaa.</p>
+<p>Public_html-hakemistossa tarvitaan seuraavat muutokset:</p>
+<ul class="largespace">
+<li>PHP-ohjelmille on annettava suoritusoikeus. Tämä koskee kaikkia public_html-hakemiston php-ohjelmia, muuten tuloksena on virhe <em>Internal Server Error</em>. Oikeudet voi muuttaa helpoiten <em>find</em>-käskyllä, kuten <a href="php.html">uusia ohjelmia asennettaessa</a>.</li>
+</ul>
+
+<h3>Yhteiset muutokset</h3>
+<p>Sekä sites- että public_html-hakemistoa koskevat seuraavat muutokset:</p>
+<ul class="largespace">
+<li>Moduuliphp:n käyttämät <em>php_flag</em> ja <em>php_value</em> asetukset on poistettava <em>.htaccess</em>-tiedostosta. Moduuliphp:n puuttuessa ne aiheuttavat virheilmoituksen <em>Internal Server Error</em>. Tarvittavat asetusmuutokset voi tehdä luomalla <a href="phpini.html">oman php.ini:n</a>.</li>
+<li>Php.ini-ohjetta käyttävien on päivitettävä asetustiedostonsa. Uusi asetustiedosto löytyy vhostilta.</li>
+<li>Vanhojen <em>php.cgi</em>-asetusten poistaminen on suositeltavaa, kuten ylempänä on jo mainittu.</li>
+<li>Päätteellä .pl olevia tiedostoja ei enää tulkita CGI-skripteiksi. Tarvittaessa toiminnan voi muuttaa sopivalla .htaccess-tiedostolla.</li>
+<li>PHP5-tulkin CGI-versio on nyt /usr/bin/php5-cgi, joka on olemassa myös Lakalla. Uudella palvelimella /usr/bin/php5 on CLI-versio.</li>
+<li>Apachen content negotiation -ominaisuus, joka lisää tiedostopäätteet osoitteisiin automaattisesti, ei suorituskyvyn 
+parantamiseksi ole enää oletuksena päällä. Sen voi ottaa käyttöön lisäämällä <em>.htaccess</em>-tiedostoon asetuksen <em>Options 
++MultiViews</em>.</li>
+</ul>
+
+<h3>Ohjelmakohtaisia ongelmia</h3>
+<ul class="largespace">
+<li>Galleryn oletusasetuksissa <em>.htaccess</em>-tiedostossa on asetus <em>FollowSymLinks</em>. Tämä ei ole tietoturvan vuoksi 
+sallittu, ja vastaavan toiminnon hoitaa turvallisemmin <em>FollowSymLinksIfOwnerMatch</em>, joka on oletuksena päällä. 
+Ongelman korjaamiseksi asetus täytyy poistaa <em>.htaccess</em>:sta.</li>
+</ul>
+
+<h2>Ongelmat siirtymisessä</h2>
+<p>Helpdeskille lähetettävän sähköpostin yhteydessä on hyvä mainita samat tiedot kuin yleensäkin www-sivuihin liittyvissä ongelmissa, eli osoite jossa ongelmia aiheuttava sivu on, sekä päivämäärä ja kellonaika jolloin virhe on tullut.</p>
+
+</div>

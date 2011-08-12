@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>Shell on UNIX-pohjaisen järjestelmän komentorivi. Joistakin yhtäläisyyksistä huolimatta Unixin shell on huomattavasti monelle tuttua DOS-kehotetta kehittyneempi. Erityisen hyödyllinen shell on järjestelmien etäkäytössä <a href="ssh.html">ssh-yhteyden</a> kautta. Tässä ohjeessa perehdytään lyhyesti yleisimmän shellin, eli bash-tulkin tärkeimpiin komentoihin.</p>
+
+<p>Koska shellin kautta voi suorittaa vapaasti komentoja järjestelmässä, on tärkeää huolehtia turvallisuudesta. Yhteyttä ei kannata jättää auki, jos poistut koneelta, ja salasana kannattaa vaihtaa säännöllisesti. Shellin salasanan vaihtaminen neuvotaan <a href="salasanojen_vaihtaminen.html">erillisessä ohjeessa</a>.</p>
+
+<h2 id="filesystem">Liikkuminen tiedostojärjestelmässä</h2>
+<p>Hakemistojen vaihtaminen onnistuu <em>cd</em>-komennolla, ja hakemiston sisällön voi tarkistaa käskyllä <em>ls</em>. Erityisen hyödyllinen ominaisuus bash-tulkissa on tiedostonimien täydentäminen sarkainnäppäimellä ("tab"), joka kahdesti painettuna listaa lisäksi mahdolliset vaihtoehdot.</p>
+
+<pre>
+# Yksinkertainen tiedostolistaus
+user@lakka:~$ ls
+Mail  mbox public_html
+
+# ls -a listaa myös piilotiedostot, joiden nimi alkaa pisteellä
+# . ja .. viittaavat nykyiseen ja hierarkiassa ylempään hakemistoon
+user@lakka:~$ ls -a
+.  ..  .bash_profile  .bashrc  Mail  mbox  public_html
+
+# Siirrytään hakemistoon public_html.
+# Nykyinen hakemisto näkyy komentokehotteessa, ~ tarkoittaa kotihakemistoa.
+user@lakka:~$ cd public_html
+
+# ls -l näyttää tiedoston nimen lisäksi mm. käyttöoikeudet
+user@lakka:public_html$ ls -l
+total 0
+-rwxr-xr-x  2 user users 48 Jan  5 12:16 php.cgi
+-rw-r--r--  1 user users  0 Jan  5 12:16 index.php
+</pre>
+
+<p><b>Huomioi:</b> Risuaita (#) on shellin kommenttimerkki, jota on tässä ohjeessa käytetty komentojen selostukseen. Kommentteja ei tarvitse kirjoittaa käskyä kokeiltaessa.</p>
+
+<h2 id="nano">Tiedostojen muokkaus</h2>
+<p>Shellin kautta voi käyttää monia eri editoreja, mutta <em>nano</em> on luultavasti helpoin oppia.</p>
+<pre>
+user@lakka:public_html$ nano index.php
+</pre>
+<p>Nanon muokkausikkunan alalaidassa näkyvät käytössä olevat näppäimet. Merkki <em>^</em> viittaa ctrl-näppäimeen, joten esimerkiksi nanon sulkeminen tapahtuu näppäinyhdistelmällä <kbd>ctrl-x</kbd>. Tiedostossa liikkuminen tapahtuu nuolinäppäimillä, ja tekstiä voi kirjoittaa suoraan kursorin kohdalle.</p>
+
+<h2 id="files">Tiedostojen käsittely</h2>
+<ul>
+<li><b>Kopiointi:</b> cp <em>lähde</em> <em>kohde</em></li>
+<li><b>Siirtäminen:</b> mv <em>lähde</em> <em>kohde</em></li>
+<li><b>Poistaminen:</b> rm <em>tiedosto</em></li>
+<li><b>Hakemiston luominen:</b> mkdir <em>hakemisto</em></li>
+<li><b>Tyhjän hakemiston poistaminen:</b> rmdir <em>hakemisto</em></li>
+</ul>
+
+<p>Kopioinnin ja poistamisen voi tehdä myös rekursiivisesti lisäämällä valitsimen <em>-r</em>, jolloin komento koskee myös kaikkia alihakemistoja ja tiedostoja. Siirtäminen vaikuttaa aina koko hakemiston sisältöön.</p>
+
+<h2 id="man">Manuaalisivut</h2>
+<p>Kaikista tämän ohjeen ja useimmista muistakin komennoista on olemassa ohjesivu, jossa selostetaan ohjelman valitsimet ja toiminta. Manuaalisivut saa näkyviin komennolla <em>man</em>:</p>
+<pre>
+user@lakka:~$ man ls
+LS(1)                            User Commands                           LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List  information  about  the FILEs (the current directory by default).
+       ...
+</pre>
+<p>
+Manuaalisivua voi selata nuolilla, ja ohjelma sulkeutuu kirjaimella 'q' (englanninkielen sanasta quit).
+On kuitenkin huomioitava, että manuaalisivut ovat yleensä tarkoitettu lyhyeksi selostukseksi ohjelman
+parametreista. Enemmän dokumentaatiota löytyy /usr/share/doc -hakemistosta sekä nykyään helpommin myös
+Googlella.
+</p>
+
+</div>

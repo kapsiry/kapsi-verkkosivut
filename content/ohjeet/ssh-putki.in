@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p><a href="ssh.html">SSH-yhteyden</a> kautta pystyy tunneloimaan eli putkittamaan myös muita protokollia salattuna.
+Tämä voi olla tarpeen esimerkiksi avointa WLAN-verkkoa käytettäessä, tai esimerkiksi Kapsin tietokantapalvelimen käyttöön omalta koneelta.</p>
+
+<p>SSH tukee kolmea tunnelointityyppiä: <em>local</em>, <em>remote</em> ja <em>dynamic</em>-portteja. Näistä <em>local</em> reitittää yksittäisen portin niin, että omalla koneella ajettavat ohjelmat pystyvät yhdistämään palvelimen kautta muihin palveluihin. <em>Remote</em> on muuten sama, mutta palvelimen ja oman koneen roolit vaihtuvat siten, että palvelimelle avautuu määrätty portti jonka kautta muut pystyvät yhdistämään omalle koneellesi. <em>Dynamic</em> puolestaan luo socks5-proxyn, jonka kautta oman koneen www-selain ja muut ohjelmat voivat yhdistää mihin tahansa.</p>
+
+<h2 id="local">Yksittäisen portin tunnelointi</h2>
+<p>Yksittäisen portin tunnelointia voi käyttää esimerkiksi päästäkseen Kapsin <a href="../palvelut/tietokannat.html">tietokantoihin</a> käsiksi omalta koneelta. Useimmiten <em>local</em> on haluttu tunnelointityyppi.</p>
+
+<p>Komentoriviltä ajettavassa SSH:ssa tunneli MySQL:ää varten luodaan näin:</p>
+<pre>
+user@omakone:~$ ssh -L3306:db1.kapsi.fi:3306 <em>tunnus</em>@kapsi.fi
+</pre>
+
+<p>Ensimmäinen luku määrää oman koneen portin, jossa tunneli tulee näkymään.
+Keskimmäinen osa on kohdeosoite, johon ssh-palvelin yhdistää tunnelin kun portti avataan.
+Viimeinen luku on kohdekoneen portti.</p>
+
+<p>PuTTY:ssä sama tehdään asetusikkunan kohdasta Connection → SSH → Tunnels, johon syötetään nämä tiedot:</p>
+<dl class="settings">
+<dt>Type</dt>
+<dd>Local</dd>
+<dt>Source port</dt>
+<dd>3306</dd>
+<dt>Destination</dt>
+<dd>db1.kapsi.fi:3306</dd>
+</dl>
+<p>Lopuksi painetaan <em>Add</em>, minkä jälkeen yhdistetään normaaliin tapaan Lakalle.</p>
+
+<p>Tunnelin avaamisen jälkeen voi omalla koneella käyttää osoitetta <em>localhost</em>, jossa näkyvät nyt Kapsin palvelimella olevat tietokannat. Samaa menetelmää voi käyttää myös muille palveluille, kun vain vaihtaa kohdeosoitteen ja portin. Omalla koneella avattava portti voi olla jokin muukin, mutta tällöin se täytyy asettaa myös muihin oman koneen ohjelmiin.</p>
+
+<h2 id="dynamic">Socks5-tunnelointi www-selainta varten</h2>
+<p>Socks5-tunneli luodaan komentoriviltä valitsimella <em>-D8080</em>. PuTTY:ssä
+asetukset ovat:</p>
+<dl class="settings">
+<dt>Type</dt>
+<dd>Dynamic</dd>
+<dt>Source port</dt>
+<dd>8080</dd>
+<dt>Destination</dt>
+<dd>(tyhjä)</dd>
+</dl>
+
+<p>Käytettävään www-selaimeen pitää asettaa välityspalvelimeksi osoite <em>localhost</em> ja portti <em>8080</em>. Firefoxissa tämä tehdään kohdasta Työkalut → Asetukset → Lisäasetukset → Verkko → Muokkaa verkkoyhteysasetuksia:</p>
+<dl class="settings">
+<dt>SOCKS-palvelin</dt>
+<dd>localhost</dd>
+<dt>Portti</dt>
+<dd>8080</dd>
+<dt>Tyyppi</dt>
+<dd>SOCKS v5</dd>
+</dl>
+
+<p>Joihinkin selaimiin täytyy tehdä myös toinen asetus, jotta myös nimipalvelinyhteydet kulkisivat tunnelin kautta. Firefoxissa tämä tehdään kirjoittamalla osoitepalkkiin <em>about:config</em>, ja kytkemällä avautuvalta sivulta asetus <em>network.proxy.socks_remote_dns</em> päälle (arvo <em>true</em>).</p>
+
+<p>Kun tunnelia ei enää tarvitse, saa sen pois tyhjentämällä välityspalvelimen asetukset selaimesta.</p>
+
+</div>

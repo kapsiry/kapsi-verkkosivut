@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>DCC on protokolla, jota voidaan käyttää suorien yhteyksien aloittamiseen irc:n kautta. Sitä käytetään yleensä tiedostojen siirtämiseen ja irc-bottien hallintaan. DCC-yhteys muodostetaan suoraan kahden koneen välille, joten yhteyden aloittajan palomuurissa on oltava tätä varten sopiva portti auki.</p>
+
+<p>Kapsilla <a href="../palvelut/portit.html">portin</a> saa avattua pyytämällä ylläpidolta. Tässä ohjeessa neuvotaan portin 
+asettaminen käytettyyn ohjelmaan.</p>
+
+<h2>Ohjelmakohtaiset ohjeet</h2>
+<h3>Irssi</h3>
+<p>Ylläpidolta saatu portti asetetaan muuttujaan <em>dcc_port</em>. Lisäksi <em>dcc_own_ip</em> asetetaan palvelimen osoitteeksi, joko <em>hilla.kapsi.fi</em> tai <em>lakka.kapsi.fi</em> (nimestä huolimatta asetukseen voi laittaa myös dns-osoitteen).</p>
+<pre>
+/set dcc_port <em>portti</em>
+/set dcc_own_ip hilla.kapsi.fi <em>tai</em> lakka.kapsi.fi
+</pre>
+
+<h3>Eggdrop</h3>
+<p>Eggdropin asetustiedostossa asetus on <em>listen</em>. Eggdropiin yhdistettäessä täytyy käyttää käskyä <em>/ctcp botti CHAT</em>, ellei irc-clientissä ole DCC-portti käytössä.
+DCC-yhteys toimii suoraan ilman asetuksia, kun käytät irssiä samalta koneelta kuin missä botti on.</p>
+<pre>
+listen <em>portti</em> all
+</pre>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Tämä ohje käsittelee valmiiden PHP-ohjelmien, kuten Gallery tai Joomla, asentamista Kapsin palvelimille.</p>
+
+<h2>Asennuspaketin lataaminen ja purkaminen</h2>
+<p>Asennuspaketin voi ladata omalle koneelleen, purkaa ja siirtää tiedostot <a href="filezilla.html">sftp:llä</a> palvelimelle. Siirtämisessä menee kuitenkin turhaan aikaa, sillä paketin voi ladata suoraan palvelimelle ja purkaa <a href="ssh.html">ssh-yhteyden</a> kautta seuraavasti:</p>
+
+<ol class="largespace">
+<li>Siirrytään sivustohakemistoon <em>cd</em>-komennolla. Esimerkiksi <em>cd public_html</em> tai <em>cd sites/www.domain.com/www</em> .</li>
+<li>Ladataan asennuspaketti. Yleensä paketit kannattaa ladata <em>.tar.gz</em>-muodossa, jos sellainen on saatavilla. Latauskomentoon tarvitaan tiedoston suora osoite, jonka esimerkiksi SourceForgessa saa vasta lataussivulta linkistä sen jälkeen kun hylkää automaattisen latauksen. Itse lataus tapahtuu komennolla <em>wget "http://osoite/"</em> .</li>
+<li>Puretaan paketti. Komennot eri tiedostotyypeille:
+    <ul>
+    <li><strong>.tar.gz</strong>: <em>tar -xzf "tiedosto.tar.gz"</em></li>
+    <li><strong>.tar.bz2</strong>: <em>tar -xjf "tiedosto.tar.bz2"</em></li>
+    <li><strong>.zip</strong>: Zipit purkautuvat usein sen hetkiseen hakemistoon suoraan, joten kannattaa ensin luoda uusi hakemisto ja siirtyä sinne komennoilla <em>mkdir hakemisto</em> ja <em>cd hakemisto</em> . Sen jälkeen paketti puretaan käskyllä <em>unzip ../paketti.zip</em> , jossa <em>../</em> tarkoittaa, että paketti on ylemmässä hakemistossa.</li>
+    </ul>
+</li>
+<li>Haluttaessa hakemiston nimi voidaan muuttaa. Näet puretut tiedostot <em>ls</em>-komennolla. Hakemiston nimen voi muuttaa <em>mv</em>-käskyllä.</li>
+</ol>
+
+<h2>PHP-tiedostojen käyttöoikeudet</h2>
+<p>Jotta php-ohjelmat toimisivat <em>public_html</em>-hakemistossa, täytyy niille antaa suoritusoikeus. Sites-hakemiston sivustoja varten tätä vaihetta ei tarvitse tehdä, vaikkei siitä haittaakaan ole.</p>
+<p>Helpointa on asettaa käyttöoikeudet kaikille tiedostoille, vaikka ne tarvitaan vain niille sivuille, jotka avataan suoraan selaimesta. <a href="ssh.html">SSH-yhteyden</a> kautta se käy komennolla:</p>
+
+<pre>
+cd ~/public_html
+find -name '*.php' -exec chmod u+rx "{}" \;
+</pre>
+
+<p>Jälkimmäinen komento muuttaa rekursiivisesti kaikkien nykyisen hakemiston ja alihakemistojen php-tiedostojen oikeudet.</p>
+
+<h2>Asennuksen viimeistely</h2>
+<p>Osalla ohjelmista on oma asennusohjelmansa, joka avataan selaimella tämän ohjeen kohtien jälkeen. Osa ohjelmista ei erillistä asennusta tarvitse, vaan toimivat suoraan paketin purkamisen ja käyttöoikeuksien asettamisen jälkeen.</p>
+<p>Ohjelmien omista asennusohjeista voi olla hyötyä, mutta käyttöoikeuksiksi ei pidä asettaa 777 (kaikki oikeudet), vaikka ohjeissa niin sanottaisiinkin. Tämä on tarpeen PHP:n safemoden kanssa, mutta Kapsilla ohjelmat ajetaan käyttäjän omalla tunnuksella ilman safemodea.</p>
+
+<h2>Ongelmatilanteita</h2>
+<p>Jos sivustosi on <em>sites</em>-hakemistossa, saat lisätietoja virheestä <em>500 Internal Server Error</em> virhelokista, joka 
+on nimellä <em>error.log</em> <em>log</em>-hakemistossa. Seuraavassa on lueteltu yleisiä ongelmatilanteita.</p>
+
+<p>Muissa tapauksissa 
+kannattaa ottaa yhteyttä helpdeskiin, ja kertoa ongelman lisäksi sivuston osoite ja kellonaika, jolloin virhe on tullut.</p>
+<ul class="largespace">
+<li><b>FollowSymLinks</b>: Kyseinen asetus on korvattu turvallisemmalla <em>FollowSymLinksIfOwnerMatch</em>-asetuksella, joka on 
+oletuksena käytössä. Ongelma korjaantuu poistamalla em. asetus <em>.htaccess</em>-tiedostosta.</li>
+
+<li><b>Moduuli-php:n php_flag</b>: Joissain ohjelmissa on oletuksena <em>.htaccess</em>-tiedostossa <em>mod_php</em>:lle tarkoitettuja asetuksia. Tämä ei ole Kapsilla käytössä, joten asetukset täytyy poistaa. Useimpien ohjelmien tapauksessa Kapsin oletusasetukset toimivat, mutta tarvittaessa niitä voi muuttaa luomalla oman <a href="phpini.html">php.ini</a>-tiedoston.</li>
+
+<li><b>Puuttuva php5.fcgi</b>: Sites-hakemistossa olevilla sivuilla pitäisi olla <em>www</em>-hakemiston alla automaattisesti 
+luotu <em>php5.fcgi</em>-tiedosto. Jos se jostain syystä puuttuu, <a href="php-fcgi-palautus.html">sen palauttamisesta on 
+ohje</a>.</li>
+
+<li><b>Väärät käyttöoikeudet</b>: Muilla käyttäjillä ei saa olla kirjoitusoikeutta hakemistoon tai tiedostoon, ja 
+<em>public_html</em>-hakemistossa php-tiedostoilla pitää olla suoritusoikeus. Käyttöoikeuksista on lisää <a 
+href="kayttooikeudet.html">erillisessä ohjeessa</a>.</li>
+</ul>
+
+
+</div>

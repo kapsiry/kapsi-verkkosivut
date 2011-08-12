@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p><a href="http://www.rubyonrails.org/">Ruby on Rails</a> on www-sivustojen
+kehitysympäristö. Kapsilla se on valmiiksi asennettu Karviaiselle. Tämä
+ohje neuvoo alkuunpääsyn RoR:n kanssa.</p>
+
+<p><b>Huom:</b> Tämä ohje toimii RoR:n vanhemmalle versiolle, joka on valmiiksi asennettu Karviaiselle ja Kirsikalle.
+Versiota 2.2 uudemmissa versioissa FCGI-tuki on poistettu, joten ohje ei sovi niille. Jos haluat käyttää uutta versiota, joudut
+ajamaan sitä <a href="http://guides.rubyonrails.org/getting_started.html#starting-up-the-web-server">Mongrelissa</a> omassa 
+<a href="../palvelut/portit.html">portissa</a>. Kysy tarvittaessa helpdeskiltä lisää ohjeita.
+</p>
+
+<h2>Projektin luominen</h2>
+<p>Komennot ajetaan <a href="ssh.html">SSH-yhteyden</a> kautta
+WWW-palvelimella. Lakalle RoR:a ei ole asennettu.</p>
+
+<p>Esimerkkiprojekti kehityksen pohjaksi luodaan käskyllä <em>rails hakemisto</em> .
+Rails luo automaattisesti uuden hakemiston projektille. Projektihakemisto kannattaa
+sijoittaa www-juuren ulkopuolelle, eli esimerkiksi suoraan kotihakemiston alle.</p>
+
+<p>Luodun hakemiston alta <em>public</em>-hakemisto linkitetään www-hakemistoon seuraavasti.
+Huomioi, että käskyssä täytyy käyttää kokonaista polkua eikä suhteellista.</p>
+<pre>
+ln -s /var/www/userhome/<em>käyttäjätunnus</em>/ror-projekti/public ~/sites/.../www/ror-projekti
+</pre>
+
+<p>RoR:n <em>README</em>-tiedostosta löytyvä <em>.htaccess</em>-esimerkkitiedosto kannattaa kopioida
+<em>public</em>-hakemistoon nimelle <em>.htaccess</em>. Esimerkkitiedosto sisältää kuitenkin asetuksia,
+jotka Kapsin ympäristössä aiheuttavat virheen <em>500 Internal Server Error</em>. Koska kyseiset ominaisuudet ovat jo valmiiksi
+käytössä, voi seuraavat rivit poistaa <em>.htaccess</em>-tiedoston alusta.</p>
+<pre>
+AddHandler fastcgi-script .fcgi
+AddHandler cgi-script .cgi
+Options +FollowSymLinks +ExecCGI
+</pre>
+
+<p>Nyt RoR:n oletussivun pitäisi näkyä osoitteessa <em>http://.../ror-projekti/dispatch.fcgi/</em>.</p>
+
+<p>Oletussivun näkyminen ei tosin kerro suuremmin itse RoR:n toiminnasta, sillä ilmeisesti <a href="http://www.ruby-forum.com/topic/78175">1.1.6-version ohjelmavirheen</a> vuoksi ko. sivun järjestelmätietoja näyttävä ikkuna ei valitettavasti toimi.</p>
+
+<h2>Jatkotoimenpiteet</h2>
+<p>Asennuksen saattamiseksi loppuun RoR:lle pitää kertoa mm. käytettävä tietokanta, jonka jälkeen varsinaista
+sovellusta pääsee kehittämään.
+Luotu oletussivu auttaa tässä, kuten myös <a href="http://www.rubyonrails.org/docs">RoR:n omat ohjeet</a>.</p>
+
+<p>Oletuksena RoR on asetettu käyttämään www-palvelimen kanssa cgi:tä, mikä on melko hidasta. Siksi lopullisessa käytössä <em>.htaccess</em>-tiedostosta
+kannattaa muuttaa myös seuraavalle riville <em>dispatch.cgi</em>:n tilalle <em>dispatch.fcgi</em>.</p>
+<p>Fcgi aiheuttaa kuitenkin viivettä muutosten voimaantuloon, minkä vuoksi kehityksen aikana asetus kannattaa pitää cgi:nä.</p>
+<pre>
+RewriteEngine On
+RewriteRule ^(.*)$ dispatch.cgi [QSA,L]
+</pre>
+
+</div>

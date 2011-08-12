@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>
+Sähköpostin lähettäminen uuteen osoitteeseen tapahtuu tekemällä .forward-niminen tiedosto kotihakemistoon. Kaikessa yksinkertaisuudessaan tiedoston sisälle kirjoitetaan se sähköpostiosoite, johon kaikki viestit halutaan ohjata. Tiedoston voi luoda helpoiten ottamalla <a href="ssh.html">SSH-yhteys</a> palvelimelle ja editoimalla .forward tiedostoa haluamallaan editorilla (esim. nanolla).
+</p>
+<pre>
+user@lakka:~$ nano .forward
+</pre>
+<p>
+Jos et halua jättää kopiota sähköposteista palvelimelle, pitäisi tiedoston näyttää tältä:
+</p>
+<pre>
+osoite@domain.com
+</pre>
+<p>
+Jos haluat jättää sähköpostit myös palvelimelle, pitäisi tiedoston näyttää tältä:
+</p>
+<pre>
+\käyttäjätunnus,osoite@domain.com
+</pre>
+<p>
+Edelleenlähetyksen saa lopetettua poistamalla .forward-tiedosto kotihakemistosta.
+</p>
+
+</div>

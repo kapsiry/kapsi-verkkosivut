@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Omilla <em>sites</em>-hakemiston sivustoilla on muista sivustoista erillinen lokihakemisto, joka näkyy kotihakemistossa hakemistona <em>~/sites/domain.com/log</em>.
+<em>Public_html</em>-hakemistossa lokitiedostoja ei ole käytettävissä.
+</p>
+
+<h2>Yleistä lokeista</h2>
+
+<p>Oletuksena lukuoikeudet on <em>error.log</em>-virhelokeihin. Näistä näkyvät mm. cgi-ohjelmien virheet ja väärät <em>.htaccess</em>-asetukset.</p>
+
+<p>Osa lokeista on tilan säästämiseksi pakattu <em>.gz</em>-päätteisiksi. Nämä lokit saa luettua esimerkiksi <em>zless</em>-komennolla, tai ne voi myös purkaa jonnekin lokihakemiston ulkopuolelle.</p>
+
+<h2>Access.log</h2>
+<p>Lisäksi hakemistossa on <em>access.log</em>-käyttölokit, joissa on tiedot kaikista verkkosivustolla vierailleista käyttäjistä. Näihin lokeihin ei oletuksena ole lukuoikeutta lakisyistä.</p>
+
+<p>Lakiasioiden selvittämiseksi Kapsi otti keväällä 2007 yhteyttä Viestintävirastoon. Viestintäviraston vastauksen perusteella edellytyksenä lokien myöntämiselle on, että jäsen on viestinnän toinen osapuoli. Tämän määritelmä on varsin epäselvä, ja lähes kaikissa tapauksissa näin on. Kuitenkin edellytetään, että <em>&quot;Kunkin jäsenenne osalta on arvioitava erikseen, voidaanko häntä pitää viestinnän osapuolena.&quot;</em></p>
+
+<p>Tämän vuoksi access-lokien käyttöönsaamiseksi täytyy ottaa yhteyttä ylläpitoon. Pyynnössä täytyy olla seuraavat asiat:</p>
+<ul>
+    <li>sivusto, jonka logeja pyyntö koskee</li>
+    <li>lyhyt selvitys lokien aiotusta käyttötavasta</li>
+    <li>perustelut siihen, että pyytäjä on viestinnän toinen osapuoli</li>
+</ul>
+
+<p>Lokeista saa tehtyä tilastoja mm. <a href="http://awstats.sourceforge.net/">AWStats</a>-ohjelmalla.</p>
+
+</div>
+

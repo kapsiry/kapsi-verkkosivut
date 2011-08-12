@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<p>Tässä osiossa on erilaisia vinkkejä ja ohjeita Kapsin käyttäjille.
+Ohjeet pätevät Kapsin palveluihin, mutta voivat toimia myös muilla palveluntarjoajilla.</p>
+
+<h2>Suosittuja ohjeita</h2>
+
+<div class="sivulista">
+<h2><a href="domain.html">Oma domain</a></h2>
+<p>Ohje neuvoo oman verkkotunnuksen käyttöönoton, ja listaa mitä palveluita
+verkkotunnukselle on saatavissa.</p>
+
+<h2><a href="filezilla.html">FileZilla-tiedostonsiirto</a></h2>
+<p>FileZilla on helppokäyttöinen ohjelma tiedostojen siirtämiseen Kapsin
+palvelimille.</p>
+
+<h2><a href="spamassassin.html">Roskapostin suodatus</a></h2>
+<p>Ohjeessa neuvotaan tehokkaan roskapostisuodattimen käyttöönotto. Tarvittaessa
+suodatinta voi myös opettaa itse tulosten parantamiseksi.</p>
+
+<h2><a href="php.html">Valmiiden PHP-ohjelmien asennus</a></h2>
+<p>PHP on toistaiseksi suosituin www-sovellusten kieli, ja valmiita ohjelmia on
+paljon. Tämä ohje sopii esimerkiksi <a href="http://gallery.menalto.com/">Galleryn</a>
+ja <a href="http://wordpress.org/">WordPressin</a> asennukseen.</p>
+
+<h2><a href="irssi-utf8.html">Irssi ja UTF-8</a></h2>
+<p>Kapsin palvelimilla <em>Irssi</em>-keskusteluohjelma käyttää oletuksena
+UTF-8 -merkistöä. Ohje neuvoo, miten ääkköset saa näkymään oikein ssh-yhteydessä.</p>
+
+<h2><a href="snapshots.html">Tilannevedokset</a></h2>
+<p>Tilannevedokset ovat eräänlaisia varmuuskopioita, joista voit itse palauttaa
+vahingossa poistamasi tiedostot.</p>
+
+<h2><a href="www-logit.html">Kotisivujen lokitiedostot</a></h2>
+<p><em>Sites</em>-hakemiston sivustoilla on omat lokitiedostonsa, joista voi
+tehdä tilastoja sivuston käyttäjistä tai selvittää virheilmoituksia.</p>
+
+<h2><a href="ssh-avain.html">SSH-avaimen luominen</a></h2>
+<p>SSH-avaimen avulla <a href="ssh.html">ssh-yhteyttä</a> pystyy käyttämään
+ilman, että salasana täytyy syöttää joka kirjautumisella.</p>
+
+</div>
+
+<p>Lisää ohjeita löydät valikon alisivuilta.</p>
+</div>

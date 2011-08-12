@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Yhdistyksellä on käytössä työkalu haavoittuvien www-sovellusten etsintään.
+Työkalu käy läpi julkisesti esillä olevia sivustoja, jotka ovat Kapsin sivutilassa ja tunnistaa yleisimmät käytössä olevista www-sovelluksista.</p>
+<p>Tätä ohjetta voi käyttää ohjelmien oma-aloitteisessa päivityksessä tai saatuaan
+ilmoituksen vanhentuneesta ohjelmasta. Päivitystapa riippuu ohjelmasta, joten ohjeen tiedot ovat yleisluontoisia ja tarkemmat tiedot löytyvät ohjelman omista ohjeista.</p>
+
+<h2>Haavoittuvuuksien vaikutukset</h2>
+<p>WWW-sovelluksilla tarkoitetaan käyttäjän itse sivutilaansa asentamia ohjelmia, joita muut ihmiset voivat käyttää www-selaimen kautta. Yleisesti käytössä ovat esimerkiksi PHP:llä toteutetut Gallery ja Wordpress.</p>
+
+<p>Näiden ohjelmien haavoittuvuudet ovat usein sellaisia, että kuka tahansa sivustolle pääsevä pystyy joko lisäämään sinne sisältöä tai ajamaan käyttäjän tunnuksella ohjelmia. Murtautumiset ovat nykyään hyvin yleisiä. Myös hyökkääjillä on automaattisia työkaluja, jotka etsivät murtautumismahdollisuuksia.</p>
+
+<p>Murtautujien tarkoitus on usein lähettää roskapostia palvelimen kautta tai käyttää sitä apuvälineenä erilaisissa huijauksissa. Hyökkäyksellä voi kuitenkin olla vielä vakavampiakin seurauksia, sillä murtautujalla on halutessaan täysi pääsy mm. käyttäjän tunnuksellaan säilyttämiin sähköposteihin.</p>
+
+<h2>Ohjelmien päivittäminen</h2>
+<p>Tavallisesti www-ohjelmien päivittäminen koostuu uuden version asennuspaketin lataamisesta, sen purkamisesta ja ohjelman oman päivitystoiminnon ajamisesta. Päivitystoiminto siirtää ohjelman tallentamat tiedot uuden version käyttämään muotoon.
+</p>
+
+<p>Joissakin ohjelmissa päivittäminen on tehty erityisen helpoksi. Wordpressissä päivitys onnistuu suoraan valitsemalla ylläpidosta Tools → Upgrade. Galleryn pystyy päivittämään myös SVN:n kautta, jonka käyttöönoton jälkeen päivitykset voi ladata  <em>svn update</em> -komennolla.</p>
+
+<p>Tavallisesti kannattaa ottaa <a href="backup.html">varmuuskopiot</a> tietokannasta ja tiedostoista ennen päivitystä. Kapsilla on kuitenkin myös koko järjestelmästä öisin otettavat varmuuskopiot. Jos päivitys jostain syystä epäonnistuu, voi helpdeskiltä pyytää apua varmuuskopioiden palautuksessa.</p>
+
+<p>Alla on linkkejä joidenkin yleisesti käytössä olevien ohjelmien päivitysohjeisiin:</p>
+<ul>
+<li><a href="http://codex.gallery2.org/Gallery2:Upgrading">Gallery 2</a></li>
+<li><a href="http://docs.joomla.org/Upgrade_Instructions">Joomla</a></li>
+<li><a href="http://www.mediawiki.org/wiki/Manual:Upgrading">Mediawiki</a></li>
+<li><a href="http://docs.simplemachines.org/index.php?board=3.0">Simple Machines Forum (SMF)</a></li>
+<li><a href="http://codex.wordpress.org/Upgrading_WordPress">Wordpress</a></li>
+</ul>
+
+<h2>Mahdolliset ongelmatilanteet</h2>
+<p>Apua sovellusten päivittämiseen voi pyytää <a href="../tukipalvelut.html">helpdeskiltä</a>. Kerro viestissäsi sivuston osoite,
+käytettävä ohjelma sekä missä kohtaa päivitystä on ongelmia, esimerkiksi mitä virheilmoituksia saat. Anna myös linkki päivitysohjeeseen jota olet seurannut.</p>
+
+</div>
