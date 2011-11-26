@@ -8,22 +8,19 @@ Voit tarkkailla levytilan käyttöäsi <a href="../ohjeet/ssh.html">ssh-yhteyden
 user@lakka:~$ quota -s
 Disk quotas for user ... (uid ....):
      Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
-/dev/mapper/vg0-tmp
-                     7M    500M    700M              66       0       0
-/dev/mapper/vg1-home
-                   953M   1024M   1536M           44930       0       0
-/dev/mapper/vg1-var_mail
-                      1   1024M   1536M               1       0       0
+10.0.0.50:/vol/users
+                  5952M  51200M  56320M            256k    512k    512k
+10.0.0.2:/export/siilo
+                 39960M    500G    500G               0       0       0
 </pre>
 
 <p>
 Käytetty levytila näkyy blocks-sarakkeessa. Esimerkkitapauksessa levytilaa on käytetty kotihakemistossa
-953 megatavua. Saapuvan postin hakemisto (josta posti siirretään muualle kun se on luettu) on tyhjä.
-Väliaikaistiedostojen hakemistossa /tmp on 7 megatavua tiedostoja.
+5952 megatavua. Siilolla on 39960 MB tietoa.
 </p>
 
 <p>
-Kapsilla on käytössä pelkkä levytilan rajoitus, eli vasemmanpuolimmaiset sarakkeet. Blocks-arvon 
+Vasemmanpuolimmaiset sarakkeet ovat levytilan rajoitus. Blocks-arvon 
 ylittäessä quota-rajan tulee asiasta ilmoitus Kapsin sähköpostiin, minkä jälkeen on viikko aikaa 
 poistaa tiedostoja.
 </p>
@@ -32,6 +29,10 @@ poistaa tiedostoja.
 Jos blocks-arvo ylittää limit-arvon tai viikon grace-aika on kulunut umpeen, ei uusia tiedostoja voi 
 enää luoda. Tällaista tilannetta kannattaa välttää, sillä se voi haitata sähköpostin kulkua ja 
 ohjelmien toimintaa.
+</p>
+
+<p>
+Oikeanpuoleiset sarakkeet rajoittavat erillisten tiedostojen määrää.
 </p>
 
 </div>

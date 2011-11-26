@@ -71,9 +71,11 @@ Ilmoita haluamasi osoite sekä osoitetta käyttävän henkilön nimi.</p></li>
 
 <li><strong>IRC-osoite</strong>
 <p>Saat oman verkkotunnuksen näkymään IRC:ssä tunnuksesi perään. Osoite voi olla esimerkiksi
-<em>irc.domain.com</em>, mutta ei kuitenkaan sama kuin kotisivujen osoite. Katso lisätietoa <a href="irc-hostname.html">tästä 
-ohjeesta</a>.</p></li>
+<em>irc.domain.com</em>, mutta ei kuitenkaan sama kuin kotisivujen osoite. Ilmoita myös, haluatko 
+käyttää osoitetta Lakalta vai Hillalta. Katso lisätietoa <a href="irc-hostname.html">tästä ohjeesta</a>.</p></li>
 </ul>
+
+<p>Jokaiselle sivustolle luodaan automaattisesti oma hakemistonsa Lakalle <em>sites</em>-hakemistoon.</p>
 
 <h2 id="dns">Kapsin nimipalveluiden käyttöönotto</h2>
 <p>Käyttäjän täytyy muuttaa nimipalvelimet domaininsa
@@ -116,6 +118,12 @@ WWW-palvelimen IP-osoitteen mahdollisista muutoksista tiedotetaan.</p>
 
 <dt>Toissijainen sähköpostipalvelin</dt>
 <dd>MX 10 mx2.kapsi.fi.</dd>
+</dl>
+
+Halutessasi voit lisätä myös AAAA-tietueen, jolloin verkkosivuihin saa yhteyden IPv6-protokollalla.
+<dl class="settings">
+<dt>WWW-palvelin, IPv6 (vapaaehtoinen)</dt>
+<dd>AAAA 2001:1bc8:1004::1:80</dd>
 </dl>
 
 </div>
