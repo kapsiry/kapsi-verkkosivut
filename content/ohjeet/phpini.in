@@ -6,45 +6,25 @@ Jotkin ohjelmat tarvitsevat muutoksia PHP:n oletusasetuksiin. Moduuli-PHP:ta var
 ohjeen avulla on lisäksi mahdollista muokata PHP:n asetuksia paljon laajemminkin.
 </p>
 
-<h2>Oletusasetusten kopioiminen</h2>
+<h2>Käyttäjäkohtaisen asetustiedoston luonti</h2>
 
 <p>
-Valmis php.ini tiedosto kannattaa kopioida pohjaksi. Helpoiten se käy <a href="ssh.html">shellissä</a>. Tiedoston sijoituspaikka on vapaa, mieluiten se ei ole www-juuren alla vaan esimerkiksi kotihakemistossasi. Huomioi että tiedoston nimi on oltava php.ini. Jos sinulla on useita ohjelmia jotka tarvitsevat eri asetukset, voit luoda niille eri kansiot.
+Kapsilla on käytössä <em>.user.ini</em>-tiedosto, joka mahdollistaa PHP:n oletusasetusten helpon mukauttamisen. Tiedosto .user.ini tehdään siihen hakemistoon, mihin halutaan vaikuttaa. Esimerkiksi tiedosto ~/sites/käyttäjä.kapsi.fi/www/.user.ini vaikuttaa kaikkiin käyttäjä.kapsi.fi:n PHP-asetuksiin.
 </p>
 
-<p>Seuraavat komennot täytyy ajaa www-palvelimella. Osoite ssh-yhteyttä varten on <em>karviainen.kapsi.fi</em> .</p>
-
+<p>
+Tiedoston sisältö voi olla yksinkertaisimmillaan esimerkiksi seuraavanlainen:
+</p>
 <pre>
-# Luodaan kansio php.inille kotihakemiston alle. Voit vaihtaa kansion nimen kuvaavammaksi.
-mkdir ~/phpini
-cd ~/phpini
-
-# Kopioidaan php:n cgi-version oletusasetukset.
-cp /etc/php5/cgi/php.ini ./    # Tämä rivi on php:n versiota 5 (oletus) varten.
-
-</pre>
-
-<h2>Uusi php.fcgi</h2>
-
-<p>
-Jos sivustosi on <em>public_html</em>-hakemistossa, tee php.fcgi-asetus muuten samalla tavalla kuin <a href="cgi-php.html">ohjeessa</a>, mutta kirjoita php.fcgi tiedoston sisällöksi seuraavat rivit.
-</p>
-<p>
-Koska <em>sites</em>-hakemistossa on oletuksena käytössä php5.fcgi, voi rivit myös muokata siihen, jolloin ei itse tarvitse luoda .htaccess-tiedostoja. Tällöin asetus tietenkin vaikuttaa koko sivustoon.
-</p>
-
-<pre>
-#!/bin/sh
-#&lt;?php exit(); ?&gt;
-export PHPRC=/home/users/<em>kayttaja</em>/phpini
-exec /usr/bin/php5-cgi
+post_max_size = 128M
+upload_max_filesize = 128M
 </pre>
 
 <p>
-Muuta tiedoston kolmannelta riviltä poluksi oman php.ini tiedostosi polku. Ainakin käyttäjätunnus täytyy vaihtaa polkuun sanan <em>kayttaja</em> paikalle, se on sama kuin shell-tunnuksesi. Voit myös katsoa polun shellissä komennolla <em>pwd</em> kun olet php.inin hakemistossa. <b>Huomioi ettei polussa saa olla mukana php.ini-nimeä, vaan se on pelkkä kansio jossa php.ini on.</b>
+Valmiista php.ini-tiedostosta voi ottaa oppia, mutta kaikkia php.inin sisältämiä asetuksia ei tarvitse kopioida .user.iniin. Käytössä oleva php.ini löytyy <em>karviainen.kapsi.fi</em>-palvelimelta polusta /etc/php5/cgi/php.ini.
 </p>
 
-<h2>Muutosten käyttöönotto</h2>
+<h2>Muutosten kokeileminen</h2>
 <p>Luo asetusten testaamista varten <em>phpinfo.php</em>-tiedosto, jossa on rivi:
 </p>
 
@@ -57,7 +37,7 @@ Syötä luomasi tiedoston www-osoite selaimeen. Jos saat virheilmoituksen (yleen
 </p>
 
 <p>
-Ellei virhettä tule, pitäisi näkyä php:n infosivu. Heti sivun alkuosassa näkyy käytetyn asetustiedoston sijainti, "Configuration File (php.ini) Path". Jos tämä on oikea, eli esimerkiksi <em>/home/users/käyttäjä/phpini/php.ini</em>, ovat uudet asetuksesi jo käytössä. Voit tarkkailla sivulta alempaa asetuksia joita yrität muuttaa.
+Ellei virhettä tule, pitäisi näkyä php:n infosivu. Voit tarkkailla sivulta asetuksia, joita yrität muuttaa. "Local Value" -sarakkeessa pitäisi näkyä tekemäsi muutokset.
 </p>
 
 <p>Asetukset eivät välttämättä heti päivity käyttöön, koska fcgi pitää PHP:n käynnissä jonkin aikaa
@@ -67,24 +47,6 @@ millä www-palvelimella (karviainen tai kirsikka) sivusi ovat. Ota ssh-yhteys t�
 pkill php
 </pre>
 
-<p>PHP:n uudelleenkäynnistys voi olla tarpeen myös php.ini:n muuttamisen jälkeen, jotta asetukset tulisivat heti voimaan.</p>
-
-<h2>Asetusten ylläpito</h2>
-<p>
-Kopioinnin jälkeen asetuksia php.ini:ssä voi muuttaa tekstieditorilla. Useimmat asetukset ovat jo valmiiksi tiedostossa, joten valmis rivi pitää etsiä ja lisätä uudet asetukset siihen. Valitettavasti php.ini:in ei voi automaattisesti hakea serverin oletusasetuksia, joten tiedosto on tosiaan kopioitava, jolloin oma versiosi ei seuraa automaattisesti oletusasetusten muutoksia. Pyrimme tiedottamaan merkittävistä muutoksista, mutta jos jokin laajennos, kuten GD, lakkaa yllättäen toimimasta, kannattaa tarkistaa php.inin aikaleima:
-</p>
-
-<pre>
-ls -l /etc/php5/cgi/php.ini
--rw-r--r--  1 root root 37942 Feb 25 00:26 /etc/php5/cgi/php.ini
-
-ls -l ~/..../php.ini   # Lisää tiedoston sijainti
--rw-r--r--  1 käyttäjä users 37920 Apr  4 16:39 php.ini
-</pre>
-
-<p>
-Jos ensimmäisen tiedoston aikaleima (tässä tämän vuoden helmikuun 25. 00:26) on uudempi kuin jälkimmäisen (tässä huhtikuun 4. 16:39), täytyy asetukset kopioida uudelleen. Voit myös verrata tiedostojen sisältöä diff-komennolla, tai ottaa asetukset tehtyäsi diff-komennolla tehdyn patchin talteen. Tässä ohjeessa ei kuitenkaan käsitellä diff-komennon käyttöä tarkemmin.
-</p>
-
+<p>PHP:n uudelleenkäynnistys voi olla tarpeen myös .user.ini:n muuttamisen jälkeen, jotta asetukset tulisivat heti voimaan.</p>
 
 </div>

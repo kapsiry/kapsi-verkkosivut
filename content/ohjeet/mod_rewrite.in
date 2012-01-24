@@ -76,21 +76,39 @@ RewriteCond %{HTTP_HOST} ^alidomain\.domain\.com
 RewriteRule ^(.*)$ http://www.ohjatutsivut.com/$1 [R]
 </pre>
 
-<h2 id="proxy">Välityspalvelin omalle http-palvelinohjelmalle</h2>
-<p>Ylläpidolta pyydetyssä <a href="../palvelut/portit.html">portissa</a>
-voi ajaa omaa http-palvelinohjelmaa.
-Tällöin se näkyy esimerkiksi osoitteessa <em>http://kirsikka.kapsi.fi:portti/</em>.
-Sivut saa näkymään myös oletusportissa 80 välittämällä pyynnöt mod_rewriten
-kautta proxy-toiminnolla:
+<h2 id="proxy">Sovelluspalvelimet</h2>
+<p>
+  Ensisijaisesti suositellaan FastCGI:n tai CGI:n käyttämistä.
+  Sovelluspalvelimia on kuitenkin mahdollista käyttää tarvittaessa.
+</p>
+<p>
+  Sovelluspalvelimen (eli sovelluksen oman HTTP-palvelimen) voi käynnistää
+  jollekin palvelimista lakka, kirsikka, karviainen, suomuurain. Portiksi
+  tulee valita jokin väliltä 30000–40000 satunnaisesti. Jos portti ei ole
+  vapaana, valitse uusi. Sovelluspalvelimen voi käynnistää cronista
+  @reboot aikamääritteellä, jolloin se käynnistyy automaattisesti jos
+  palvelin uudelleenkäynnistetään. Sovelluspalvelimen saa näkyviin Internetiin
+  lisäämällä .htaccessiin ohjauksen sovelluspalvelimelle Kapsin sisäverkossa,
+  esimerkiksi seuraavasti:
 </p>
 
 <pre>
-RewriteRule ^(.*)$ http://kirsikka.kapsi.fi:<em>portti</em>/$1 [P]
+  RewriteEngine On
+  RewriteRule ^(.*)$ http://lakka.n.kapsi.fi:<em>PORTTI</em>/$1 [P]
 </pre>
 
-<p>Osoite <em>kirsikka.kapsi.fi</em> korvataan sillä osoitteella, jossa oma
-palvelin on käytössä. Jos portti on ylläpidolta pyydetty, palvelin on se mihin portti on avattu.
-Käytettäessä itse valittua porttia paikallisiin yhteyksiin, täytyy palvelinohjelma olla samalla koneella kuin oma www-sivusto.
-Kyseisen koneen saa helpoiten selville komennolla <em>ssh käyttäjätunnus@www.omadomain.com</em>.</p>
+<p>
+  Osoite <em>lakka.n.kapsi.fi</em> korvataan sillä osoitteella, jossa oma
+  sovelluspalvelin on käytössä. PORTTI pitää korvata itse valitulla.
+  Osoitteessa oleva .n. tarkoittaa Kapsin Nebulan salin sisäverkon osoitetta,
+  johon ei julkisen Internetin kautta pääse.
+</p>
+
+<p>
+  Huomaathan, että sinun itse huolehdittava itse asennettujen sovelluksen
+  päivitysten seuraamisesta ja asentamisesta! Älä luota myöskään siihen, että
+  sovelluspalvelimeltasi ei voisi ladata muita sivuja kuin olet rewritella
+  sallinut, sillä palvelimilla on tuhansia muita paikallisia käyttäjiä.
+</p>
 
 </div>
