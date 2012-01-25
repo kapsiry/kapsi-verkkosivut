@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Tämä ohje käsittelee git-http-backend:in asentamista kapsin palvelimelle. Git-http-backend mahdollistaa gitin käyttämisen http(s)-yhteyden yli myös palvelimelle päin. Tämän avulla voit myös antaa kaverillesi luku ja kirjotusoikeudet repositoryysi. Repository kannattaa mielellään tehdä secure-www:n alle, mikäli käytät kapsin tunnusta. Omilla tunnuksilla ei ole mahdollista käyttää ssl-suojausta, joten silloin on käytettävä http:tä.</p>
+<p>Korvaa domain.tld haluamallasi domainilla ja "tunnus" omalla käyttäjätunnuksellasi.</p>
+<h2 id="repo"><a href="#repo" class="anchor">Luodaan uusi repository</a></h2>
+<p>Julkiseen jakoon tarkotettua repoa varten on repository luotava --bare option kanssa, jotta se toimisi push:in kanssa. Bare optio luo repositorystä etäkäyttöön sopivan ja tekee muunmuassa .git kansion sisällön suoraan annettuun hakemistoon. Jos sinulla oli jo olemassa repository, myöhemmin tulee kohta, missä siirretään olemassaoleva data nyt luotavaan repositoryyn.</p>
+<pre>
+mkdir ~/code
+git --bare init ~/code/myrepo.git
+</pre>
+<p>Jatkossa tässä ohjeessa oletetaan, että repositoryt ovat ~/code hakemistossa.</p>
+
+<h2 id="htpasswd"><a href="#htpasswd" class="anchor">Luodaan salasanatiedosto</a></h2>
+<p>Tehdään kirjautumista varten salasanatiedosto. Tähän ei tulisi käyttää samaa salasanaa, mikä sinulla on lakalla.</p>
+<pre>
+htpasswd -c ~/.gituser.passwd tunnus
+&gt; salasana
+&gt; salasana uusiksi
+</pre>
+<p>Jos tarvitset kirjoitusoikeudet myös kaverillesi ne voi lisätä seuraavasti. (Muistathan laittaa tarpeeksi vahvan salasana, vähintään 10 merkkiä pitkä ja tarpeeksi monimutkainen.)</p>
+<pre>
+htpasswd ~/.gituser.passwd kaverisi
+&gt; Väh8merkk1äpitkävahva$a1asana
+&gt; Väh8merkk1äpitkävahva$a1asana
+</pre>
+
+<h2 id="cgi"><a href="#cgi" class="anchor">"Luodaan .htaccess ja cgi-scripti</a></h2>
+<p>Tehdään kansio http://domain.tld/git/ ja rajataan sen käyttö aikasemmin määritellylle käyttäjälle. Huomaa muuttaa "tunnus" kohdat omaksi käyttäjänimeksesi.</p>
+<pre>
+mkdir ~/sites/domain.tld/secure-www/git
+</pre>
+<p>Muokataan seuraavaksi tiedoston  ~/sites/domain.tld/secure-www/git/.htaccess sisällöksi.</p>
+<pre>
+RewriteEngine On
+AcceptPathInfo On
+
+RewriteCond %{REQUEST_URI} ^/(.*/(HEAD|info/refs|objects/(info/[^/]+|[0-9a-f]{2}/[0-9a-f]{38}|pack/pack-[0-9a-f]{40}\.(pack|idx))|git-(upload|receive)-pack))$
+RewriteCond %{REQUEST_URI} !git-http-backend
+RewriteRule (.*)$ /git/git-http-backend.cgi/$1 [L] 
+
+Options -Indexes
+AuthType Basic
+AuthName "Private"
+Require valid-user
+AuthUserFile /var/www/userhome/tunnus/.gituser.passwd
+</pre>
+<p>Koska ScriptAlias ei ole käytettävissä, täytyy git-http-backendiä käyttää cgi-scriptinä. Luodaan seuraavaksi cgi-scripti. Muokataan tiedoston ~/sites/domain.tld/secure-www/git/git-http-backend.cgi sisällöksi seuraavaa. Muuta kohta "tunnus" omaksi tunnukseksesi!</p>
+<pre>
+#!/bin/bash
+export GIT_PROJECT_ROOT="/var/www/userhome/tunnus/code/"
+export GIT_HTTP_EXPORT_ALL=""
+/usr/lib/git-core/git-http-backend
+</pre>
+<p>Ja annetaan vielä riittävät oikeudet</p>
+<pre>
+chmod 500  ~/sites/domain.tld/secure-www/git/git-http-backend.cgi
+</pre>
+
+<h2 id="push"><a class="anchor" href="#push">Git push toimimaan</a></h2>
+<p>Git repositorylle pitää kertoa, että siille saa ajaa git push. Tämä onnistuu lakkalla repossa seuraavasti.</p>
+<pre>
+git config http.receivepack true
+</pre>
+
+<h2>Käyttämään!</h2>
+<p>Seuraavaksi onkin aika kokeilla git-repositoryn toimintaa.</p>
+<pre>
+git clone https://tunnus@domain.tld/git/myrepo.git
+</pre>
+<h2 id="siirto"><a href="#siirto" class="anchor">Datan siirtäminen vanhasta repositorystä äskettäin luotuun uuteen repositoryyn.</a></h2>
+<p>Jos sinulla on jo valmiiksi git-repository, minkä haluat juuri luomaasi http-repositryyn, toimi seuraavasti</p>
+<pre>
+cd minunrepo
+git remote rm origin
+git remote add origin https://tunnus@domain.ltd/git/myrepo.git
+git push origin master
+</pre>
+<p>Nyt tiedot ovat uudessa repossa. Lisäksi jatkossa muutokset menevät automaattisesti uuteen repositoryyn.</p>
+<h2 id="rajoitukset"><a class="anchor" href="#rajoitukset">Rajoituksia ja muuta huomattavaa</a></h2>
+<p>Jos lisäät jollekkin käyttäjälle oikeudet htpasswd tiedostoon, tällä käyttällä on luku ja kirjoitusoikeudet kaikkiin ~/code/ kansion alla oleviin repositoryihin. Helpoin ja ainoa tapa rajottaa käyttäjiä on tehdä jaettua repoa varten tällä ohjeella toinen vastaavanlainen sivu, mutta kuitenkin muuttaen gituser.passwd vaikka gitpubuser.passwd:ksi ja /git kansion joksikin muuksi sekä tekemällä toinen code kansio jaettua repoa varten.</p>
+<p>Mikäli sinulla on kysyttävää tai ongelmia, ota yhteyttä helpdeskiin.</p>
+</div>
