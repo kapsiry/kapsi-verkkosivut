@@ -9,7 +9,7 @@ UTF-8 on myös käytössä joissakin Linux-jakeluversioissa, kuten esimerkiksi U
 
 <p>
 Tämä ohje neuvoo Irssin konfiguroinnin siten, että irkkiin päin puhutaan oletuksena
-ISO 8859-15 -merkistöä ja päätteelle UTF-8:aa.
+UTF-8 -merkistöä.
 </p>
 
 <ol class="largespace">
@@ -36,11 +36,12 @@ Irssin merkistöksi päätteeseen päin asetetaan UTF-8:
 
 <li>
 <p>
-Turvallisin vaihtoehto on asettaa IRC-keskustelun merkistöksi ISO 8859-15, sillä UTF-8 ei ole vielä
-tuettu kaikilla ohjelmilla:
+Turvallisin vaihtoehto on asettaa IRC-keskustelun merkistöksi UTF-8, sillä 
+se on tuettu kaikilla nykyaikaisilla ohjelmilla ja sitä käytetään 
+kansainvälisillä kanavilla:
 </p>
 <pre>
-/set recode_out_default_charset ISO8859-15
+/set recode_out_default_charset UTF-8
 </pre>
 </li>
 
