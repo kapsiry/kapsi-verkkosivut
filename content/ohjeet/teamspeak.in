@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Teamspeak on VoIP-ohjelmisto, mikä mahdollistaa useamman ihmisen ryhmäkeskustelut. Tässä ohjeessa kerrotaan, miten voit asentaa Teamspeak-palvelimen shellissä.
+</p>
+<h2 id="aluksi">Ennen asentamista</h2>
+<p>Ennen Teamspeak-palvelimen asentamista sinun tulee pyytää <a href="http://www.kapsi.fi/tukipalvelut.html">ylläpidolta</a> kolme avointa porttia. Muista mainita pyynnössä käyttäjätunnuksesi tai jäsennumero sekä mille palvelimella aiot asentaa Teamspeakin. Ylläpito antaa portit muodossa 12345:12347, joka tarkoittaa portteja 12345, 12346, 12347.</p>
+<p>Tämän lisäksi sinun pitää hankkia itsellesi ilmainen <a href="http://npl.teamspeakusa.com/ts3npl.php">non-profit-lisenssi</a> Teamspeakkia varten.</p>
+<h2 id="asentaminen">Asentaminen</h2>
+<p>Aloita asentaminen kirjautumalla valitsemallesi palvelimelle <a href="http://www.kapsi.fi/ohjeet/ssh.html">ssh</a>:lla. Voit asentaa Teamspeak-ohjelman lataamalla ensin uusimman version Teamspeak-serveristä <a href="http://teamspeak.com/?page=downloads">Teamspeakin sivuilta</a>. Valitse sivulta server linux 64bit. Käyttöehtojen hyväksymisen jälkeen sivulla lukee osoite, mistä voit noutaa uusimman version. Kopioi osoite ja suorita shellissä seuraavat komennot:</p>
+<pre>
+cd ~
+wget "juuri kopioimasi linkki" -O ~/teamspeak3.tar.gz
+tar -xvf ~/teamspeak3.tar.gz
+mv teamspeak3-server_linux-amd64 teamspeak
+cd teamspeak
+nano ts3server.ini
+</pre>
+<p>Lisää tiedostoon seuraavat rivit.  <a href="http://www.kapsi.fi/ohjeet/shell-manual.html#nano">Ohje nanon käyttöön.</a></p>
+<pre>
+default_voice_port=ensimmäisen portin numero
+filetransfer_port=toisen portin numero
+query_port=kolmannen portin numero
+voice_ip=217.30.184.184
+filetransfer_ip=217.30.184.184
+query_ip=217.30.184.184
+</pre>
+<p>Huom! Jos asennat Teamspeak-palvelimen Hillalle Lakan sijaan, vaihda IP-osoitteiksi 81.90.72.4.</p>
+<p>Seuraavaksi tulee kopioida sähköpostissa sinulle tullut licensekey.dat ~/teamspeak-kansioon. Sen voi tehdä esimerkiksi käyttämällä SFTP-ohjelmaa, kuten Filezillaa.</p>
+<p>Seuraava vaihe on laittaa Teamspeak-palvelin päälle. Tämä onnistuu komennolla:</p>
+<pre>
+screen LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH" ./ts3server_linux_amd64 inifile=ts3server.ini
+</pre>
+<p>Nyt voit kokeilla yhdistää Teamspeak-palveimeesi asiakasohjelmalla. Aseta palvelimen osoitteeksi lakka.kapsi.fi:ensimmäinenportti, käyttäjätunnukseksi serveradmin ja salasanaksi se, minkä Teamspeak-palvelin sanoo käynnistyessään.</p>
+<h2>Muuta huomattavaa</h2>
+<p>Jotta Teamspeak lähtisi palvelimen uudelleenkäynnistyksen jälkeen päälle, pitää se lisätä crontabiin.</p>
+<pre>
+export EDITOR=nano crontab -e
+</pre>
+<p>Lisää tiedoston loppuun seuraava rivi:</p>
+<pre>
+@reboot cd ~/teamspeak &amp;&amp; screen LD_LIBRARY_PATH=".:$LD_LIBRARY_PATH" ./ts3server_linux_amd64 inifile=ts3server.ini
+</pre>
+</div>

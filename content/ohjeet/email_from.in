@@ -9,6 +9,9 @@ oikein myös lähtevissä viesteissä, täytyy se asettaa sähköpostiohjelman a
 <h3>Webmail (<a href="https://mail.kapsi.fi">https://mail.kapsi.fi</a>)</h3>
 <p>Asetukset → Henkilötiedot → Sähköpostiosoite</p>
 
+<h3>Roundcube (<a href="https://roundcube.kapsi.fi">https://roundcube.kapsi.fi</a>)</h3>
+<p>Asetukset (ratas oikeassa yläkulmassa) → Identiteetit</p>
+
 <h3>Mozilla Thunderbird</h3>
 <p>Työkalut → Tilin asetukset → Sähköpostiosoite</p>
 

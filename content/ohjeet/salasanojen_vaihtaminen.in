@@ -15,6 +15,11 @@
 
 Lisäksi jos käytössäsi on postituslistoja, niiden hallinnointiin käytettävä salasana on myös erillinen edellisistä.
 
+<h2>Sähköpostilaatikon salasanan vaihtaminen</h2>
+
+<p><b>tunnus@omadomain.tld</b> muotoisen sähköpostilaatikon salasanan saa vaihdettua <a href="https://pakki.kapsi.fi/salasana/virtualmail.cgi">tällä lomakkeella</a>.</p>
+<p><b>mail-tunnus-numero</b> muotoisen sähköpostitunnuksen salasanan saa vahidettua <a href="https://pakki.kapsi.fi/salasana/">tätä lomaketta</a>.</p>
+
 <h2>Shell-salasanan vaihtaminen</h2>
 
 <p>Avaa ensiksi <a href="ssh.html">SSH-yhteys</a> Lakka-palvelimelle. Ensimmäisellä kirjautumisella shell-salasanan vaihto on pakotettu. Myöhemmin salasana vaihdetaan käskyllä <em>passwd</em>. Ohjelma kysyy aluksi nykyistä salasanaasi, ja sen jälkeen kahdesti uutta salasanaa kirjoitusvirheiden varalta. Salasana ei näy kirjoitettaessa.

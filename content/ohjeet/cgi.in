@@ -9,7 +9,7 @@ CGI on www-palvelimen laajennos, jonka kautta sivut voidaan luoda suorittamalla 
 <p>Yksinkertainen CGI:nä ajettavaksi tarkoitettu PHP-ohjelma:</p>
 
 <pre>
-#!/usr/bin/php5-cgi
+#!/usr/bin/php5-cgi -d cgi.force_redirect=0
 &lt;?php
 echo "Hello World!";
 ?&gt;

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Tämä ohje käsittelee PHP PEAR pakettien asentamista kotihakemistoon.</p>
+
+<p>Koska PHP PEAR yrittää asentaa paketit paikkan, mihin käyttäjällä ei ole oikeutta kirjoittaa, täytyy ensin luoda asetukset PEAR:lle. Asetukset tarvitsee luoda vain ensimmäisellä kerralla ja asetukset on voimassa kaikilla kapsin palvelilimilla lukuunottamatta hillaa. Pakettien asentamista varten on hyvä kirjautua lakan sijaan suoraan www-palvelimelle, esimerkiksi karviaiselle.</p>
+
+<h2>Asetuksien luominen</h2>
+<p>Asentaminen alkaa kirjautumisella www-palvelimelle. Asetukset ovat muuten samat, kuin lakalle kirjautuessa, mutta lakka.kapsi.fi osoite tulee korvata osoitteella karviainen.kapsi.fi.</p>
+<p>PEAR ohjelmassa on valmis optio, millä asetukset voidaan luoda. Tässä ohjeessa käytetään niitä.</p>
+<pre>
+pear config-create $HOME $HOME/.pearrc
+pear config-set bin_dir $HOME/bin
+echo 'export PATH=$HOME/bin:$PATH' &gt;&gt; $HOME/.bashrc
+. .bashrc
+pear channel-update pear.php.net
+cd $HOME/sites/www.verkkotunnukseni.fi/www/  # korvaa tämä oikealla polulla sivuillesi
+cp /etc/php5/cgi/php.ini php.ini
+</pre>
+
+<p>Seuraavaksi tarvii vielä muokata äskettäin kopioitua php.ini tiedostoa. Avaa tiedosto esimerkiksi tekstieditorilla, (esimerkiksi nano php.ini ), ja korvaa seuraava rivi:</p>
+<pre>
+;include_path = ".:/usr/share/php"
+</pre>
+<p> Rivillä (huomaa muuttaa käyttäjätunnus omaksi käyttäjätunnukseksesi)</p>
+<pre>
+include_path = "./home/users/käyttäjätunnus/pear/php:/usr/lib/php5:/usr/share/php5"
+</pre>
+
+<h2>Pakettien asentaminen</h2>
+<p>Kun olet luonut kertaalleen PEAR:in asetukset, voit asentaa paketit www-palvelimella seuraavasti.</p>
+<pre>
+pear install tahtomani_paketti
+</pre>
+</div>

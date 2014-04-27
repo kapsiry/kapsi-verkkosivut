@@ -15,7 +15,6 @@ jäsenten ylläpitopyyntöihin. Esimerkkejä ylläpidolle kuuluvista asioista:</
 <li>Ohjelmien asentaminen (lähinnä Debianin stable-jakelusta, muut voi asentaa itse kotikansioonsa)</li>
 <li>Varmuuskopioiden palautus Hilla-palvelimella. Lakalla voit palauttaa tiedostot itse <a 
 href="snapshots.html">tilannevedoksista</a>.</li>
-<li>Lisätilapyynnöt</li>
 <li>Unohtuneiden salasanojen vaihtaminen</li>
 </ul>
 
@@ -35,6 +34,7 @@ ja päättää laitehankinnoista. Esimerkkejä hallitukselle kuuluvista asioista
 <li>Jäsenrekisterin ylläpito, esimerkiksi muuttuneet osoite-, email- tai nimitiedot</li>
 <li>Uudet jäsenet, erityisesti "poikkeustapaukset", kuten kannatusjäsenet ja yhteisöt</li>
 <li>Eroilmoitukset</li>
+<li>Lisätilapyynnöt</li>
 </ul>
 
 <h3>Laskutus</h3>

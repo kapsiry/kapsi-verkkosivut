@@ -2,19 +2,25 @@
 <div>
 <p><a href="http://www.djangoproject.com/">Django</a> on Python-pohjainen www-sovellusten kehitysympäristö. Djangon asennukseen on useita menetelmiä, joista tässä neuvotaan fcgi-pohjainen asennustapa. Ohjeen komennot kannattaa ajaa Lakka-palvelimella, vaikka itse www-sivut palvellaankin Karviaiselta.</p>
 
-<p><b>Huom:</b> Tätä ohjetta ei ole kattavasti testattu todellisten sivustojen kanssa. Jos käytät ohjetta isommassa projektissa, kerro sen toiminnasta helpdeskille.</p>
+<h2>Djangon ajaminen sovelluspalvelimena</h2>
+<p>Joustavin tapa ajaa Djangoa on käyttää omaa <a href="mod_rewrite.html#proxy">sovelluspalvelinta</a>,
+esimerkiksi <a href="http://gunicorn.org/">gunicorn</a>:ia. Tällöin pystyt itse asentamaan uusimmat versiot
+Djangosta ja haluamistasi Python-kirjastoista.</p>
 
-<h2>Asennuspaketin lataaminen ja purkaminen</h2>
+<p>Tämä ohje neuvoo kuitenkin fcgi-pohjaisen lähestymistavan. Tässä on se etu, ettei tarvita erikseen ajettavaa
+sovelluspalvelinta. Tämä ei kuitenkaan ole yhtä laajasti käytetty tapa kuin gunicorn, joten ohjeen toiminnassa
+on ollut ajoittain ongelmia eri Django-versioita käytettäessä.</p>
+
+<h2>Djangon ajaminen FCGI:nä</h2>
+
+<h3>Asennuspaketin lataaminen ja purkaminen</h3>
 <p>Lataa asennuspaketti Djangon sivuilta ja pura se esimerkiksi kotihakemiston alle. Purettavan hakemiston ei tarvitse olla www-juuren alla.</p>
 
 <p>Djangon asennus setup.py:n kautta vaatisi pääkäyttäjän oikeudet. Sen sijaan
 luodaan itse asennetuille python-moduuleille oma hakemisto, tässä ohjeessa <em>python-modules</em> kotihakemiston alla.
 Kopioidaan paketista <em>Django-x.xx</em>:n alle purkautunut <em>django</em>-niminen hakemisto <em>python-modules</em>:n alle.</p>
 
-<p>Lisäksi fcgi:tä varten Django tarvitsee <em>flup</em>-kirjaston. Kyseisestä kirjastosta on Debianin versio asennettu, mutta Djangon sivuilla suositellaan käytettäväksi uusinta kehitysversiota. Se haetaan <em>python-modules</em>-hakemiston alla seuraavasti:</p>
-<pre>svn co http://svn.saddi.com/flup/trunk/flup</pre>
-
-<h2>Fcgi-asetukset</h2>
+<h3>Fcgi-asetukset</h3>
 <p>Sivustoa varten luodaan mysite.fcgi, johon pyynnöt ohjataan mod_rewritellä.</p>
 
 <p>Alla esimerkkinä Djangon ohjeiden perusteella tehty mysite.fcgi Djangon omia esimerkkiohjelmia varten. Tiedostossa
@@ -27,8 +33,11 @@ import sys, os
 # Add a custom Python path.
 sys.path.insert(0, "/home/users/.../python-modules/")
 
+# Add path to django project
+sys.path.insert(1,"/home/users/.../django-testaus/")
+
 # Switch to the directory of your project. (Optional.)
-os.chdir("/home/users/.../www/django-testaus/")
+os.chdir("/home/users/.../django-testaus/")
 
 # Set the DJANGO_SETTINGS_MODULE environment variable.
 os.environ['DJANGO_SETTINGS_MODULE'] = "examples.settings"
@@ -52,10 +61,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ mysite.fcgi/$1 [QSA,L]
 </pre>
 
-<h2>Sivuston testaus</h2>
+<h3>Sivuston testaus</h3>
 <p>Testaukseen voi käyttää Djangon esimerkkiohjelmia, joita varten kopioidaan <em>examples</em>-hakemisto projektin juurihakemistoon. Yllä <em>mysite.fcgi</em>:ssä määritelty <em>examples.settings</em> kertoo asetusmoduulin, josta Django osaa ladata esimerkkiohjelmien tiedot.</p>
 
-<h2>Djangon työkaluskriptien käyttö</h2>
+<h3>Djangon työkaluskriptien käyttö</h3>
 <p>Djangon apuskriptejä (kuten <em>django-admin.py</em>) komentoriviltä käytettäessä täytyy asettaa ympäristömuuttuja $PYTHONPATH, jotta järjestelmän oletusversioiden sijaan käytetään kotihakemistoon asennettuja python-moduuleita. Polun voi määrittää komennolla:</p>
 <pre>
 export PYTHONPATH=~/python-modules

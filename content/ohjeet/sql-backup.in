@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<h2>Tietokannan varmuuskopioiminen ja palauttaminen</h2>
+<p>Vaikka Kapsin ylläpito varmuuskopioi tietokantoja säännöllisesti joka yö, tulee eteen esim. ohjelmistoja päivittäessä tarve ottaa tietokannasta varmuuskopio. 
+Ottamalla varmuuskopion itse, varmistat että datasta ei jää puuttumaan päivän aikana tehtyjä muutoksia ja mahdollisessa ongelmatilanteessa varmuuskopion saa palalutettua nopeasti.</p>
+
+<h2 id="shell">Varmuuskopiointi ja palauttaminen käyttäen ssh:ta</h2>
+<p>Kirjaudu Lakkalle tai Hillalle käyttäen <a href="http://www.kapsi.fi/ohjeet/ssh.html">SSH-yhteyttä</a>. Korvaa ohjeessa esiintyvä <b>tietokannan_nimi</b> oman tietokantasi nimellä, se on useimmiten sama kuin käyttäjätunnuksesi.</p>
+
+<h3 id="mysql">MySQL</h3>
+<p>MySQL-tietokannan varmuuskopiointi onnistuu käyttäen mysqldump-komentoa seuraavasti:</p>
+<pre>
+mysqldump --add-drop-table tietokannan_nimi &gt; tietokannan_nimi.sql
+</pre>
+<p>Olemassa olevan tietokannan varmuuskopion palauttaminen onnistuu mysql-komennolla seuraavasti:</p>
+<pre>
+mysql &lt; tietokannan_nimi.sql
+</pre>
+<h3 id="psql">PostgreSQL</h3>
+<p>PostgreSQL-tietokannan varmuuskopiointi käyttäen pg_dump-komentoa seuraavasti:</p>
+<pre>
+pg_dump -cf tietokannan_nimi.sql tietokannan_nimi
+</pre>
+<p>Olemassa olevan tietokannan varmuuskopion saa palautettua psql-komennolla seuraavasti:</p>
+<pre>
+pg_restore -d tietokanna_nimi tietokannan_nimi.sql
+</pre>
+
+<p>MySQL-tietokannan varmuuskopiointi ja palautus onnistuu myös <a href="https://pakki.kapsi.fi/phpmyadmin">phpmyadminia</a> mikäli tietokannan koko on alle 32MB.</p>
+
+</div>

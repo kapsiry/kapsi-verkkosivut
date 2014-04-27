@@ -7,8 +7,9 @@ ohje neuvoo alkuunpääsyn RoR:n kanssa.</p>
 <h2>Projektin luominen</h2>
 <p>Komennot ajetaan <a href="ssh.html">SSH-yhteyden</a> kautta
 WWW-palvelimella.</p>
-<p>Esimerkkiprojekti kehityksen pohjaksi luodaan käskyllä <em>rails --with-dispatchers hakemisto</em> .
-Rails luo automaattisesti uuden hakemiston projektille. Projektihakemisto kannattaa
+<p>Esimerkkiprojekti kehityksen pohjaksi luodaan käskyllä</p>
+<pre>rails --with-dispatchers hakemisto</pre>
+<p>Rails luo automaattisesti uuden hakemiston projektille. Projektihakemisto kannattaa
 sijoittaa www-juuren ulkopuolelle, eli esimerkiksi suoraan kotihakemiston alle.</p>
 <p>Luodun hakemiston alta <em>public</em>-hakemisto linkitetään www-hakemistoon seuraavasti.
 Huomioi, että käskyssä täytyy käyttää kokonaista polkua eikä suhteellista.</p>
@@ -24,7 +25,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ dispatch.fcgi [QSA,L]
 ErrorDocument 500 "&lt;h2&gt;Application error&lt;/h2&gt;Rails application failed to start properly"
 </pre>
-<p>Seuraavaksi tarvitsee vielä muokata tiedostoa config/environment.rb . Lisätään puoliväliin tiedostoa seuraava rivi.</p>
+<p>Seuraavaksi tarvitsee vielä muokata tiedostoa config/environment.rb . Lisätään heti rivin "Rails::Initializer.run do |config|" 
+jäkeen seuraava rivi seuraava rivi.</p>
 <pre>
 config.action_controller.relative_url_root= "/ror-projekti"
 </pre>
@@ -33,7 +35,7 @@ config.action_controller.relative_url_root= "/ror-projekti"
 <p>Asennuksen saattamiseksi loppuun RoR:lle pitää kertoa mm. käytettävä tietokanta, jonka jälkeen varsinaista
 sovellusta pääsee kehittämään.
 Luotu oletussivu auttaa tässä, kuten myös <a href="http://www.rubyonrails.org/docs">RoR:n omat ohjeet</a>.</p>
-<p>Kun oma projekti on valmis, voi sen laittaa tulemaan oletusetusivun tilalle lisäämällä routes.rb tiedostoon rivin</p>
+<p>Kun oma projekti on valmis, voi sen laittaa tulemaan oletusetusivun tilalle lisäämällä routes.rb tiedostoon ennen lopussa olevaa "end" riviä rivin</p>
 <pre>
 map.root :controller =&gt; "minunprojektinnimi"
 </pre>

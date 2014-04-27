@@ -9,6 +9,7 @@ luet postisi.</p>
 
 <h2>Käyttöönotto</h2>
 
+<p>Mikäli jäsennumerosi on <b>alle 4882</b> ja käytössä on mailbox, noudata alla olevaa ohjetta. Muussa tapauksessa hyppää alempaan ohjeeseen.</p>
 <p>Luo kotikansion alle tekstitiedosto nimellä .procmailrc seuraavalla sisällöllä. Tällöin spamassassinin roskapostiksi tunnistamat viestit menevät sähköpostikansioon spam.
 </p>
 
@@ -23,6 +24,25 @@ spam
 <p>Tiedosto kannattaa luoda <a href="ssh.html">ssh-yhteyden</a> kautta suoraan palvelimella. Helpoiten oletusasetukset saa käyttöön ajamalla ssh-yhteyden kautta seuraavan komennon:</p>
 <pre>
 echo -e 'MAILDIR=$HOME/mail/\n\n:0:\n* ^X-Spam-Status: Yes\nspam\n' > ~/.procmailrc
+</pre>
+
+<p>Jos jäsennumerosi on <b>yli 4882</b> tai käytössä on maildir, luo kotikansiosi alle tekstitiedosto nimellä .procmailrc seuraavalla sisällööllä:
+</p>
+
+<pre>
+MAILDIR=$HOME/Maildir/
+
+:0:
+* ^X-Spam-Status: Yes
+spam
+
+:0
+$MAILDIR
+</pre>
+
+<p><a href="ssh.html">Ssh-yhteyden</a> kautta tiedoston voi luoda komennolla:</p>
+<pre>
+echo -e 'MAILDIR=$HOME/Maildir/\n\n:0:\n* ^X-Spam-Status: Yes\nspam\n\n:0\n$MAILDIR\n'
 </pre>
 
 <p><b>Huomio:</b> Tarkista aina procmail-säätöjen jälkeen, että posti

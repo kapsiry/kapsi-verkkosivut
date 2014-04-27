@@ -111,4 +111,10 @@ RewriteRule ^(.*)$ http://www.ohjatutsivut.com/$1 [R]
   sallinut, sillä palvelimilla on tuhansia muita paikallisia käyttäjiä.
 </p>
 
+<p>
+ Jotta Djangon tekemät edelleenohjaukset toimisivat oikein, tulee djangon
+ asetuksiin lisätä <em>USE_X_FORWARDED_HOST = True</em>. Tällöin sovelluspalvelin
+ käyttää edelleenohjatessa alkuperäisessä kyselyssä käytettyä osoitetta eikä
+ redirectissä käytettyä sisäverkon osoitetta.
+</p>
 </div>

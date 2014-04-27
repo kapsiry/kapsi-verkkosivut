@@ -16,6 +16,9 @@ SSH-yhteysasetukset Kapsin palvelimille ovat:
 <dt>Protocol</dt><dd>SSH2</dd>
 <dt>Port</dt><dd>22</dd>
 </dl>
+<p>
+Lakalle pääsee myös osoitteella ssh.kapsi.fi porteista 222 ja 443. Erityisesti 443 on hyödyllinen yhteyksille, missä vain http ja https -yhteyksien käyttämät portit ovat hyväksyttyjä.
+</p>
 
 <h2>Windows-järjestelmät: PuTTY</h2>
 <p>
@@ -68,20 +71,27 @@ Tähän vastataan yes.
 <h2>Kirjautumisen jälkeen</h2>
 
 <pre>
-Linux lakka 2.4.31-ow1-lakka #1 SMP i686 GNU/Linux
-============================
+Linux lakka 3.1.10-grbfs-kapsi #2 SMP Sun Jan 22 18:37:08 EET 2012 x86_64
+ HP DL 360 G7: 2x6-core Xeon @ 3,07 GHz, 144 GB ECC
 
-[lakka.kapsi.fi]
+Tervetuloa käyttämään Lakka-palvelinta.
 
-10.10.2005
+- Kotihakemistot tulevat NFS-palvelimelta ja ovat samat Lakalla, Kirsikalla
+  ja Karviaisella.
+- Käytössä on oletuksena UTF-8-merkistö. Merkistöongelmien yhteydessä kannattaa 
+  tutustua: http://www.kapsi.fi/ohjeet/irssi-utf8.html
 
-  Kapsille on avattu foorumi osoitteessa http://forum.kapsi.fi/. Kaikki
-  ovat tervetulleita!
+Vikailmoitukset, parannusehdotukset yms. voi lähettää sähkopostilla
+osoitteeseen yllapito@tuki.kapsi.fi.
 
---
+---
+IRCnet-palvelin: irc.nebula.fi
+Voit irkata lakan lisäksi myös palvelimelta hilla.kapsi.fi.
+---
+
 No mail.
 
-Last login: Thu Oct 27 15:25:32 2005 from 123.234.123.234
+Last login: Wed Oct 27 15:25:32 2010 from 123.234.123.234
 user@lakka:~$
 </pre>
 
