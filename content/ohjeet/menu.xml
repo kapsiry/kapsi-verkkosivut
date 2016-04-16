@@ -1,0 +1,86 @@
+<menu>
+    <item page="index.in">Ohjeet
+        <item page="www-sivut.in" pagechilds="T" short="WWW-sivut">WWW-sivuihin liittyvät ohjeet
+            <category>Yleiset
+                <item page="internal_server_error.in">Internal Server Error -virheet</item>
+                <item page="public_html.in">Kotisivuhakemiston luominen</item>
+                <item page="www-logit.in">Lokitiedostot</item>
+                <item page="domain.in" tango="1">Oma domain</item>
+                <item page="www-paivitys.in">WWW-sovellusten päivittäminen</item>
+            </category>
+            <category>PHP
+                <item page="cgi-php.in">PHP:n ajaminen CGI-ohjelmana</item>
+                <item page="phpini.in">PHP:n asetusten mukauttaminen</item>
+                <item page="php-fcgi-palautus.in">Vahingossa poistetun php5.fcgi:n palauttaminen</item>
+                <item page="php.in">Valmiiden PHP-ohjelmien asentaminen</item>
+                <item page="php-pear.in">PHP PEAR pakettien asentaminen</item>
+            </category>
+            <category>Edistyneet
+                <item page="django.in">Django-ympäristön asentaminen</item>
+                <item page="tomcat.in">Java-sivujen käyttö Tomcatilla</item>
+                <item page="ror.in">Ruby on Rails:n asennus</item>
+                <item page="htpasswd.in">Salasanasuojattu hakemisto</item>
+                <item page="cgi.in">Tavallinen CGI-ohjelma</item>
+                <item page="http-git.in">Git-versionhallinta http:llä</item>
+                <item page="mod_rewrite.in">Uudelleenohjaukset mod_rewrite:llä</item>
+                <item page="www-tekniikka.in">WWW-palvelimen tekniset ratkaisut</item>
+            </category>
+        </item>
+        <item page="levytila.in" pagechilds="T" short="Levytila">Levytilan käyttöön liittyvät ohjeet
+            <category>Yleiset
+                <item page="filezilla.in">FileZilla-tiedostonsiirto</item>
+                <item page="scp.in">SCP-tiedostonsiirto</item>
+                <item page="quota.in">Käytetyn levytilan tarkistaminen</item>
+                <item page="kayttooikeudet.in">Käyttöoikeudet</item>
+            </category>
+            <category>Varmuuskopiointi
+                <item page="snapshots.in">Tiedostojen palauttaminen tilannevedoksista</item>
+                <item page="backup.in" short="Varmuuskopiointi">Tiedostojen ja tietokantojen varmuuskopiointi</item>
+            </category>
+        </item>
+        <item page="shell.in" pagechilds="T" short="Shell">Shell-käyttöön liittyvät ohjeet
+            <category>Yleiset
+                <item page="salasanojen_vaihtaminen.in">Salasanojen vaihtaminen</item>
+                <item page="shell-manual.in">Shell-opas</item>
+                <item page="ssh.in">SSH-yhteys</item>
+            </category>
+            <category>Edistyneet
+                <item page="svnadmin.in">Oman SVN-repositoryn luominen</item>
+                <item page="cpan.in">Perlin CPAN-moduulien asennus</item>
+                <item page="screen.in">Screen-ohjelma</item>
+                <item page="ssh-avain.in">SSH-avaimen käyttö kirjautumiseen</item>
+                <item page="ssh-putki.in">SSH-tunnelin käyttö</item>
+            </category>
+            <category>IRC
+                <item page="irc-dcc.in">DCC-yhteydet irc:ssä</item>
+                <item page="irc-hostname.in">Hostnamen asettaminen irc:ssä</item>
+                <item page="irssi-utf8.in">Irssi ja UTF-8</item>
+                <item page="irssi-proxy.in">Irssi-proxyn käyttäminen</item>
+            </category>
+        </item>
+        
+        <item page="email.in" pagechilds="T" short="Sähköposti">Sähköpostin käyttöön liittyvät ohjeet
+            <item nomenu="1" page="pgp.in">Viestien salaus PGP:llä</item>
+            <category>Yleiset
+                <item page="procmail.in">Postin ohjailu procmaililla</item>
+                <item page="spamassassin.in">Roskapostin suodatus</item>
+                <item page="spammin_valttaminen.in">Roskapostin välttäminen</item>
+                <item page="forward.in">Sähköpostin uudelleenohjaus</item>
+                <item page="mailbox2maildir.in">Maildir muunnos</item>
+            </category>
+            <category>Sähköpostiohjelman asetukset
+                <item page="email_ssl.in">SSL:n kytkeminen päälle eri sähköpostiohjelmissa</item>
+                <item page="email_from.in">Sähköpostiosoitteen asettaminen</item>
+            </category>
+        </item>
+
+        <item page="muut.in" pagechilds="T" short="Muut">Luokittelemattomia ohjeita
+            <item nomenu="1" page="gem.in">Gem-ympäristön asennus omaan kotihakemistoon</item>
+            <item nomenu="1" page="jasenmaksumuistutus.in">Jäsenmaksumuistutus</item>
+            <item nomenu="1" page="svn.in">SVN-versionhallintajärjestelmä</item>
+	    <item nomenu="1" page="teamspeak.in">Teamspeak</item>
+            <item page="tukipyynto.in">Tukipyynnön lähetys</item>
+	    <item page="sql-backup.in">Tietokannan varmuuskopiointi</item>
+        </item>
+    </item>
+</menu>

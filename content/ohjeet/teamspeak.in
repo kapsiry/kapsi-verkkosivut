@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <div>
 <p>
-Teamspeak on VoIP-ohjelmisto, mikä mahdollistaa useamman ihmisen ryhmäkeskustelut. Tässä ohjeessa kerrotaan, miten voit asentaa Teamspeak-palvelimen shellissä.
+Teamspeak on VoIP-ohjelmisto, mikä mahdollistaa useamman ihmisen ryhmäkeskustelut. Tässä ohjeessa kerrotaan, miten voit asentaa Teamspeak-palvelimen shellissä.</p>
+<p>Kapsilla on tarjolla toimihenkilöiden ylläpitämä teamspeak palvelin johon on mahdollista saada pysyviä kanavia joko lähettämällä tiketti ylläpidolle tai pyytämällä sitä teamspeak.kapsi.fi palvelimen Ylläpito kanavalla roikkuvilta ylläpitäjiltä. Mikäli haluat kuitenkin ylläpitää palvelimen itse, onnistuu se alla olevan ohjeistuksen mukaisesti.
 </p>
 <h2 id="aluksi">Ennen asentamista</h2>
 <p>Ennen Teamspeak-palvelimen asentamista sinun tulee pyytää <a href="http://www.kapsi.fi/tukipalvelut.html">ylläpidolta</a> kolme avointa porttia. Muista mainita pyynnössä käyttäjätunnuksesi tai jäsennumero sekä mille palvelimella aiot asentaa Teamspeakin. Ylläpito antaa portit muodossa 12345:12347, joka tarkoittaa portteja 12345, 12346, 12347.</p>

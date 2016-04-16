@@ -12,7 +12,7 @@ SSH-yhteysasetukset Kapsin palvelimille ovat:
 </p>
 
 <dl class="settings">
-<dt>Host</dt><dd>hilla.kapsi.fi (Hilla-palvelin) tai kapsi.fi (Lakka- eli Box-palvelin)</dd>
+<dt>Host</dt><dd>hilla.kapsi.fi (Hilla-palvelin) tai kapsi.fi (Lakka-palvelin)</dd>
 <dt>Protocol</dt><dd>SSH2</dd>
 <dt>Port</dt><dd>22</dd>
 </dl>
@@ -60,18 +60,20 @@ Korvaa komennosta user käyttäjätunnuksellasi ja syötä salasanasi. Huomioi e
 
 <pre>
 The authenticity of host 'kapsi.fi (217.30.184.161)' can't be established.
-RSA key fingerprint is 85:41:7d:f3:43:8a:e6:e1:0f:93:64:f5:d8:05:73:b9.
+RSA key fingerprint is b7:f1:51:77:22:ec:8c:80:0a:05:6c:8f:31:45:97:6b. (TAI)
+ECDSA key fingerprint is f3:24:4f:45:33:54:3d:56:df:02:70:d1:34:e9:e1:bb.
 Are you sure you want to continue connecting (yes/no)?
 </pre>
 
 <p>
-Tähän vastataan yes.
+Tähän vastataan yes, jos sormenjälki täsmää.
+Ajantasaiset SSH-sormenjäljet näet <a href="../palvelut/palvelimet.html">palvelimet-sivulta</a>.
 </p>
 
 <h2>Kirjautumisen jälkeen</h2>
 
 <pre>
-Linux lakka 3.1.10-grbfs-kapsi #2 SMP Sun Jan 22 18:37:08 EET 2012 x86_64
+Linux lakka 3.2.54-grbfs-kapsi #1 SMP Mon Jan 6 00:34:28 EET 2014 x86_64
  HP DL 360 G7: 2x6-core Xeon @ 3,07 GHz, 144 GB ECC
 
 Tervetuloa käyttämään Lakka-palvelinta.
@@ -82,7 +84,7 @@ Tervetuloa käyttämään Lakka-palvelinta.
   tutustua: http://www.kapsi.fi/ohjeet/irssi-utf8.html
 
 Vikailmoitukset, parannusehdotukset yms. voi lähettää sähkopostilla
-osoitteeseen yllapito@tuki.kapsi.fi.
+osoitteeseen nn.
 
 ---
 IRCnet-palvelin: irc.nebula.fi
@@ -91,7 +93,7 @@ Voit irkata lakan lisäksi myös palvelimelta hilla.kapsi.fi.
 
 No mail.
 
-Last login: Wed Oct 27 15:25:32 2010 from 123.234.123.234
+Last login: Wed Oct 27 15:25:32 2013 from 123.234.123.234
 user@lakka:~$
 </pre>
 

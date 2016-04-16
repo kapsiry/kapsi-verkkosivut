@@ -40,7 +40,7 @@ on nimellä <em>error.log</em> <em>log</em>-hakemistossa. Seuraavassa on luetelt
 <p>Muissa tapauksissa 
 kannattaa ottaa yhteyttä helpdeskiin, ja kertoa ongelman lisäksi sivuston osoite ja kellonaika, jolloin virhe on tullut.</p>
 <ul class="largespace">
-<li><b>FollowSymLinks</b>: Kyseinen asetus on korvattu turvallisemmalla <em>FollowSymLinksIfOwnerMatch</em>-asetuksella, joka on 
+<li><b>FollowSymLinks</b>: Kyseinen asetus on korvattu turvallisemmalla <em>SymLinksIfOwnerMatch</em>-asetuksella, joka on 
 oletuksena käytössä. Ongelma korjaantuu poistamalla em. asetus <em>.htaccess</em>-tiedostosta.</li>
 
 <li><b>Moduuli-php:n php_flag</b>: Joissain ohjelmissa on oletuksena <em>.htaccess</em>-tiedostossa <em>mod_php</em>:lle tarkoitettuja asetuksia. Tämä ei ole Kapsilla käytössä, joten asetukset täytyy poistaa. Useimpien ohjelmien tapauksessa Kapsin oletusasetukset toimivat, mutta tarvittaessa niitä voi muuttaa luomalla oman <a href="phpini.html">php.ini</a>-tiedoston.</li>

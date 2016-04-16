@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>
+Suurimmalla osalla pidempään jäsenenä olleilla jäsenillä on vielä käytössä mailbox-formaatissa oleva sähköpostilaatikko. Tässä formaatissa kaikki sähköpostilaatikon viestit ovat samassa yhdessä tiedostossa. Tiedosto on herkkä korruptoitumaan ja vähänkään isommalla viestimäärällä myös ikävän hidas.
+</p>
+<p>
+Kapsilla on ollut mailbox-formaatin tilalle tarjolla Maildir-formaatti jossa viestit ovat omissa tiedostoissaan. Maildir-formaatissa tietyn viestin haku on nopeaa ja esimerkiksi viestien poistaminen ei vaikuta mitenkään muihin viesteihin.
+</p>
+<p>
+Huhtikuun 2012 jälkeen jäseneksi liittyneillä on automaattisesti käytössä maildir-formaatti joten tämä ohje koskee vain sitä aikaisemmin liittyneitä jotka eivät ole vielä sähköpostilaatikon formaattia vaihtaneet. Mikäli kotihakemistostasi Lakalla löytyy .maildir_enable niminen tiedosto, on muutos jo suoritettu osaltasi. Myöskin jos kotihakemistossa on .forward-tiedosto, joka ohjaa postit johonkin Kapsin-ulkopuoliseen palveluun, ei sinun tarvitse suorittaa tätä muutosta.
+</p>
+<p>
+Muutostyötä tehdessä on suositeltavaa ensin lukea ohje huolella ja toteuttaa kaikki tarpeelliset kohdat jotta sähköpostit eivät vahingossa katoa. Laatikon formaatin muuttamisen lisäksi on syytä tarkistaa että mahdollinen procmailrc on korjattu toimimaan uuden formaatin kanssa. Myöskin alpine ja mutt saattavat tarvita pieniä configuraatiomuutoksia.
+</p>
+<h3>Ennen muuntamista</h3>
+<p>Aloitetaan muunnostyö luomalla tai muuttamalla olemassaolevaa $HOME/.procmailrc tiedostoa.</p>
+<pre>nano -w $HOME/.procmailrc</pre>
+<p>Lisää tiedoston alkuun tai korvaa olemassaoleva MAILDIR=-alkuinen rivi vastaamaan seuraavaa:</p>
+
+<pre>
+MAILDIR=$HOME/Maildir/
+</pre>
+<p>Lisäksi tiedoston loppuun tulee lisätä rivit:</p>
+<pre>
+:0
+ $HOME/Maildir/
+</pre>
+<p>Alla esimerkki kokonaisesta tiedostosta:</p>
+<pre>
+MAILDIR=$HOME/Maildir/
+
+:0:
+* ^X-Spam-Status: Yes
+spam
+
+:0
+$MAILDIR
+</pre>
+<p>Sitten lisätään kotihakemistoosi .maildir_enable tiedosto</p>
+<pre>
+touch $HOME/.maildir_enable
+</pre>
+
+<h3>Muuntaminen</h3>
+<p>
+Kapsin mailit sijaitsevat oletuksena mailbox-formaatin mukaisessa tiedostossa /var/mail/$USER, josta ne pitää muuntaa maildir-formaattiin. Lakalla on asennettuna tätä varten skripti mb2md.
+</p>
+<p>Aloitetaan muutaminen korjaamalla mahdollisesti jo korruptoitunut mailbox-tiedosto vähän oikeamman muotoiseksi. Tämä ei korjaa läheskään kaikkia ongelmia mutta ainakin yhden tunnetun.</p>
+<pre>
+sed 's/^From /\nFrom /g' /var/mail/$USER | formail -s > $HOME/mbox.tmp
+</pre>
+<p>Sitten muunnetaan formaatti oikeaksi</p>
+<pre>
+mb2md -s $HOME/mbox.tmp -d $HOME/Maildir
+</pre>
+<p>Mikäli sinulla on sähköpostissa alikansioita, tulee ne myös muuntaa seuraavasti.</p>
+<pre>
+mb2md -s $HOME/mail -R -d $HOME/Maildir
+</pre>
+<p>Nyt kansion formaatti on muutettu oikeaksi!</p>
+
+<h3>Tarkistus</h3>
+<p>Tässä kohti kannatta tarkistaa että viestit kulkevat lähettämällä viesti itselle. Mikäli viesti saapui perille, muunnos on onnistunut.</p>
+
+<h3>Mutt</h3>
+<p>Mikäli ajat Lakalla lokaalisti Mutt:ia, tulee sinun vielä asettaa Mutt käyttämään Maildir:iä mailboxin sijaan. Luo tai muokkaa $HOME/.muttrc sisältämään seuraavaa:</p>
+<pre>
+set mbox_type=Maildir
+set folder="~/Maildir"
+set mask="!^\\.[^.]"
+set mbox="~/Maildir"
+set record="+.Sent"
+set postponed="+.Drafts"
+set spoolfile="~/Maildir"
+</pre>
+<p>Nyt mutt käyttää maildiriä.</p>
+<h3>Alpine</h3>
+<p>Alpine ei valitettavasti tue Maildir-formaattia. Ongelman voi kuitenkin kiertää asettamalla Alpine käyttämään IMAP-protokollaa. Alla tarvittavat configuraatio-optiot $HOME/.pinerc-tiedostoon:</p>
+<pre>
+inbox-path={mail.kapsi.fi}inbox
+folder-collections=mail.kapsi.fi {mail.kapsi.fi:993/ssl}[]
+</pre>
+</div>

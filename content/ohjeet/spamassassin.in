@@ -3,14 +3,14 @@
 
 <p>Roskapostin suodatus perustuu tiettyjen viestin ominaisuuksien tunnistamiseen, kuten itse tekstin sanaston ja otsaketietojen palvelinlistan tutkimiseen. Lakalla tarkoitukseen on käytössä <em>spamassassin</em>-ohjelmisto. Tässä ohjeessa käytetään spamassassinia saapuvan postin tutkimiseen, ja lajitellaan roskaposti erilliseen kansioon <a href="procmail.html">procmaililla</a>.</p>
 
-<p><em>SquirrelMail</em>-ohjelmassa, jota Kapsin webmail käyttää, on joitakin omia suodatustoimintojaan. Tässä ohjeessa neuvottu
+<p><em>Roundcube</em>-ohjelmassa, jota Kapsin webmail käyttää, on joitakin omia suodatustoimintojaan. Tässä ohjeessa neuvottu
 spamassassin suodattaa kuitenkin paremmin. Ohjeessa tehdyt asetukset vaikuttavat koko tunnukseesi, riippumatta siitä millä tavalla 
 luet postisi.</p>
 
 <h2>Käyttöönotto</h2>
 
 <p>Mikäli jäsennumerosi on <b>alle 4882</b> ja käytössä on mailbox, noudata alla olevaa ohjetta. Muussa tapauksessa hyppää alempaan ohjeeseen.</p>
-<p>Luo kotikansion alle tekstitiedosto nimellä .procmailrc seuraavalla sisällöllä. Tällöin spamassassinin roskapostiksi tunnistamat viestit menevät sähköpostikansioon spam.
+<p>Luo kotikansion alle tekstitiedosto nimellä .procmailrc seuraavalla sisällöllä. Tällöin spamassassinin roskapostiksi tunnistamat viestit menevät sähköpostikansioon <em>.spam</em>.
 </p>
 
 <pre>
@@ -18,12 +18,12 @@ MAILDIR=$HOME/mail/
 
 :0:
 * ^X-Spam-Status: Yes
-spam
+.spam
 </pre>
 
 <p>Tiedosto kannattaa luoda <a href="ssh.html">ssh-yhteyden</a> kautta suoraan palvelimella. Helpoiten oletusasetukset saa käyttöön ajamalla ssh-yhteyden kautta seuraavan komennon:</p>
 <pre>
-echo -e 'MAILDIR=$HOME/mail/\n\n:0:\n* ^X-Spam-Status: Yes\nspam\n' > ~/.procmailrc
+echo -e 'MAILDIR=$HOME/mail/\n\n:0:\n* ^X-Spam-Status: Yes\n.spam\n' > ~/.procmailrc
 </pre>
 
 <p>Jos jäsennumerosi on <b>yli 4882</b> tai käytössä on maildir, luo kotikansiosi alle tekstitiedosto nimellä .procmailrc seuraavalla sisällööllä:
@@ -34,7 +34,7 @@ MAILDIR=$HOME/Maildir/
 
 :0:
 * ^X-Spam-Status: Yes
-spam
+.spam/
 
 :0
 $MAILDIR
@@ -42,7 +42,7 @@ $MAILDIR
 
 <p><a href="ssh.html">Ssh-yhteyden</a> kautta tiedoston voi luoda komennolla:</p>
 <pre>
-echo -e 'MAILDIR=$HOME/Maildir/\n\n:0:\n* ^X-Spam-Status: Yes\nspam\n\n:0\n$MAILDIR\n'
+echo -e 'MAILDIR=$HOME/Maildir/\n\n:0:\n* ^X-Spam-Status: Yes\n.spam\n\n:0\n$MAILDIR\n' > ~/.procmailrc
 </pre>
 
 <p><b>Huomio:</b> Tarkista aina procmail-säätöjen jälkeen, että posti
@@ -53,7 +53,7 @@ postille.</p>
 <p>
 Joissakin sähköpostiohjelmissa roskapostikansio täytyy erikseen valita näkyviin.
 Kapsin webmailissa tämä tapahtuu valitsemalla yläreunasta <em>Kansiot</em>. Avautuvan
-sivun alaosasta voi valita spam-kansion näkyviin. Huomioi, ettei spam-kansiota ole
+sivun alaosasta voi valita .spam-kansion näkyviin. Huomioi, ettei .spam-kansiota ole
 olemassa ennen ensimmäisen spam-viestin saapumista.
 </p>
 
