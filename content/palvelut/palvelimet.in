@@ -49,10 +49,16 @@ Kapsin palvelimet ja palvelut pääpiirteissään.
 <td>6 GB, ECC</td><td>&#160;</td><td></td></tr>
 
 <tr><td>Muikku</td><td>HP DL 385 G7</td><td>AMD Opteron 6136 (8 ydintä) 2,4 GHz</td>
-<td>32 GB, ECC</td><td>&#160;</td><td>SATA, 58 TB, RAID-Z3</td></tr>
+<td>32 GB, ECC</td><td>&#160;</td><td>SATA, 109 TB, RAID-Z3</td></tr>
 
 <tr><td>Kookos</td><td>Dell R610</td><td>2 x Intel X5675, 3.06GHz (6 ydintä)</td>
 <td>192 GB, ECC</td><td>&#160;</td><td>600GB SAS RAID 10</td></tr>
+
+<tr><td>Puska1</td><td>Dell FC630</td><td>2 x Intel E5-2670 v3 2.30GHz (12 ydintä)</td>
+<td>512 GB, ECC</td><td>&#160;</td><td>200GB SAS SSD RAID 1</td></tr>
+
+<tr><td>Puska2</td><td>Dell FC630</td><td>2 x Intel E5-2670 v3 2.30GHz (12 ydintä)</td>
+<td>512 GB, ECC</td><td>&#160;</td><td>200GB SAS SSD RAID 1</td></tr>
 
 <tr><td>Puska3</td><td>Dell R620</td><td>2 x Intel E5-2670 2.60GHz (8 ydintä)</td>
 <td>386 GB, ECC</td><td>&#160;</td><td>600GB SAS RAID 10</td></tr>
@@ -332,6 +338,16 @@ SSH-palvelimen salausavainten sormenjäljet
 </tr>
 </tbody>
 </table>
+</div>
+
+<div class="palvelin" id="puska1">
+<h3>Puska3</h3>
+Puska1 on Kapsin virtuaalialusta, joilla pyörii yhdistyksen virtuaalikoneita.
+</div>
+
+<div class="palvelin" id="puska2">
+<h3>Puska4</h3>
+Puska2 on Kapsin virtuaalialusta, joilla pyörii yhdistyksen virtuaalikoneita.
 </div>
 
 <div class="palvelin" id="puska3">
