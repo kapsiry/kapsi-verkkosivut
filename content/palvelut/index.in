@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+
+<div style="overflow:hidden;">	
+
+<div class="infoBox">
+<a href="levytila.html">
+<img src="200px-Drive-harddisk.png" style="" />
+<h3> Tiedostot talteen! </h3>
+<span style=""></span>
+
+<ul>
+	<li> 500 Gt levytilaa varmuuskopioillesi </li>
+	<li> 50 Gt varmennettua levytilaa WWW- ja shell-käyttöön </li>
+</ul>
+</a>
+</div>
+
+<div class="infoBox">
+<a href="www-sivut.html">
+<img src="200px-Applications-internet.png"  />
+<h3> Kotisivut nettiin! </h3>
+<span style=""></span>
+
+<ul>
+	<li> WWW-palvelua johon voit luottaa </li>
+	<li> Oma verkkotunnus käyttöön </li>
+	<li> Apache, PHP 5.x, MySQL, PostgreSQL, Python, RoR jne </li>
+</ul>
+</a>
+</div>
+
+<div class="infoBox">
+<a href="irc.html">
+<img src="200px-Utilities-terminal.png" />
+<h3> Irkkaa ja säädä! </h3>
+<span style=""></span>
+
+<ul>
+	<li> Tunnukset kahdelle toisistaan riippumattomalle shell-koneelle. </li>
+	<li> Mahdollisuus ajaa omia prosesseja. </li>
+	<li> Ei enää kotipalvelinta nurkissa! </li>
+</ul>
+</a>
+</div>
+
+<div class="infoBox">
+<a href="email.html">
+<img src="200px-Mail-mark-junk_red.png" />
+<h3> Mailit perille! </h3>
+<span style=""></span>
+
+<ul>
+	<li> Riittoisan kokoinen sähköpostilaatikko kattaa kaikki tarpeesi. </li>
+	<li> Mahdollisuus roskapostien suodatukseen. </li>
+	<li> Mailit myös omille domaineille. </li>
+</ul>
+</a>
+</div>
+
+</div>
+
+<div style="">&nbsp;</div>
+
+<div onclick="location.href='https://admin.kapsi.fi/membership/application/person/'"
+style="margin-bottom: 20px; background-image: url('../nuoli.png'); background-repeat: no-repeat; background-position: right top; min-height: 130px; padding: 1px 150px 0px 50px; max-width: 500px; cursor: pointer">
+<h2><a href="https://admin.kapsi.fi/membership/application/person/" style="color:#9bae24">Tee jäsenhakemus</a></h2>
+<p style="margin:0">Hyväksyt <a href="../yhdistys/saannot.html">yhdistyksen säännöt</a>. Jäsenmaksu on 40 €/12 kk alv 0%.</p>
+<p style="margin:0"><strong>Kapsin palvelut on tarkoitettu <a href="../poytakirjat/vuosikokous2008.html#kaupallisuus">epäkaupalliseen käyttöön</a>.</strong></p>
+<p style="margin:0">Saat tunnukset 1-2 viikon kuluessa, nopeimmillaan samana päivänä.</p>
+</div>
+
+<h2>Yleisesti palveluista</h2>
+<p>Osa palveluista on kaikkien jäsenten käytössä, osa pyydetään ylläpidolta erikseen. Kaikki
+palvelut kuuluvat jäsenmaksuun, myös yksittäistapauksina sovitut erikoispalvelut.</p>
+
+<p>Kaikkia palveluita koskevat yhdistyksen <a href="../yhdistys/saannot.html">säännöt</a> sekä
+Suomen lait. Häiriötapauksissa ylläpito puuttuu asiaan ilmoittamalla käyttäjälle sekä mahdollisesti
+tilapäisesti lukitsemalla ko. palvelun käyttäjältä. Sääntöjä ja käytäntöjä tarkennetaan tarvittaessa.
+</p>
+
+<h2>Alasivut</h2>
+<ol class="largespace">
+<li><strong><a href="irc.html">IRC-palvelut</a></strong></li>
+<li><strong><a href="levytila.html">Levytila</a></strong></li>
+<li><strong><a href="palvelimet.html">Palvelimet</a></strong></li>
+<li><strong><a href="portit.html">Portit</a></strong></li>
+<li><strong><a href="postituslistat.html">Postituslistat</a></strong></li>
+<li><strong><a href="email.html">Sähköposti</a></strong></li>
+<li><strong><a href="emailsuodatus.html">Sähköpostin suodatus</a></strong></li>
+<li><strong><a href="tietokannat.html">Tietokannat</a></strong></li>
+<li><strong><a href="svn.html">Versionhallinta</a></strong></li>
+<li><strong><a href="www-sivut.html">WWW-sivut</a></strong></li>
+</ol>
+</div>

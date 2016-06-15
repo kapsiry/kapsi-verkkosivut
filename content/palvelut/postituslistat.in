@@ -1,0 +1,12 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Postituslista eli sähköpostilista helpottaa viestien lähettämistä laajalle joukolle ihmisiä. Kapsilla postituslistojen hallintaan 
+käytetään www-selaimen kautta toimivaa <a href="http://www.gnu.org/software/mailman/index.html">Mailman</a>-ohjelmaa.
+<a href="../jasentoiminta/postituslistat.html">Kapsin omat postituslistat</a> on tarkoitettu keskusteluun yhdistyksen asioista.
+Näiden lisäksi jäsenillä on mahdollisuus pyytää ylläpidolta käyttöönsä oma postituslista.</p>
+
+<p>Oman postituslistan voi liittää joko <em>@kapsi.fi</em>-osoitteeseen tai <a href="../ohjeet/domain.html">omaan 
+verkkotunnukseen</a>. Listoja hallitaan ja niille liitytään www-selaimen kautta osoitteessa
+<strong>https://list.kapsi.fi/listinfo/<em>listan nimi</em></strong>. Listojen nimi omaa domainia käytettäessä on
+muotoa listan_nimi_domain_tld, eli esimerkiksi listan <em>lista@example.com</em> nimi on <em>lista_example_com</em>.</p>
+</div>

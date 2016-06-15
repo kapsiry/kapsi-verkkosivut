@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>IRC-yhteyden voi ottaa shellissä esimerkiksi irssillä, ircII:lla tai epic4:llä. Bouncer-ohjelmia
+varten täytyy palomuuriin avata portti, jonka saa pyytämällä ylläpidolta. Botteja varten suositellaan Hilla-palvelinta.</p>
+
+<h2>Palvelimet</h2>
+<dl class="settings">
+<dt>Lakka &amp; Hilla</dt>
+<dd>irc.nebula.fi (botit sallittu), irc.cc.tut.fi (botit sallittu)</dd>
+
+<dt>Hilla, Omat konenimet</dt>
+<dd>irc6.cc.tut.fi (botit sallittu)</dd>
+
+</dl>
+
+<p>Lisäksi Kapsin palvelimilta toimivat ainakin QuakeNet (irc.fi.quakenet.org) ja Freenode (irc.freenode.org) -verkot.</p>
+
+<h2>Konenimet</h2>
+<p>Käytettävissä ovat seuraavat konenimet (hostnamet) irc-yhteyksiä varten. Lisäksi on mahdollista saada omaa domainia varten IPv6-reverse, jolloin myös sen saa näkyviin irc:ssä. Hostnamen asettamisesta
+on <a href="../ohjeet/irc-hostname.html">ohje</a>.</p>
+<p>
+<b>Lakka:</b> kapsi.fi, lakka.kapsi.fi<br />
+<b>Hilla:</b> hilla.kapsi.fi, xob.kapsi.fi, bot.kapsi.fi
+</p>
+</div>

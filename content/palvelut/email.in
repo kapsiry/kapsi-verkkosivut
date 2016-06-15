@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<h2>Osoitteet</h2>
+<p>
+Kaikilla Kapsin käyttäjillä on oletuksena käytössään osoite <i>käyttäjätunnus@kapsi.fi</i>. Lisäksi
+jäsenhakemuksesta voi valita tai myöhemmin pyytää ylläpidolta osoitteen <i>Etunimi.Sukunimi@kapsi.fi</i>.
+</p>
+<p>
+Verkkotunnukselle <i>@kapsi.fi</i> on annettu käyttöön korkeintaan muutamia osoitteita, jotta nimivaihtoehdot
+eivät lopu kesken. Sen sijaan omalle domain-nimelle tai muotoa <i>@jotain.kapsi.fi</i> olevalle verkkotunnukselle
+sähköpostiosoitteita (aliaksia eli uudelleenohjauksia) saa vapaasti.
+</p>
+<p>
+Korkeintaan neljälle lähipiiriin kuuluvalle (käsittäen sisaret, vanhemmat, lapset ja puolison) on mahdollista saada erillinen postilaatikko Kapsilta.
+Sähköpostiosoitteen loppuosa voi olla oma verkkotunnus tai <em>@ext.kapsi.fi</em>.
+Kyseessä on rajoitettu
+tunnus, jolla ei voi esimerkiksi ajaa ohjelmia. Siksi päätteessä käytettävät sähköpostiohjelmat eivät toimi ja
+asetukset mm. roskapostin suodatukseen on tehtävä pyyntönä ylläpidon kautta. Webmail ja erilliset sähköpostiohjelmat
+sekä niiden omat suodatustoiminnot toki toimivat.</p>
+<p>
+Myös Hilla-palvelimella on erillinen sähköpostipalvelu mahdollisia erikoistarpeita varten. Hillan sähköposti toimii osoitteella <i>käyttäjä@hilla.kapsi.fi</i>.
+</p>
+
+<h2>Sähköpostin vastaanotto</h2>
+<p>Yhdistämisasetukset erillisille sähköpostilaatikoille löytyvät <a href="#virtualmailbox">alempaa</a>.</p>
+<p>
+Sähköpostia voi käyttää paikallisesti <a href="../ohjeet/shell-manual.html">shellin</a> kautta esimerkiksi
+mutt- tai alpine-ohjelmilla, <a href="https://roundcube.kapsi.fi/">webmailin</a> kautta ja omalta koneelta erillisellä
+sähköpostiohjelmalla. Asetukset erilliselle sähköpostiohjelmalle:
+</p>
+
+<dl class="settings">
+<dt>Saapuvan postin palvelin</dt>
+<dd>mail.kapsi.fi</dd>
+
+<dt>Käyttäjätunnus ja salasana</dt>
+<dd>Sama kuin shell-tunnus (<em>ilman</em> loppuosaa <em>@kapsi.fi</em>) ja -salasana.</dd>
+
+<dt>SSL-salaus</dt>
+<dd>Kyllä, välttämätön yhteyttä varten.</dd>
+
+<dt>Protokolla ja portti</dt>
+<dd>995 (POP3) tai 993 (IMAP)</dd>
+
+<dt>IMAP-hakemiston polku (IMAP path prefix)</dt>
+<dd>Tämän asetuksen voi jättää tyhjäksi. Myös aiemmin käytössä ollut asetus "mail/" toimii.</dd>
+</dl>
+
+<h2>Sähköpostin lähetys (SMTP)</h2>
+<p>Lähtevän postin palvelimena voi käyttää joko oman Internet-palveluntarjoajan palvelinta, tai kirjautumisen kanssa yhdistyksen palvelinta. PHP-ohjelmissa, jotka siis ajetaan palvelimella paikallisesti, voi lähtevän postin palvelimena käyttää
+mail.kapsi.fi:tä ilman kirjautumista.
+</p>
+<dl class="settings">
+<dt>Lähtevän postin palvelin</dt>
+<dd>mail.kapsi.fi</dd>
+
+<dt>Käyttäjätunnus ja salasana</dt>
+<dd>Sama kuin shell-tunnus ja -salasana.</dd>
+
+<dt>Salaus ja portti</dt>
+<dd>Tuetut salaustavat ovat:</dd>
+<dd>TLS-salaus, portti 587</dd>
+<dd>SSL-salaus, portti 465</dd>
+</dl>
+
+<h2 id="virtualmailbox">Sähköpostin vastaanotto erillisen sähköpostilaatikon kanssa</h2>
+<p>
+Sähköpostia voi käyttää joko Kapsin <a href="https://roundcube.kapsi.fi/">Roundcuben</a> kautta tai erillisellä sähköpostiohjelmalla. Roundcubea käyttäessä tulee käyttäjätunnuksena käyttää koko sähköpostiosoitetta ja valita pudotusvalikosta kohta "Oma verkkotunnus".
+</p>
+<p>
+Asetukset erilliselle sähköpostiohjelmalle:
+</p>
+
+<dl class="settings">
+<dt>Saapuvan postin palvelin</dt>
+<dd>mailserv.kapsi.fi</dd>
+
+<dt>Käyttäjätunnus ja salasana</dt>
+<dd>Annettu sähköpostiosoite @-merkin jälkeisen osan <b>kanssa</b> sekä tunnuksen salasana.</dd>
+
+<dt>SSL-salaus</dt>
+<dd>Kyllä, välttämätön yhteyttä varten.</dd>
+
+<dt>Protokolla ja portti</dt>
+<dd>993 (IMAP)</dd>
+
+<dt>IMAP-hakemiston polku (IMAP path prefix)</dt>
+<dd>Tämän asetuksen voi jättää tyhjäksi.</dd>
+</dl>
+
+<h2>Sähköpostin lähetys (SMTP)</h2>
+<p>Lähtevän postin palvelimena voi käyttää joko oman Internet-palveluntarjoajan palvelinta, tai kirjautumisen kanssa yhdistyksen palvelinta.
+</p>
+<dl class="settings">
+<dt>Lähtevän postin palvelin</dt>
+<dd>mailserv.kapsi.fi</dd>
+
+<dt>Käyttäjätunnus ja salasana</dt>
+<dd>Annettu sähköpostiosoite @-merkin jälkeisen osan <b>kanssa</b> sekä tunnuksen salasana.</dd>
+
+<dt>Salaus ja portti</dt>
+<dd>Tuetut salaustavat ovat:</dd>
+<dd>TLS-salaus, portti 587</dd>
+<dd>SSL-salaus, portti 465</dd>
+</dl>
+
+<h2>Ongelmat yhteyden salauksessa</h2>
+<p>Kapsin salausvarmenteella on GeoTrustin allekirjoitus, joten se toimii suoraan useimmissa järjestelmissä.
+Matkapuhelimista varmenne saattaa kuitenkin puuttua, jolloin sen voi tarvittaessa asentaa 
+<a href="https://www.geotrust.com/resources/root_certificates/certificates/GeoTrust_Global_CA.pem">tästä</a>.</p>
+<p>Sähköpostin lähetys Kapsin SMTP-palvelimen kautta ei välttämättä toimi Symbian-pohjaisilla puhelimilla.
+Kyse on gnutls:n ja Symbianin SSL-toteutuksen välisestä
+<a href="http://www.gnu.org/software/gnutls/manual/html_node/On-Record-Padding.html">epäyhteensopivuudesta</a>. 
+Ongelma ei vaikuta sähköpostin vastaanottamiseen,
+ja lähettäminen onnistuu operaattorin oman palvelimen kautta.</p>
+
+<h2>Lisätoiminnot</h2>
+<p>
+Shell-yhteyden kautta on mahdollista ajaa useita sähköpostia suodattavia ja muutoin käsitteleviä ohjelmia.
+Yleisimpiin toimintoihin, kuten roskapostin suodatukseen, löytyy valmiita <a href="../ohjeet/email.html">ohjeita</a>.
+</p>
+<p>
+Lisäksi yhdistyksen jäsenillä on mahdollisuus pyytää <a href="postituslistat.html">postituslista</a> omille projekteilleen.
+</p>
+</div>

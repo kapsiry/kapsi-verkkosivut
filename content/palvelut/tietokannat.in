@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>MySQL- ja Postgre-tietokantoja saa käyttöönsä maksuttomana lisäpalveluna pyytämällä
+ylläpidolta tai jäsenhakemuksen yhteydessä. Tietokannat ovat käytettävissä Lakalta, WWW-palvelimilta ja Hillalta.</p>
+
+<dl class="settings">
+<dt>Tietokantapalvelin, "hostname"</dt>
+<dd>db1.kapsi.fi</dd>
+
+<dt>Käyttäjätunnus, salasana, tietokannan nimi</dt>
+<dd>Ylläpidolta saamasi tietokannan tiedot. Normaalisti tietokannan nimi on sama kuin käyttäjätunnuksesi, mutta salasana on erillinen shell-palveluiden salasanasta.</dd>
+</dl>
+
+<p>Omalta koneelta tietokantoihin saa tarvittaessa yhteyden <a href="../ohjeet/ssh-putki.html">ssh-tunnelin</a> kautta.</p>
+
+<h2>PHPMyAdmin</h2>
+<p>WWW-selaimen kautta käytettävällä <a href="https://pakki.kapsi.fi/phpmyadmin/">PHPMyAdmin-palvelulla</a>
+voit hallita MySQL-tietokantojasi, ottaa ja palauttaa varmuuskopioita sekä selata tietoja.</p>
+
+<!-- Check-by: 2011-12 Firefox-bugin relevanttius -->
+<p><strong>Huomio:</strong> PHPMyAdminin ja Firefox 3.6 -selaimen välillä on
+<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=618835">yhteensopivuusongelma</a>, joka vaikeuttaa kirjautumista.
+Jos ensimmäisellä yrityksellä salasana on väärin, eivät myöhemmätkään yritykset onnistu. Ongelma korjaantuu tyhjentämällä 
+selaimesta PHPMyAdminiin liittyvät evästeet.
+</p>
+
+<h2>Useat tietokannat</h2>
+<p>Tavallisesti myönnetään yksi tietokanta per käyttäjä. Perusteltuun tarpeeseen
+saa kuitenkin myös useampia tietokantoja.</p>
+<p>Useampi ohjelma voi kuitenkin käyttää samaa tietokantaa ns. <em>table prefix</em> -tekniikalla.
+Tässä ohjelmalle kerrotaan merkkijono (kuten <em>"wp_"</em>), jonka se lisää
+käyttämiensä taulun nimien eteen.
+Table prefix -tekniikkaa käytettäessä esimerkiksi samassa tietokannassa
+olevat WordPressin taulut voivat olla
+nimeltään <em>wp_*</em> ja Galleryn taulukot <em>g2_*</em>, eivätkä ne haittaa
+toistensa toimintaa.</p>
+
+
+</div>

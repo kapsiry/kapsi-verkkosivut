@@ -1,0 +1,16 @@
+<menu>
+    <item page="index.in">Palvelut
+        <item page="irc.in" priority="0.8">IRC</item>
+        <item page="bitlbee.in" priority="0.8">Bitlbee</item>
+        <item page="levytila.in" priority="0.8">Levytila</item>
+        <item page="jabber.in">Jabber</item>
+        <item page="palvelimet.in" tango="1" priority="0.8">Palvelimet</item>
+        <item page="portit.in" short="Portit" priority="0.8">Palomuurin portit</item>
+        <item page="postituslistat.in" priority="0.8">Postituslistat</item>
+        <item page="email.in" priority="0.8">Sähköposti</item>
+        <item page="emailsuodatus.in" short="Roskaposti" tango="1">Sähköpostin suodatus</item>
+        <item page="tietokannat.in" priority="0.8">Tietokannat</item>
+        <item page="svn.in" priority="0.8">Versionhallinta</item>
+        <item page="www-sivut.in" priority="0.8">WWW-sivut</item>
+    </item>
+</menu>

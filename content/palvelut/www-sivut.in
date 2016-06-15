@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<h2 id="osoitteet">Osoitteet</h2>
+<p>Oletuksena kaikilla käyttäjillä on käytössään <a href="../ohjeet/public_html.html">public_html-hakemisto</a> kotisivuja varten. Tähän kansioon laitetut sivut näkyvät osoitteella <em>http://koti.kapsi.fi/kayttajatunnus/</em> ja <em>http://koti.kapsi.fi/~kayttajatunnus/</em>.
+Lisäksi aiemmin käytössä olleet osoitteet <em>http://www.kapsi.fi/~kayttajatunnus/</em>,  <em>http://kapsi.fi/~kayttajatunnus/</em> ja <em>http://kapsi.fi/kayttajatunnus</em> uudelleenohjaavat nykyiseen osoitteeseen.</p>
+
+<p>Jäsen saa halutessaan käyttöönsä myös muotoa <em>jotain.kapsi.fi</em> olevan osoitteen tai sivut omalle domain-nimelle (ns. vhost). Tällaisen palvelun voi pyytää joko jäsenhakemuksessa tai myöhemmin ylläpidolta. Näitä osoitteita varten sivut laitetaan kotikansion alle hakemistoon <em>~/sites/domain.com/www/</em>, jonka ylläpito luo lisätessään palvelun.</p>
+
+<h2 id="nimipalvelut">Nimipalvelut</h2>
+<p>Jäsenten omia verkkotunnuksia varten Kapsilla on kaksi nimipalvelinta. Kapsin kautta
+on mahdollista saada nimipalvelut, mutta itse verkkotunnuksen rekisteröinti on suoritettava ulkopuolisen rekisteröijän kautta (esim. <a href="https://domain.ficora.fi/fiDomain/aca.aspx">Ficora</a> tai
+<a href="http://joker.com/">joker.com</a>). Nimipalvelupyyntöä varten on <a href="../ohjeet/domain.html">ohje</a>.
+</p>
+
+<h2 id="php">PHP-sivut</h2>
+<p>Kapsin sivutilassa on käytössä käyttäjän omalla tunnuksella ilman safemodea ajettava PHP5. Aiheesta on lisää <a href="../ohjeet/php.html">erillisessä ohjeessa</a>.</p>
+
+<h2 id="muut">Kotisivutilaan liittyvät muut palvelut</h2>
+<p>Kapsilla on käytettävissä varsin laaja valikoima erilaisia www-sivuihin liittyviä toimintoja:</p>
+<ul>
+<li><a href="levytila.html">Levytilaa</a> 50 gigatavua, joka on jaettu muiden palveluiden (mm. sähköpostin) kanssa</li>
+<li>Apache-palvelinohjelmiston yleisimmät laajennokset, kuten .htaccess ja mod_rewrite</li>
+<li>Safemodettomat PHP-ohjelmat, jotka ajetaan käyttäjän omalla tunnuksella</li>
+<li>SSI-sivut (<a href="http://httpd.apache.org/docs/2.2/howto/ssi.html">Apachen tukemat rakenteet</a>)</li>
+<li><a href="tietokannat.html">MySQL- ja PostgreSQL-tietokannat</a> (pyydetään erikseen ylläpidolta)</li>
+</ul>
+
+<h2 id="https">Salatut sivustot (HTTPS)</h2>
+<p>HTTPS-protokolla, joka salaa tietoliikenteen SSL-salauksella, on käytössä Kapsilla kahdella tavalla:</p>
+<ol class="largespace">
+<li>Osoitteessa <em>https://koti.kapsi.fi/~tunnus/</em> , jossa näkyvät kotihakemistossa olevan <em>private_html</em>-hakemiston sivut. Toiminta on vastaava kuin <em>public_html</em>-hakemistossa.
+Teknisistä syistä <em>private_html</em>-hakemistossa ei voi käyttää PHP- tai muita CGI-ohjelmia.</li>
+
+<li>Hakemuksen yhteydessä tai erikseen pyydetylle muotoa <em>alidomain.kapsi.fi</em> oleville alidomaineille osoitteessa <em>https://alidomain.kapsi.fi/</em>. Sivut lisätään hakemistoon <em>sites/alidomain.kapsi.fi/secure-www/</em> .
+Secure-www:ssä voi käyttää PHP-ohjelmia normaalisti. Joissakin tapauksissa automaattisesti luotava php5.fcgi puuttuu, jolloin se täytyy <a href="../ohjeet/php-fcgi-palautus.html">luoda itse</a>.</li>
+</ol>
+
+<p>SSL-salauksen omalle domain-nimelle haluavia pyydetään ottamaan yhteyttä ylläpitoon sähköpostitse.</p>
+
+<h2 id="lisatietoa">Lisätietoa</h2>
+<p><a href="../ohjeet/www-sivut.html">WWW-sivuihin liittyviä ohjeita</a></p>
+
+</div>

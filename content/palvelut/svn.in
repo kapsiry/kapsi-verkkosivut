@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p><a href="http://subversion.tigris.org/">Subversion</a> eli SVN on versionhallintajärjestelmä, jota käytetään usein mm. lähdekoodin varastointiin. Kapsilla on kaksi tapaa käyttää subversionia:</p>
+<ol class="largespace">
+<li>Kotihakemistosta SSH:n yli. Tämä tapa sopii käytettäväksi, jos käytät
+SVN-varastoa vain itse. Käyttöönotosta on <a href="../ohjeet/svnadmin.html">ohje</a>.</li>
+<li>Osoitteesta <em>https://svn.kapsi.fi/</em> erillisillä tunnuksilla.
+Tällainen svn-varasto (repository) pyydetään ylläpidolta, ja se sopii sekä yhden käyttäjän
+käyttöön että laajemmille projekteille. Käyttäjätunnuksia voi hallita itse.</li>
+</ol>
+
+<h2>Käyttäjätunnusten hallinta</h2>
+<p>Osoitteessa <em>https://svn.kapsi.fi/</em> olevien
+SVN-varastojen tiedot tallennetaan kotihakemiston alle hakemistoon
+<em>~/svnrepos</em>, joka tehdään ylläpitopyynnön yhteydessä. Hakemistossa on kaksi 
+tiedostoa: <em>svn.access</em> ja <em>svn.users</em>. Tiedostojen alussa on ohjeet 
+niiden muokkaamiseen.</p>
+
+<p><strong>Huomio:</strong> Jotta tiedostojen käyttöoikeudet pysyvät oikeina, älä käytä
+muokkaamiseen sftp-ohjelmaa, vaan muokkaa tiedostoja
+<a href="../ohjeet/shell-manual.html">komentoriviltä</a>.</p>
+
+<h2>Selaaminen www-selaimen kautta</h2>
+<p>SVN:lle on tehty useita apusovelluksia, kuten
+<a href="http://www.viewvc.org/">ViewVC</a> ja
+<a href="http://viewsvn.berlios.de/">ViewSVN</a>,
+joilla pystyy selaamaan versionhallinnan tiedostoja käyttäen www-selainta.
+<em>ViewVC</em> kuitenkin edellyttää suoraa pääsyä varaston tiedostoihin, mikä ei
+tällä hetkellä onnistu <em>https://svn.kapsi.fi/</em>-osoitteen varastojen
+kanssa.</p>
+
+<p>Ongelman voi välttää käyttämällä <em>ViewSVN</em>:ää, joka käsittelee varastoa
+<em>https</em>:n yli. Toinen mahdollisuus on kopioida varasto kotihakemistoon
+<em>svnsync</em>-ohjelmalla säännöllisin väliajoin.</p>
+
+</div>

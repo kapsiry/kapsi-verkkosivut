@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<h2>Bitlbee</h2>
+<p>Bitlbee:n kautta irc-clientillä voi käyttää mm. Facebook-, XMPP- ja MSN-verkkoja. Kapsin Bitlbee-palvelin on avoin kaikkien käytettäväksi.
+<dl class="settings">
+<dt>Bitlbee</dt>
+<dd><em>bitlbee.kapsi.fi</em> ja portti <em>6697</em> SSL-päällä.</dd>
+<dt>Bitlbee ilman SSL-salausta</dt>
+<dd><em>bitlbee.kapsi.fi</em> ja portti <em>6667</em>.</dd>
+</dl>
+<h3>Yhdistäminen irssillä</h3>
+Irssissä yhdistäminen tapahtuu komennolla <em>/connect -ssl bitlbee.kapsi.fi 6697</em> .</p>
+</div>

@@ -1,0 +1,368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<div>
+<div class="imgcaption">
+<img src="kapsi-palvelimet.png" alt="Kapsin palvelimet" />
+Kapsin palvelimet ja palvelut pääpiirteissään.
+</div>
+
+<div id="shell">
+<h2>Shell-palvelimet</h2>
+<p>Shell-palvelimille saa yhteyden <a href="../ohjeet/ssh.html">ssh</a>:n, <a href="../ohjeet/scp.html">scp</a>:n tai <a href="../ohjeet/filezilla.html">sftp</a>:n kautta. Sen sijaan ftp- ja telnet-protokollat eivät ole käytettävissä tietoturvasyistä.</p>
+<p>Kaikkien shell-palvelimien salasana on sama. Salasanan voi vaihtaa vain Lakka-palvelimen kautta.</p>
+</div>
+
+<h2 id="laitteisto">Laitteisto</h2>
+<p>
+  Klikkaa palvelimen nimestä niin saat pidemmän kuvauksen kyseisestä
+  palvelimesta.
+  Seuraavassa taulukossa mainittu levytila on RAID:n jälkeen käytettävissä oleva
+  osuus.
+</p>
+
+<table id="palvelimet">
+<tr><th>Palvelin</th><th>Palvelinmalli</th><th>Prosessori</th><th>RAM</th>
+<th>Internet-yhteys</th><th>Levyjärjestelmä</th></tr>
+
+<tr><td>Hilla</td><td>HP DL 380 G7</td><td>2x Intel Quad Core Xeon 2,13 GHz</td>
+<td>28 GB, ECC</td><td>1 Gbps, Nebula &amp; FNE</td><td>SAS, 146 GB, RAID 1,<br />SATA, 2 TB, RAID 5</td></tr>
+
+<tr><td>Karviainen</td><td>Virtuaali</td><td></td>
+<td>64 GB, ECC</td><td>1 Gbps, Nebula &amp; FNE</td><td></td></tr>
+
+<tr><td>Kirsikka</td><td>Virtuaali</td><td></td>
+<td>64 GB, ECC</td><td>1 Gbps, Nebula &amp; FNE</td><td></td></tr>
+
+<tr><td>Lakka</td><td>HP DL 360 G7</td><td>2x Intel 6-Core Xeon 3,07 GHz</td>
+<td>144 GB, ECC</td><td>1 Gbps, Nebula</td><td>SAS, 146 GB, RAID 1</td></tr>
+
+<tr><td>Mansikka</td><td>HP DL 360 G5</td><td>Intel Quad Core Xeon 2,0 GHz</td>
+<td>4 GB, ECC</td><td>&#160;</td><td>SAS, 146 GB, RAID 1</td></tr>
+
+<tr><td>Siika</td><td>HP DL 385 G7</td><td>2x AMD Opteron 6136 (8 ydintä) 2,4 GHz</td>
+<td>128 GB, ECC</td><td>&#160;</td><td>SATA, 146 TB, RAID-Z3</td></tr>
+
+<tr><td>Siilo</td><td>Virtuaali</td><td></td>
+<td>48 GB, ECC</td><td>&#160;</td><td></td></tr>
+
+<tr><td>Suomuurain</td><td>Virtuaali</td><td></td>
+<td>6 GB, ECC</td><td>&#160;</td><td></td></tr>
+
+<tr><td>Muikku</td><td>HP DL 385 G7</td><td>AMD Opteron 6136 (8 ydintä) 2,4 GHz</td>
+<td>32 GB, ECC</td><td>&#160;</td><td>SATA, 58 TB, RAID-Z3</td></tr>
+
+<tr><td>Kookos</td><td>Dell R610</td><td>2 x Intel X5675, 3.06GHz (6 ydintä)</td>
+<td>192 GB, ECC</td><td>&#160;</td><td>600GB SAS RAID 10</td></tr>
+
+<tr><td>Puska3</td><td>Dell R620</td><td>2 x Intel E5-2670 2.60GHz (8 ydintä)</td>
+<td>386 GB, ECC</td><td>&#160;</td><td>600GB SAS RAID 10</td></tr>
+
+<tr><td>Puska4</td><td>Dell R620</td><td>2 x Intel E5-2670 2.60GHz (8 ydintä)</td>
+<td>386 GB, ECC</td><td>&#160;</td><td>600GB SAS RAID 10</td></tr>
+
+<tr><td>Turska</td><td>Dell R320</td><td>Intel E5-2407 2.20GHz (6 ydintä)</td>
+<td>34 GB, ECC</td><td>100Mbps, Nebula</td><td>SATA, 27 TB, RAID-Z3</td></tr>
+
+<tr><td>Pensas</td><td>Dell R420</td><td>2 x Intel E5-2440 2.40GHz (6 ydintä)</td>
+<td>96 GB, ECC</td><td>1 Gbps, Nebula &amp; FNE</td><td>6 x 300GB SAS ZFS mirror</td></tr>
+
+</table>
+
+<div class="palvelin" id="lakka">
+<h3>Lakka</h3>
+<p>Lakka on yhdistyksen ensisijainen shell-palvelin, jonka kautta käytetään myös www-sivuja ja sähköpostia.
+Varsinaiset palvelut on eriytetty muille palvelimille, joista Siika tarjoaa levyjärjestelmät, Karviainen sähköpostin sekä Karviainen ja Kirsikka yhdessä www-palvelut.
+Lakka on samassa 1 Gbps lähiverkossa muiden Nebulalla olevien palvelimien kanssa.</p>
+<table>
+<thead>
+<tr>
+<th colspan="3">
+SSH-palvelimen salausavainten sormenjäljet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2">ECDSA</th>
+<td>MD5</td>
+<td>f3:24:4f:45:33:54:3d:56:df:02:70:d1:34:e9:e1:bb</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>beLcVg1t43a6vPPvR711sEgUomWoOHyn7QBuSP3bqA4=</td>
+</tr>
+<tr>
+<th rowspan="2">RSA</th>
+<td>MD5</td>
+<td>b7:f1:51:77:22:ec:8c:80:0a:05:6c:8f:31:45:97:6b</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>p3qB73gm8m2LDf0pCMFoTThHA3ea9oEtbHh/KD6wcDE=</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="palvelin" id="hilla">
+<h3>Hilla</h3>
+<p>Hilla on toinen jäsenten käyttöön tarkoitettu palvelin. Hillalla toimivat sähköposti ja www-sivut, esimerkiksi
+erikoistarkoituksia kuten IRC-bottien mahdollisia hallintaominaisuuksia varten.</p>
+<table>
+<thead>
+<tr>
+<th colspan="3">
+SSH-palvelimen salausavainten sormenjäljet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2">Ed25519</th>
+<td>MD5</td>
+<td>11:d3:21:9e:47:16:1b:70:70:1d:e5:d9:3d:6a:dc:09</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>NXw+K8D2ivQhA74mSqERqAAQ13PbqVMSkIxZMIvF+hI=</td>
+</tr>
+<tr>
+<th rowspan="2">ECDSA</th>
+<td>MD5</td>
+<td>2f:29:15:c3:3f:0d:8c:91:a1:a7:c2:82:90:be:c5:2b</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>hRvu6qNjkDbo4UOY9/oQyJvIqK/g5WZv6sE975mJIgY=</td>
+</tr>
+<tr>
+<th rowspan="2">RSA</th>
+<td>MD5</td>
+<td>f2:55:ba:da:a9:c9:e2:02:8b:39:eb:e4:0e:04:75:f4</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>hRWar7MKm5acPiuxgas47jR06obWuLsZDK0wTyB0szA=</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="palvelin" id="karviainen">
+<h3>Karviainen ja Kirsikka</h3>
+<p>Karviainen ja Kirsikka ovat yhdistyksen WWW-palvelimia. Niille pääsee kirjautumaan shell-tunnuksilla osoitteissa <em>karviainen.kapsi.fi</em> ja <em>kirsikka.kapsi.fi</em>, mutta normaaliin shell-käyttöön niitä ei ole tarkoitettu.
+WWW-palvelimet käyttävät NFS:n kautta samoja kotihakemistoja kuin Lakka, joten tiedostoja ei tarvitse erikseen siirtää sinne.</p>
+
+<p>Karviaisen ja Kirsikan kokoonpanot ovat samanlaiset, ja kuormaa tasataan
+jakamalla sivustoja eri palvelimille. Tällä hetkellä kapsi.fi:n alla olevat
+sivustot ovat Karviaisella ja jäsenien omat verkkotunnukset Kirsikalla. Oikeaan palvelimeen saa helpoiten 
+yhteyden syöttämällä ssh-ohjelmaan omien verkkosivujen verkkotunnuksen, kuten <em>koti.kapsi.fi</em>, <em>tunnus.kapsi.fi</em> tai 
+<em>example.com</em>.</p>
+
+<table>
+<thead>
+<tr>
+<th colspan="3">
+Karviaisen SSH-palvelimen salausavainten sormenjäljet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2">ECDSA</th>
+<td>MD5</td>
+<td>9b:61:5b:8c:e2:db:ab:70:70:66:71:79:a7:22:6b:71</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>+fXyJbtTUgxYIG7daSqrLheMc2TZFCzlHKoQrQAIKPQ=</td>
+</tr>
+<tr>
+<th rowspan="2">RSA</th>
+<td>MD5</td>
+<td>26:8b:4a:78:7b:b5:94:1a:f0:aa:c2:ee:24:14:4a:05</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>sUykO9OQ1QFNXjIQK7xYHKOOhjE2mNrBpezoS8YHrTc=</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th colspan="3">
+Kirsikan SSH-palvelimen salausavainten sormenjäljet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2">ECDSA</th>
+<td>MD5</td>
+<td>94:c1:d5:0d:6b:e2:47:76:b3:d1:2e:4f:78:fb:ab:4f</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>NZUTaYhIe7nfQS6th4sANvZ4cd4gzbEWWVvoz018JGA=</td>
+</tr>
+<tr>
+<th rowspan="2">RSA</th>
+<td>MD5</td>
+<td>65:5a:e9:22:42:bc:47:ec:ea:37:a3:a4:35:a2:fc:08</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>30EmSG+WxZI/GmoabEDDByaLY1nEEiUpkIJjJNojdsU=</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="palvelin" id="mansikka">
+<h3 id="mansikka">Mansikka</h3>
+<p>Mansikka on ylläpidon sisäisessä käytössä.</p>
+</div>
+
+<div class="palvelin" id="muikku">
+<h3>Muikku</h3>
+<p>Muikku on varmuuskopiopalvelin, joka toimii myös Siian varapalvelimena.</p>
+</div>
+
+<div class="palvelin" id="paskanmarja">
+<h3>Paskanmarja</h3>
+<p>Ylläpidon testikone, jolla testataan uudet säädöt ennen niiden käyttöönottoa muissa palvelimissa.</p>
+</div>
+
+<div class="palvelin" id="kookos">
+<h3 id="kookos">Kookos</h3>
+<p>Kookos on yhdistyksen tietokantapalvelin MySQL- ja PostgreSQL-kantoja varten.
+Kookoselle saa yhteyden Lakka-, Hilla- ja WWW-palvelimilta osoitteesta db1.kapsi.fi.</p>
+</div>
+
+<div class="palvelin" id="siika">
+<h3>Siika</h3>
+<p>Siika on levypalvelin, jolla sijaitsee Lakan ja WWW-palvelinten jaetut kotihakemistot sekä varmuuskopioille tarkoitettu <a 
+href="levytila.html">siilo-levytila</a>.</p>
+</div>
+
+<div class="palvelin" id="siilo">
+<h3>Siilo</h3>
+<p>Siilo on jäsenten <a href="levytila.html">Siilo-levytilan</a> käyttöä varten tarkoitettu palvelin.</p>
+<table>
+<thead>
+<tr>
+<th colspan="3">
+SSH-palvelimen salausavainten sormenjäljet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2">Ed25519</th>
+<td>MD5</td>
+<td>83:fc:23:12:b2:6e:36:31:fa:6c:1e:d0:7b:6d:67:8b</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>b5y5UDwE82/xyh//nFQUzCu6GH+c8amONuoRuhZO9GE=</td>
+</tr>
+<tr>
+<th rowspan="2">ECDSA</th>
+<td>MD5</td>
+<td>02:bb:ef:d7:2e:96:e4:8a:e8:1f:ec:77:0a:27:bd:ba</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>g826aHEsBUrNW/P6zd7mXgk/Drd9riIPpRXAmVcN8ZY=</td>
+</tr>
+<tr>
+<th rowspan="2">RSA</th>
+<td>MD5</td>
+<td>de:f0:40:ef:56:af:2a:81:ba:09:e1:6f:62:56:d7:59</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>EPE/+MZs7/u1PAGxB1GYUiwxnDPGNlwlWtLNoHCrOBM=</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="palvelin" id="suomuurain">
+<h3>Suomuurain</h3>
+<p>Suomuurain on jäsenten shell-palvelin Ubuntulla ja keskimäärin muita palvelimia uudemmilla ohjelmilla. Suomuurainta voi käyttää esimerkiksi niissä tilanteissa, jos Lakalta ja Hillalta ei löydy tarpeeksi uusia ohjelmistoja.</p>
+<table>
+<thead>
+<tr>
+<th colspan="3">
+SSH-palvelimen salausavainten sormenjäljet
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="2">Ed25519</th>
+<td>MD5</td>
+<td>SHA256:CdPg8laH7dxcmB94tYOrCUzvmHZ58ExC4aW9YLfaaa4</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>CdPg8laH7dxcmB94tYOrCUzvmHZ58ExC4aW9YLfaaa4=</td>
+</tr>
+<tr>
+<th rowspan="2">ECDSA</th>
+<td>MD5</td>
+<td>SHA256:vz0d1/zQ+Bth+ipP1UuF8sx2cRsxooqAb7KkeUN1QJw</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>vz0d1/zQ+Bth+ipP1UuF8sx2cRsxooqAb7KkeUN1QJw=</td>
+</tr>
+<tr>
+<th rowspan="2">RSA</th>
+<td>MD5</td>
+<td>SHA256:VMbIL4DDRNg+wsiEXXNRfsoIcqWXgPkStNoLRXHkkLA</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>VMbIL4DDRNg+wsiEXXNRfsoIcqWXgPkStNoLRXHkkLA=</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="palvelin" id="puska3">
+<h3>Puska3</h3>
+Puska3 on Kapsin virtuaalialusta, joilla pyörii yhdistyksen virtuaalikoneita.
+</div>
+
+<div class="palvelin" id="puska4">
+<h3>Puska4</h3>
+Puska4 on Kapsin virtuaalialusta, joilla pyörii yhdistyksen virtuaalikoneita.
+</div>
+
+<div class="palvelin" id="turska">
+<h3>Turska</h3>
+Turska on Kapsin varmuuskopiointipalvelin.
+</div>
+
+<div class="palvelin" id="pensas">
+<h3>Pensas</h3>
+Pensas virtuaalialusta hallinnon ja ylläpidon virtuaaleille.
+</div>
+
+<script src="palvelimet.js" type="text/javascript" charset="utf-8"></script>
+
+<style type="text/css" media="screen">
+  .palvelin {
+    max-width: 50em;
+    margin: 1em;
+    padding: 1em;
+    background: #eeffee;
+  }
+</style>
+
+</div>

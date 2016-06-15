@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<h2>Kotihakemisto</h2>
+<p>Kaikilla käyttäjillä on kotihakemistossaan Lakka-palvelimella tilaa 50&nbsp;GB ja Hilla-palvelimella 5&nbsp;GB.
+Kotihakemistojen tiedot varmuuskopioidaan joka yö, ja varmuuskopiot säilytetään kaksi viikkoa. Vahingossa
+poistetut tiedostot voi Lakalla <a href="../ohjeet/snapshots.html">palauttaa itse</a>, Hillan tapauksessa palautusta täytyy 
+pyytää ylläpidolta. Käytetyn levytilan määrää voi tarkkailla
+<a href="../ohjeet/quota.html">quota-komennolla</a>.
+</p>
+<p>Käyttäjien kotihakemistojen polku on /home/users/käyttäjätunnus/.</p>
+
+<h2>Siilo</h2>
+<p>Siilo on erityisesti varmuuskopiointiin tarkoitettu levytila. Levytila löytyy kotihakemiston siilo-hakemistosta, joka
+ohjaa polkuun /siilo/users/käyttäjätunnus/. Siilon levykäyttöraja on 500&nbsp;GB.</p>
+
+<h2>Muut tallennuspaikat</h2>
+<p>Väliaikaisille tiedostoille on käytössä /tmp-hakemisto, jossa on yksittäiselle käyttäjälle 500 megatavua
+tilaa. Tämä hakemisto on tarkoitettu lähinnä ohjelmien luomille väliaikaistiedostoille, jotka ohjelma poistaa
+automaattisesti käytön jälkeen.
+</p>
+
+<h2>Tietojen varmistus eri paikoissa</h2>
+<p>Kotihakemistoista otetaan tilannevedoksia joita käyttäjät voivat <a href="../ohjeet/snapshots.html">tarkastella</a>.
+Tilannevedoksista otetaan viikottain varmuuskopiot samassa konesalissa sijaitsevalle palvelimelle sekä eri tiloissa
+olevalle palvelimelle.</p>
+	
+<p>Siilosta otetaan tilannevedoksia, mutta tietoja ei enää kopioida toisille palvelimille Siilon käyttöluonteen vuoksi.</p>
+
+<p>Kaikki käytössä oleva tila palvellaan vikasietoisilta levyjärjestelmiltä, jotka kestävät kovalevyjen rikkoontumisia.</p>
+
+<h2>Lisätilan pyytäminen</h2>
+<p>Jos levytila loppuu, sitä voi pyytää lisää hallitukselta. Lisätilaa myönnetään
+tarpeen mukaan. Pyynnössä täytyy myös perustella lisätilan tarve.
+</p>
+
+</div>

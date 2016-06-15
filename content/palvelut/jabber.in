@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Jabber on XMPP-protokollaa käyttävä pikaviestinverkko. Kapsin Jabber-palvelimella on mahdollista liittyä ryhmäkeskusteluihin, eli huoneisiin, sekä lähettää yksityisviestejä. Palvelimelta on mahdollista myös liittyä muilla palvelimilla oleviin ryhmäkeskusteluihin sekä lähettää muilla palvelimilla oleville käyttäjille yksityisviestejä. Jabber-tunnuksella voi myös keskustella Google Talk -tunnuksien kanssa.</p>
+
+<h2>Käyttäjän asetukset</h2>
+
+<dl class="settings">
+<dt>Käyttäjätunnus</dt>
+<dd>tunnus@kapsi.fi</dd>
+
+<dt>Salasana</dt>
+<dd>sama kuin shelliin ja sähköpostiin</dd>
+
+<dt>Palvelin</dt>
+<dd>jabber.kapsi.fi</dd>
+
+<dt>Portti</dt>
+<dd>5222 (STARTTLS)</dd>
+<dd>5223 (SSL)</dd>
+</dl>
+
+<p>Jabber-verkon huoneiden osoitteet ovat muotoa "huoneennimi@conference.domain.tld".
+Kapsin jäsenille tarkoitettu huone  Jabber-verkossa on "kapsi@conference.kapsi.fi".</p>
+
+<h2>Jabber-asiakasohjelmia</h2>
+
+<ul>
+<li><a href="http://www.pidgin.im/download/" alt="Pidgin download">Pidgin (Linux, OSX, Windows)</a></li>
+<li><a href="http://adium.im/" alt="Adium download">Adium (OS X)</a></li>
+<li>Bitlbee (käytettävissä Lakalle ja Hillalle)</li>
+</ul>
+<h2>Yhdistäminen Irssin xmpp lisäosalla</h2>
+<p>Irssiin tarjolla olevan xmpp lisäosan avulla on mahdollista yhdistää jabber-verkkoon suoraan Irssillä. Yhdistäminen onnistuu seuraavasti:</p>
+<p>
+Aluksi tulee ladata xmpp lisäosa, se on asennettu valmiiksi Lakalle ja Hillalle. Lataaminen onnistuu <b>load</b> komennolla seuraavasti:</p>
+<pre>
+/load xmpp
+</pre>
+<p>
+Seuraavaksi tulee yhdistää haluttuun verkkoon, esimerkissä yhdistetään Kapsin Jabber-verkkoon. Korvaa <span class="korvaa">tunnus</span> omalla tunnuksellasi ja <span class="korvaa">salasana</span> omalla salasanallasi.
+</p>
+<pre>
+/xmppconnect -ssl -host jabber.kapsi.fi <span class="korvaa">tunnus</span>@kapsi.fi <span class="korvaa">salasana</span>
+</pre>
+<p>
+Salasanan voi myös jättää syöttämättä jolloin se kysytään seuraavaksi. Huomaa että näin salasanan syötetyt merkit eivät näy.
+</p>
+<p>Kun yhdistäminen on onnistunut niin /join komennolla voi liittyä xmpp kanaville samaan tapaan kuin liittyisi IRC-kanavalle.</p>
+<pre>
+/join kapsi@conference.kapsi.fi
+</pre>
+
+<h2>Yhdistäminen Bitbleellä</h2>
+
+<p>Mikäli et ole yhdistänyt bitlbee-verkkoon, voit yhdistää siihen seuraavasti</p>
+<pre>
+/connect -network bitlbee localhost 6668
+/j &amp;bitlbee
+</pre>
+<p>Kirjautuminen Jabber-palvelimelle, sekä huoneen avaaminen Bitbeellä onnistuu seuraavasti. 
+Varmista ensin, että olet &amp;bitlbee-kanavalla.</p>
+<pre>
+account add jabber <span class="korvaa">shelltunnus</span>@kapsi.fi salasana
+account list
+account <span class="korvaa">tunnuksennumero</span> on (tulostuneen listan viimeisen rivin ensimmäinen numero)
+chat add <span class="korvaa">tunnuksennumero</span> kapsi@conference.kapsi.fi
+/j #kapsi
+</pre>
+<p>Mikäli kanavalla näkyy olevan muitakin, yhdistäminen onnistui. Nyt bitlbee on valmis käytettäväksi.</p>
+</div>

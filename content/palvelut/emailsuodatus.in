@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<div class="imgcaption">
+<img src="sahkopostikaavio.png" alt="Sähköpostin suodatus Kapsilla." />
+Kaavio sähköpostin vastaanotosta Kapsilla.
+</div>
+
+<p>
+Ilman vastaanottajan suostumusta lähetetyt mainospostit ovat nykyään merkittävä
+ongelma sähköpostiliikenteessä. Kapsilla roskapostia pyritään torjumaan
+<a href="../ohjeet/spamassassin.html">suodattamalla</a> sekä
+<a href="../ohjeet/spammin_valttaminen.html">palvelukohtaisten osoitteiden</a>
+käyttömahdollisuudella.
+</p>
+<p>
+Kaikkiin tietoon tulleisiin tapauksiin, joissa Kapsin palveluita on käytetty
+roskapostittamiseen, puututaan tietenkin välittömästi.
+</p>
+
+<h2>Roskapostin lajittelu</h2>
+<p>
+Kapsilla on käytössä palvelimenlaajuinen
+<a href="http://spamassassin.apache.org/">SpamAssassin</a>-suodatinohjelma,
+joka tutkii automaattisesti kaikki vastaanotetut viestit ja lisää niihin
+suodatusmerkinnät. Roskapostia ei oletuksena lajitella eri kansioon, mutta
+käyttäjä voi ottaa tämän käyttöön <a href="../ohjeet/spamassassin.html">ohjeen</a>
+mukaisesti.
+</p>
+</div>

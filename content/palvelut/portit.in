@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<div>
+<p>Yhteyksiä yhdistyksen palvelimille muualta internetistä on rajoitettu
+palomuurilla. Tämä estää palvelinohjelmien ajamisen ja IRC:n DCC-yhteydet.
+Jäsenet voivat kuitenkin pyytää ylläpidolta portteja käyttöönsä.
+</p>
+
+<h2>Portin pyytäminen</h2>
+<p>Porttien avaamista pyydetään sähköpostilla <a href="../tukipalvelut.html">ylläpidolta</a>.
+Portin numeroa ei voi itse päättää, vaan se määräytyy vapaana olevien porttien perusteella.
+Kerro pyynnössäsi:</p>
+<ul>
+<li>Montako porttia tarvitset.</li>
+<li>Palvelin, jolle haluat että portti avataan.</li>
+<li>Käyttötarkoitus.</li>
+</ul>
+
+<h2>Paikalliset yhteydet</h2>
+<p>Samalla palvelimella ajettavien ohjelmien välisiin yhteyksiin ei tarvita erikseen pyydettyä porttia.
+Paikalliseen käyttöön portin voi arpoa itse väliltä 30&nbsp;000–40&nbsp;000.
+Tasalukuja kannattaa välttää, jotta portti ei ole vahingossa jonkun toisen käytössä.</p>
+
+<h2>Sovelluskohtaisia huomioita</h2>
+<h3>Irssi-proxy</h3>
+<p>Irssi-proxyn käytöstä on <a href="../ohjeet/irssi-proxy.html">ohje</a>.
+Se tarvitsee erillisen portin jokaiselle käytettävälle IRC-verkolle.</p>
+
+<h3>Eggdrop</h3>
+<p>Eggdropin DCC-hallintayhteys ei tarvitse erikseen pyydettyä porttia, jos käytät
+sitä samalta palvelimelta.</p>
+
+<h3>HTTP-palvelinohjelmat</h3>
+<p>Voit ajaa omaa www-palvelinohjelmaa, kuten Tomcat tai Mongrel, jos yhdistyksen
+Apache-palvelinohjelmisto ei tue kaikkia tarvitsemiasi ominaisuuksia.
+Apachea voi käyttää myös välityspalvelimena omalle palvelimellesi
+<a href="../ohjeet/mod_rewrite.html#proxy">mod_rewrite</a>:n avulla.
+</p>
+</div>
