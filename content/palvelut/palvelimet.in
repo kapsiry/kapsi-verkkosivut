@@ -89,6 +89,15 @@ SSH-palvelimen salausavainten sormenjäljet
 </thead>
 <tbody>
 <tr>
+<th rowspan="2">ED25519</th>
+<td>MD5</td>
+<td>9e:38:2d:94:88:7e:d3:31:72:d6:eb:8d:25:c2:90:ce</td>
+</tr>
+<tr>
+<td>SHA256</td>
+<td>T5kFrcFtwIaInxbXB5ZDU/exuOoqjlY2LYMDzFHhukg</td>
+</tr>
+<tr>
 <th rowspan="2">ECDSA</th>
 <td>MD5</td>
 <td>f3:24:4f:45:33:54:3d:56:df:02:70:d1:34:e9:e1:bb</td>

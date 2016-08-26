@@ -111,10 +111,10 @@ Useimmissa tilanteissa nimipalveluiden hallitseminen itse ei siis ole tarpeen.</
 WWW-palvelimen IP-osoitteen mahdollisista muutoksista tiedotetaan.</p>
 <dl class="settings">
 <dt>WWW-palvelin</dt>
-<dd>A 217.30.184.170</dd>
+<dd>A 91.232.156.81 <b>JA</b> A 91.232.156.82</dd>
 
 <dt>Ensisijainen sähköpostipalvelin</dt>
-<dd>MX 5 mail.kapsi.fi.</dd>
+<dd>MX 5 mailserv.kapsi.fi.</dd>
 
 <dt>Toissijainen sähköpostipalvelin</dt>
 <dd>MX 10 mx2.kapsi.fi.</dd>
@@ -123,7 +123,7 @@ WWW-palvelimen IP-osoitteen mahdollisista muutoksista tiedotetaan.</p>
 Halutessasi voit lisätä myös AAAA-tietueen, jolloin verkkosivuihin saa yhteyden IPv6-protokollalla.
 <dl class="settings">
 <dt>WWW-palvelin, IPv6 (vapaaehtoinen)</dt>
-<dd>AAAA 2001:1bc8:1004::1:80</dd>
+<dd>AAAA 2001:67c:1be8::80:1 <b>JA</b> AAAA 2001:67c:1be8::80:2</dd>
 </dl>
 
 </div>
