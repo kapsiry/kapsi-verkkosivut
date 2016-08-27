@@ -18,6 +18,7 @@ git remote add origin ssh://käyttäjätunnus@lakka.kapsi.fi/~/sites/domain.tld/
 git push -u origin master
 git commit
 </pre>
+
 <h2 id="roikeudet"><a href="#roikeudet" class="anchor">Lukuoikeuksien rajoittaminen</a></h2>
 <p>Jos haluat rajoittaa vain luku -varastosi oikeudet vain tietyille käyttäjille, onnistuu tämä <a href="http://www.kapsi.fi/ohjeet/htpasswd.html">htpasswd:n</a> avulla. .htaccess tiedosto luodaan ~/sites/domain.tld/www/git/myrepo.git kansioon.</p>
 
@@ -28,15 +29,15 @@ git commit
 <h2 id="repo"><a href="#repo" class="anchor">Luodaan uusi varasto</a></h2>
 <p>Julkiseen jakoon tarkotettua varastoa varten on varasto luotava --bare option kanssa, jotta se toimisi push:in kanssa. Bare optio poistaa työkopion käytöstä, mitä suositellaan varastoihin johon lähetetään muutoksia push-käskyllä. Jos sinulla oli jo olemassa varasto, myöhemmin tulee kohta, missä siirretään olemassaoleva data nyt luotavaan varastoon.</p>
 <pre>
-mkdir ~/code
-git --bare init ~/code/myrepo.git
+mkdir ~/sites/domain.tld/code
+git --bare init ~/sites/domain.tld/code/myrepo.git
 </pre>
-<p>Jatkossa tässä ohjeessa oletetaan, että varastot ovat ~/code hakemistossa.</p>
+<p>Jatkossa tässä ohjeessa oletetaan, että varastot ovat ~/sites/tunnus.kapsi.fi/code hakemistossa.</p>
 
 <h2 id="htpasswd"><a href="#htpasswd" class="anchor">Luodaan salasanatiedosto</a></h2>
 <p>Tehdään kirjautumista varten salasanatiedosto. Tähän ei tulisi käyttää samaa salasanaa, mikä sinulla on lakalla.</p>
 <pre>
-htpasswd -c ~/.gituser.passwd tunnus
+htpasswd -c ~/sites/domain.tld/.gituser.passwd tunnus
 &gt; salasana
 &gt; salasana uusiksi
 </pre>
@@ -48,11 +49,11 @@ htpasswd ~/.gituser.passwd kaverisi
 </pre>
 
 <h2 id="cgi"><a href="#cgi" class="anchor">"Luodaan .htaccess ja cgi-scripti</a></h2>
-<p>Tehdään kansio http://domain.tld/git/ ja rajataan sen käyttö aikasemmin määritellylle käyttäjälle. Huomaa muuttaa "tunnus" kohdat omaksi käyttäjänimeksesi.</p>
+<p>Tehdään kansio https://domain.tld/git/ ja rajataan sen käyttö aikasemmin määritellylle käyttäjälle. Huomaa muuttaa "tunnus" kohdat omaksi käyttäjänimeksesi.</p>
 <pre>
-mkdir ~/sites/domain.tld/secure-www/git
+mkdir ~/sites/domain.tld/www/git
 </pre>
-<p>Muokataan seuraavaksi tiedoston  ~/sites/domain.tld/secure-www/git/.htaccess sisällöksi.</p>
+<p>Muokataan seuraavaksi tiedoston  ~/sites/domain.tld/www/git/.htaccess sisällöksi.</p>
 <pre>
 RewriteEngine On
 AcceptPathInfo On
@@ -65,23 +66,23 @@ Options -Indexes
 AuthType Basic
 AuthName "Private"
 Require valid-user
-AuthUserFile /var/www/userhome/tunnus/.gituser.passwd
+AuthUserFile /var/www/userhome/tunnus/sites/domain.tld/.gituser.passwd
 </pre>
 <p>Hox! Vaikka lakalla ei ole /var/www/userhome/tunnus/ hakemistoa, löytyy semmoinen www-palvelimilta.</p>
 <p>Koska ScriptAlias ei ole käytettävissä, täytyy git-http-backendiä käyttää cgi-scriptinä. Luodaan seuraavaksi cgi-scripti. Muokataan tiedoston ~/sites/domain.tld/secure-www/git/git-http-backend.cgi sisällöksi seuraavaa. Muuta kohta "tunnus" omaksi tunnukseksesi!</p>
 <pre>
 #!/bin/bash
-export GIT_PROJECT_ROOT="/var/www/userhome/tunnus/code/"
+export GIT_PROJECT_ROOT="/var/www/userhome/tunnus/sites/domain.tld/code/"
 export GIT_HTTP_EXPORT_ALL=""
 /usr/lib/git-core/git-http-backend
 </pre>
 <p>Ja annetaan vielä riittävät oikeudet</p>
 <pre>
-chmod 500  ~/sites/domain.tld/secure-www/git/git-http-backend.cgi
+chmod 500  ~/sites/domain.tld/www/git/git-http-backend.cgi
 </pre>
 
 <h2 id="push"><a class="anchor" href="#push">Git push toimimaan</a></h2>
-<p>Git varastolle pitää kertoa, että sitä saa päivittää git push:lla. Tämä onnistuu lakkalla seuraavasti.</p>
+<p>Git varastolle pitää kertoa, että sitä saa päivittää git push:lla. Tämä onnistuu Lakka-palvelimella seuraavasti.</p>
 <pre>
 cd ~/code/myrepo.git
 git config http.receivepack true
