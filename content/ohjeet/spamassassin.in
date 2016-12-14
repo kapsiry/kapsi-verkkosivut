@@ -42,7 +42,7 @@ $MAILDIR
 
 <p><a href="ssh.html">Ssh-yhteyden</a> kautta tiedoston voi luoda komennolla:</p>
 <pre>
-echo -e 'MAILDIR=$HOME/Maildir/\n\n:0:\n* ^X-Spam-Status: Yes\n.spam\n\n:0\n$MAILDIR\n' > ~/.procmailrc
+echo -e 'MAILDIR=$HOME/Maildir/\n\n:0:\n* ^X-Spam-Status: Yes\n.spam/\n\n:0\n$MAILDIR\n' > ~/.procmailrc
 </pre>
 
 <p><b>Huomio:</b> Tarkista aina procmail-säätöjen jälkeen, että posti
