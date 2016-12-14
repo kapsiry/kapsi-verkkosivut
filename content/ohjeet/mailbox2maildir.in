@@ -31,7 +31,7 @@ MAILDIR=$HOME/Maildir/
 
 :0:
 * ^X-Spam-Status: Yes
-spam
+.spam/
 
 :0
 $MAILDIR
